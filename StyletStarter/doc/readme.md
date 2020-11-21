@@ -53,7 +53,7 @@ namespace StyletStarter.Core.Models
 Note that the class modifier above should be `public` since the second WPF project will depend on this project later and `PersonModel` must be accessible outside its own assembly. Besides, the three `using` namespaces at the top are inserted by VS automatically and are actually unused here (you can remove them safely if you like).
 
 ## 1.2 Add the viewmodel class to *StyletStarter.Core*
-Again, first add a new folder *ViewModels* and then place a *GuestBookViewModel.cs* class file inside it. To use the *Stylet* framework, a viewmodel is reccomended to inherit the [`Screen`](https://github.com/canton7/Stylet/wiki/Screens-and-Conductors) class. We thus first add the dependency on *Stylet*. 
+Again, first add a new folder *ViewModels* and then place a *GuestBookViewModel.cs* class file inside it. To use the *Stylet* framework, a viewmodel is recommended to inherit the [`Screen`](https://github.com/canton7/Stylet/wiki/Screens-and-Conductors) class. We thus first add the dependency on *Stylet*. 
 
 Right click the "Dependencies" term under *StyletStarter.Core* project and choose "Manage NuGet Packages". Search for "Stylet" and install it.
 
@@ -90,7 +90,7 @@ namespace StyletStarter.Core.ViewModels
             get { return firstName; }
             set
             {
-                // both methods below are inherinted from `PropertyChangedBase`
+                // both methods below are inherited from `PropertyChangedBase`
                 SetAndNotify(ref firstName, value);
                 NotifyOfPropertyChange(nameof(FullName));
                 NotifyOfPropertyChange(nameof(CanAddGuest));
@@ -295,7 +295,7 @@ The final solution structure is
 
 ![](./img/sol-structure-final.png)
 
-# 3. Advanced techniques in *stylet*
+# 3. Advanced techniques in *Stylet* 🌈
 
 ## 3.1 Conductor
 What is a conductor? The concept may be a little abstract until you play with it. In short,
@@ -332,7 +332,7 @@ Accordingly, we need to reset the `ContentControl` of `ShellView` to make its Co
 Now run the program again. As expected, everything works as before. Finally, note that, though not required in this toy example, the `Conductor` is a powerful tool to manage and to coordinate the lifecycle of one or more viewmodels. For instance, you may change its `ActiveItem` (a viewmodel) by calling `ActivateItem(T item)`, which causes the changes of views accordingly. This technique is commonly used in tab-like interfaces. Please check [Conductors in Detail](https://github.com/canton7/Stylet/wiki/Screens-and-Conductors#conductors-in-detail).
 
 
-## 3.2 viewmodel lifecycle management
+## 3.2 viewmodel lifecycle management <a name="lifecycle"></a>
 Why do we care about the `Conductor` introduced above? The main reason is to manage the lifecycle of a viewmodel. We know that a **view** can be shown, hidden, and closed, but how can the **viewmodel** know it and perform appropriately?
 >Now, a ViewModel doesn't magically know when it's been shown, hidden, or closed. It has to be told. This is the role of a Conductor.
 A Conductor is, simply, a ViewModel which owns another ViewModel, and knows how to manage its lifecycle.
@@ -413,6 +413,69 @@ Add the `GuestBookViewModel` as follows, which binds the service to itself (sinc
 The above line means, when the service identified by type `GuestBookViewModel` is needed (e.g., in construcotr injection when creating a `ShellViewModel`), an instance of `GuestBookViewModel` is generated and returned by the IoC. 
 Now everything should work again as before. Please check the [Configuration](https://github.com/canton7/Stylet/wiki/StyletIoC-Configuration) page to learn more about IoC configuration.
 
+
+
+## 3.4 Message box 
+
+In Section [3.2](#lifecycle), we demonstrated the lifecycle management of a viewmodel by printing some debug information. In practice, we will of course do something useful. A common scenario is to pop out a messagebox that asks the user whether to save the current file. It is always a pain to get a full MVVM-style message box (you can get a lot of discussion by Googling "MVVM messagebox"). Ideally, a messagebox is also a view, which thus should have its own viewmodel as well. Sadly, this feature is not built-in WPF's messagebox.
+Fortunately, *Stylet* comes with its own MessageBox clone, which looks and behaves almost identically to the WPF one. Check [MessageBox](https://github.com/canton7/Stylet/wiki/MessageBox) for details.
+
+Assume that the boss has assigned a new task: save the guest book to a file or a database. We now need to ask the user whether saving is desired before closing, typically in the form of a message box. According to the [documentation](https://github.com/canton7/Stylet/wiki/MessageBox), we need a `WindowManager` to show the messagebox. Usually in *stylet*, our viewmodel class grabs the window manager instance from the IoC container. Check the [WindowManager](https://github.com/canton7/Stylet/wiki/The-WindowManager) page for an example. 
+
+Recall that, after modifications in Section 3.3, the `GuestBookViewModel` is injected into the `ShellViewModel` by IoC. Since the `GuestBookViewModel` instance is created by IoC, other service can also be injected into `GuestBookViewModel`'s construction. In short, the `GuestBookViewModel` requires an `IWindowManager` service.
+
+Now it is clear that two modifications of `GuestBookViewModel` are required to acquire the window manager:
+- Define a field of type `IWindowManager`
+- Define a constructor that allows injection of `IWindowManager`
+
+```csharp
+    public class GuestBookViewModel : Screen
+    {
+        private IWindowManager windowManager;
+
+        // constructor injection
+        public GuestBookViewModel(IWindowManager windowManager)
+        {
+            this.windowManager = windowManager;
+        }
+        
+        ......
+    }
+```
+
+Once we get the window manager, it can used to show a message box when the application is going to be closed as documented in [MessageBox](https://github.com/canton7/Stylet/wiki/MessageBox). A good place to put it is the `CanClose` method of a `Screen`. However, the `CanClose` method is labeled obsolete in the current version of *stylet*, and `CanCloseAsync` is suggested instead.
+
+Now let's override the `CanCloseAsync` method in `GuestBookViewModel` that has been inherited from `Screen`.
+
+```csharp
+        public override Task<bool> CanCloseAsync()
+        {
+            var result = windowManager.ShowMessageBox(
+                "Save the guest book to file?", // main text
+                "My App", // caption
+                MessageBoxButton.YesNoCancel
+                );
+
+            if (result == MessageBoxResult.Yes)
+                Debug.WriteLine("----- Saved the guest book to file");
+            else if (result == MessageBoxResult.No)
+                Debug.WriteLine("----- Discarded the guest book");
+
+            return Task.FromResult<bool>(result != MessageBoxResult.Cancel);
+        }
+```
+
+Start the program. You should see something like the figure below when you want to close the application.
+
+![](./img/msgbox.png)
+
+Try the three different buttons and see whether the effect is desired 🎃.
+
+
+## Summary
+At this point, we have finished this introductory tutorial. Hope that you have got better understanding of *Stylet* now. There are some other interesting topics to be explored, like [EventAggregator](https://github.com/canton7/Stylet/wiki/The-EventAggregator) and [Validation](https://github.com/canton7/Stylet/wiki/ValidatingModelBase). Have fun! ☕☕	🍻	🍻
+
+The source code for this advanced part is available [here]().
 
 
 

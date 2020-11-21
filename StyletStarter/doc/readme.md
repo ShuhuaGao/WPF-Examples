@@ -297,15 +297,15 @@ The final solution structure is
 
 # 3. Advanced techniques in *stylet*
 
-## 3.1 Conductor and viewmodel lifecycle management
+## 3.1 Conductor
 What is a conductor? The concept may be a little abstract until you play with it. In short,
 > A Conductor is, simply, a ViewModel which owns another ViewModel, and knows how to manage its lifecycle.
 
 In our guest book application, there is essentially only one viewmodel, and no lifecycle issue is involved. That is, the unique viewmodel `GuestBookViewModel` (and its view `GuestBookview`) is created at the beginning and disposed (closed) at the end of the application. Nevertheless, if you have multiple viewmodels, their creation, activation, and closing must be managed properly. That is why we need a `Conductor`. Detailed documentation is on the [Screens and Conductors](https://github.com/canton7/Stylet/wiki/Screens-and-Conductors) page. 
 
-Now suppose we want to manage the lifecycle of our `GuestBookViewModel` (which is in fact not necessay in this toy example though). Since there is only one viewmodel, we use the built-in conductor [`Conductor<T>`](https://github.com/canton7/Stylet/wiki/Screens-and-Conductors#conductort), where `T` refers to the type of the viewmodel to be managed.
+Now suppose we want to manage the lifecycle of our `GuestBookViewModel` (which is in fact not necessary in this toy example though). Since there is only one viewmodel, we use the built-in conductor [`Conductor<T>`](https://github.com/canton7/Stylet/wiki/Screens-and-Conductors#conductort), where `T` refers to the type of the viewmodel to be managed.
 
-We can make the `ShellViewModel` inherit `Conductor<Screen>`, since by convention every viewmodel in a *stylet* application is a subclass of `SCreen`. Now the `ShellViewModel` becomes a `Conductor` now and can manage the internal `GuestBookView`. 
+We can make the `ShellViewModel` inherit `Conductor<Screen>` (instead of the original `Screen`), since by convention every viewmodel in a *stylet* application is a subclass of `Screen`. You may however use `Conductor<IScreen>` as an alternative. Now the `ShellViewModel` becomes a `Conductor` now and can manage the internal `GuestBookView`. 
 
 In *ShellViewModel.cs* we have the following code, in which the `ActiveItem` of a conductor is initialized to an instance of `GuestBookViewModel`.
 ```csharp
@@ -323,15 +323,51 @@ namespace StyletStarter.Wpf.Pages
     }
 }
 ```
-Accordinly, we need to reset the `ContentControl` of `ShellView` to make its Content bind to the `ActiveItem`. That is, change that specific line in *ShellView.xaml* to 
-```xml
+Accordingly, we need to reset the `ContentControl` of `ShellView` to make its Content bind to the `ActiveItem`. That is, change that specific line in *ShellView.xaml* to 
+```XML
 <ContentControl s:View.Model="{Binding ActiveItem}"/>
 ```
 
-Now run the program again. As expected, everything works as before. Finally, note that, though not required in this toy example, the `Conductor` is a powerful tool to manage and to coordinate the lifecyle of one or more viewmodels. For instance, you may change its `ActiveItem` (a viewmodel) by calling `ActivateItem(T item)`, which causes the changes of views accordingly. This technique is commonly used in tab-like interfaces. Please check [Conductors in Detail](https://github.com/canton7/Stylet/wiki/Screens-and-Conductors#conductors-in-detail).
+Now run the program again. As expected, everything works as before. Finally, note that, though not required in this toy example, the `Conductor` is a powerful tool to manage and to coordinate the lifecycle of one or more viewmodels. For instance, you may change its `ActiveItem` (a viewmodel) by calling `ActivateItem(T item)`, which causes the changes of views accordingly. This technique is commonly used in tab-like interfaces. Please check [Conductors in Detail](https://github.com/canton7/Stylet/wiki/Screens-and-Conductors#conductors-in-detail).
 
 
+## 3.2 viewmodel lifecycle management
+Why do we care about the `Conductor` introduced above? The main reason is to manage the lifecycle of a viewmodel. We know that a **view** can be shown, hidden, and closed, but how can the **viewmodel** know it and perform appropriately?
+>Now, a ViewModel doesn't magically know when it's been shown, hidden, or closed. It has to be told. This is the role of a Conductor.
+A Conductor is, simply, a ViewModel which owns another ViewModel, and knows how to manage its lifecycle.
 
+The `Screen` class implements interface `IScreen`, which provides [a list of virtual methods](https://github.com/canton7/Stylet/wiki/Screens-and-Conductors#iscreen-and-screen) related to lifecycle management that we can override to obtain desired behavior. Let's first play with by outputting some debugging information. 
+
+
+Add two `override` methods in the `GuestBookViewModel` class as follows.
+```csharp
+        // Called when the Screen's activated. Will only be called if the Screen wasn't already active.
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+            Debug.WriteLine("------ OnActivate in GuestBookViewModel");
+        }
+
+        // Called when the Screen's closed. Will only be called once. 
+        protected override void OnClose()
+        {
+            base.OnClose();
+            Debug.WriteLine("------ OnClose in GuestBookViewModel");
+        }
+```
+Of course, the above `Debug` requires `using System.Diagnostics;`. The debug info will be written into the "Output" window of VS by default (Menu: View -> Output). Start our WPF application, and you should see that `OnActivate` is called at the beginning and `OnClose` is called after you close the program.
+
+Feel free to play with other related methods by overriding them. Do note that these methods (like `OnActivate`) is essentially called by the `Conductor` that manages this viewmodel. Thus, to enable lifecycle management, a viewmodel must be *owned* by a conductor, e.g., by setting the `ActiveItem` property or using the `Activate` method of a conductor, etc.
+
+
+## 3.3 Message box 
+
+In practice, we will of course do something useful instead of just writing debugging information as shown above. A common scenario is to pop out a messagebox that asks the user whether to save the current file. It is always a pain to get a full MVVM-style message box (you can get a lot of discussion by Googling "MVVM messagebox"). Ideally, a messagebox is also a view, which thus should have its own viewmodel as well. Sadly, this feature is not built-in WPF's messagebox.
+Fortunately, *Stylet* comes with its own MessageBox clone, which looks and behaves almost identically to the WPF one. Check [MessageBox](https://github.com/canton7/Stylet/wiki/MessageBox) for details.
+
+Assume that our boss has assigned a new task: save the guest book to a file or a database. We now need to ask the user whether saving is desired before closing. This is exactly where the above `OnClose` method comes in. 
+
+Let's show a messagebox in the `OnClose` method of `GuestBookViewModel`.
 
 
 

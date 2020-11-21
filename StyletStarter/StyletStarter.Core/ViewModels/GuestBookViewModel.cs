@@ -1,10 +1,12 @@
 ﻿using Stylet;
 using StyletStarter.Core.Models;
+using System.Diagnostics;
 
 namespace StyletStarter.Core.ViewModels
 {
     public class GuestBookViewModel : Screen
     {
+
         // a collection of models
         private BindableCollection<PersonModel> people = new BindableCollection<PersonModel>();
 
@@ -25,7 +27,7 @@ namespace StyletStarter.Core.ViewModels
             get { return firstName; }
             set
             {
-                // both methods below are inherinted from `PropertyChangedBase`
+                // both methods below are inherited from `PropertyChangedBase`
                 SetAndNotify(ref firstName, value);
                 NotifyOfPropertyChange(nameof(FullName));
                 NotifyOfPropertyChange(nameof(CanAddGuest));
@@ -66,5 +68,19 @@ namespace StyletStarter.Core.ViewModels
         // We use the "expression body" syntax introduced in C# 6.
         // The returned value controls whether the button is enabled. 
         public bool CanAddGuest => FirstName?.Length > 0 && LastName?.Length > 0;
+
+        // Called when the Screen's activated. Will only be called if the Screen wasn't already active.
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+            Debug.WriteLine("------ OnActivate in GuestBookViewModel");
+        }
+
+        // Called when the Screen's closed. Will only be called once. 
+        protected override void OnClose()
+        {
+            base.OnClose();
+            Debug.WriteLine("------ OnClose in GuestBookViewModel");
+        }
     }
 }

@@ -1,6 +1,7 @@
 using StyletStarter.Wpf.Pages;
 using Stylet;
 using StyletIoC;
+using StyletStarter.Core.ViewModels;
 
 namespace StyletStarter.Wpf
 {
@@ -9,6 +10,7 @@ namespace StyletStarter.Wpf
         protected override void ConfigureIoC(IStyletIoCBuilder builder)
         {
             // Configure the IoC container in here
+            builder.Bind<GuestBookViewModel>().ToSelf();
         }
 
         protected override void Configure()

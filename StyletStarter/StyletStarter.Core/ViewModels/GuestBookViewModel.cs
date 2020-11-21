@@ -81,6 +81,8 @@ namespace StyletStarter.Core.ViewModels
         {
             base.OnClose();
             Debug.WriteLine("------ OnClose in GuestBookViewModel");
+            //WindowManager.ShowMessageBox("Hello");
         }
+
     }
 }

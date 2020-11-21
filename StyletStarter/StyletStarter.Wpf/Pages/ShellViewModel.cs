@@ -5,9 +5,10 @@ namespace StyletStarter.Wpf.Pages
 {
     public class ShellViewModel : Conductor<Screen>
     {
-        public ShellViewModel()
+        // `vm` will be injected by stylet IoC
+        public ShellViewModel(GuestBookViewModel vm)
         {
-            ActiveItem = new GuestBookViewModel();
+            ActiveItem = vm;
         }
     }
 }

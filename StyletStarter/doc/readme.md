@@ -1,4 +1,4 @@
-In this beginner tutorial, we try to reproduce step-by-step the introductory *GuestBook* example originally given by Tim Corey, a prominent tutor teaching .Net technology who has published quite a number of inspiring [tutorial videos on YouTube](https://www.youtube.com/channel/UC-ptWR16ITQyYOglXyQmpzw). For this specific example in this tutorial, the video given by Tim Corey is found [here](https://youtu.be/8E000zu8UhQ?list=PLm97Mr_WwOyk4ug4j4sRA4wyQShxGodyr&t=2124) (starting from 35:20). In that video, Tim Corey turns to the *MVVMCross* framework, since *Caliburn Micro* is no longer actively maintained now 😐. Nonethess, we will use arguably the  more convenient *Stylet* framework here (especially if you only target WPF rather than the mobile stuff with Xamarin🙂), 
+In this beginner tutorial, we try to reproduce step-by-step the introductory *GuestBook* example originally given by Tim Corey, a prominent tutor teaching .Net technology who has published quite a number of inspiring [tutorial videos on YouTube](https://www.youtube.com/channel/UC-ptWR16ITQyYOglXyQmpzw). For this specific example in this tutorial, the video given by Tim Corey is found [here](https://youtu.be/8E000zu8UhQ?list=PLm97Mr_WwOyk4ug4j4sRA4wyQShxGodyr&t=2124) (starting from 35:20). In that video, Tim Corey turns to the *MVVMCross* framework, since *Caliburn Micro* is no longer actively maintained now 😐. Nonetheless, we will use arguably the  more convenient *Stylet* framework here (especially if you only target WPF rather than the mobile stuff with Xamarin🙂), 
 
 Overall, this tutorial is a mirror of the one from Tim Corey except that MVVMCross is replaced with Stylet. Therefore, you are strongly recommended to check Tim Corey's video for many common steps and the rationality behind the code. The environment we work with is Visual Studio (VS) 2019, .Net Core 3.1, and *stylet* 1.3.4. 
 
@@ -143,7 +143,7 @@ Some explanations of the above code.
 
 ----------
 # 2. *StyletStarter.Wpf* project
-To avoid writing boilerplate code, we use the template provided by *Stylet* to generate a new WPF project. The instructions are documented on [Quick Start page](https://github.com/canton7/Stylet/wiki/Quick-Start). Recall that we are targeting .Net Core, a natural choice particually in 2020.
+To avoid writing boilerplate code, we use the template provided by *Stylet* to generate a new WPF project. The instructions are documented on [Quick Start page](https://github.com/canton7/Stylet/wiki/Quick-Start). Recall that we are targeting .Net Core, a natural choice particularly in 2020.
 
 ## 2.0 Add a .Net Core WPF project
 In VS, right click the Solution "StyletStarter" and choose "Open in Terminal". An integrated terminal window is opened inside VS. Following the above instructions, first type the following command to install the *stylet* template
@@ -158,7 +158,7 @@ It says "The template "Stylet Application" was created successfully." if nothing
 
 (Of course, the above two commands can be executed in any terminal outside VS, like the CMD, PowerShell, or Windows Terminal, etc. Just make sure that the root directory is correct, i.e., the one containing the VS solution file.)
 
-Right click the added *StyletStarter.Wpf* project and set it as a Startup Project. Now you can start the program to confirm that everying is fine. An empty *Stylet* app shows up with a line of text "Hello Stylet!".
+Right click the added *StyletStarter.Wpf* project and set it as a Startup Project. Now you can start the program to confirm that everything is fine. An empty *Stylet* app shows up with a line of text "Hello Stylet!".
 
 Note that the dependency of the project *StyletStarter.Wpf* on *Stylet* has already been added with the above template generation. Now we simply need to add dependency on our previous *StyletStarter.Core* project. Right click "Dependencies" of the *StyletStarter.Wpf* project and choose "Add Project Reference". Now the solution structure looks like
 
@@ -215,7 +215,7 @@ Note that
 - The only part specific to *Stylet* is the `Command="{s:Action AddGuest}"` that depends on its [Action](https://github.com/canton7/Stylet/wiki/Actions) mechanism. There is also a hidden feature, [guard property](https://github.com/canton7/Stylet/wiki/Actions#guard-properties), that determines whether the command `AddGuest` can be executed by checking the property `CanAddGuest`.
 
 ## 2.2 Place the custom view into the shell view
-After we finish the `GuestBookView`, the next step is to *place* it inside the shell `ShellView`. In *stylet*, it is usually (also reccomended) implemented using the `Conductor`. Nonetheless, for our single-window toy example, we will follow a simpler way without using conductor for now. 
+After we finish the `GuestBookView`, the next step is to *place* it inside the shell `ShellView`. In *stylet*, it is usually (also recommended) implemented using the `Conductor`. Nonetheless, for our single-window toy example, we will follow a simpler way without using conductor for now. 
 
 ### 2.2.1 Put a `ContentControl` in `ShellView` to render `GuestBookView`
 
@@ -308,6 +308,7 @@ Now suppose we want to manage the lifecycle of our `GuestBookViewModel` (which i
 We can make the `ShellViewModel` inherit `Conductor<Screen>` (instead of the original `Screen`), since by convention every viewmodel in a *stylet* application is a subclass of `Screen`. You may however use `Conductor<IScreen>` as an alternative. Now the `ShellViewModel` becomes a `Conductor` now and can manage the internal `GuestBookView`. 
 
 In *ShellViewModel.cs* we have the following code, in which the `ActiveItem` of a conductor is initialized to an instance of `GuestBookViewModel`.
+<a name="activeitem"></a>
 ```csharp
 using Stylet;
 using StyletStarter.Core.ViewModels;
@@ -360,14 +361,62 @@ Of course, the above `Debug` requires `using System.Diagnostics;`. The debug inf
 Feel free to play with other related methods by overriding them. Do note that these methods (like `OnActivate`) is essentially called by the `Conductor` that manages this viewmodel. Thus, to enable lifecycle management, a viewmodel must be *owned* by a conductor, e.g., by setting the `ActiveItem` property or using the `Activate` method of a conductor, etc.
 
 
-## 3.3 Message box 
+## 3.3 IoC and dependency injection
+Another commonly seen companion of an MVVM framework is a IoC (inversion of control) container. IoC is closely related to (or, in a narrower view, equivalent to) dependency injection (DI). There are many articles about IoC and DI on-line, e.g., this stack-overflow [one](https://stackoverflow.com/questions/3058/what-is-inversion-of-control). Frankly speaking, the two concepts are quite abstract and are themselves broad topics. Roughly speaking, IoC means ([source](https://stackoverflow.com/a/31828292))
+> IoC means that objects do not create other objects on which they rely to do their work. Instead, they get the objects that they need from an outside service 
 
-In practice, we will of course do something useful instead of just writing debugging information as shown above. A common scenario is to pop out a messagebox that asks the user whether to save the current file. It is always a pain to get a full MVVM-style message box (you can get a lot of discussion by Googling "MVVM messagebox"). Ideally, a messagebox is also a view, which thus should have its own viewmodel as well. Sadly, this feature is not built-in WPF's messagebox.
-Fortunately, *Stylet* comes with its own MessageBox clone, which looks and behaves almost identically to the WPF one. Check [MessageBox](https://github.com/canton7/Stylet/wiki/MessageBox) for details.
+In *Stylet*, the outside service is the built-in IoC container called *StyletIoC*. Refer to [StyletIoC](https://github.com/canton7/Stylet/wiki/StyletIoC-Introduction) for more explanation. Overall, IoC is somewhat like a dictionary. We first register into the IoC a key (a *service*, e.g., an interface, abstract type, or a concrete type) along with a concrete type that provides this service. Later, when we need this service, we ask the IoC for an instance of the associated concrete type (instead of creating it ourselves). 
 
-Assume that our boss has assigned a new task: save the guest book to a file or a database. We now need to ask the user whether saving is desired before closing. This is exactly where the above `OnClose` method comes in. 
+A even lazier way is to let the IoC give us the needed concrete type instance automatically (instead of asking it explicitly). This is exactly what dependency injection (DI) does. Two common [injection](https://github.com/canton7/Stylet/wiki/StyletIoC-Injection) points are constructor injection and property injection. 
 
-Let's show a messagebox in the `OnClose` method of `GuestBookViewModel`.
+Enough words! Since we are not writing a paper here 😂, a beginner does not need to grasp all these knowledge. Just play with it 🔥!
+
+
+Recall that in our current [ShellViewModel](#activeitem) implementation, the instance of `GuestBookViewModel` is created manually. Now let's turn it into an injected one via constructor injection. Since the `ShellViewModel` is instantiated by *stylet* (we never `new` a `ShellViewModel`, right? 👽), its constructor injection happens [automatically](https://github.com/canton7/Stylet/wiki/StyletIoC-Injection).
+
+ 
+```csharp
+    public class ShellViewModel : Conductor<Screen>
+    {
+        // `vm` will be injected by stylet IoC
+        public ShellViewModel(GuestBookViewModel vm)
+        {
+            ActiveItem = vm;
+        }
+    }
+```
+
+That is, when creating an instance of `ShellViewModel` by *StyletIoC* (the default behavior), the IoC will also create an instance of `GuestBookViewModel` for use and insert it into the constructor. Easy?
+
+
+Now if you start the program, you will encounter the exception 
+> StyletIoC.StyletIoCFindConstructorException: 'Unable to find a constructor for type ShellViewModel which we can call:
+Constructor:
+   GuestBookViewModel: Failure
+
+What happened? The reason is that we have not registered the *service* `GuestBookViewModel` to the IoC even if it is an concrete type already. We shall configure the IoC by overriding the `ConfigureIoC` method of the `Bootstrapper` class. The template has already created an empty override for us in *Bootstrapper.cs*.
+
+Add the `GuestBookViewModel` as follows, which binds the service to itself (since `GuestBookViewModel` is a concrete type rather than an interface or an abstract class).
+```csharp
+    public class Bootstrapper : Bootstrapper<ShellViewModel>
+    {
+        protected override void ConfigureIoC(IStyletIoCBuilder builder)
+        {
+            // Configure the IoC container in here
+            builder.Bind<GuestBookViewModel>().ToSelf();
+        }
+
+        .......
+    }
+```
+
+The above line means, when the service identified by type `GuestBookViewModel` is needed (e.g., in construcotr injection when creating a `ShellViewModel`), an instance of `GuestBookViewModel` is generated and returned by the IoC. 
+Now everything should work again as before. Please check the [Configuration](https://github.com/canton7/Stylet/wiki/StyletIoC-Configuration) page to learn more about IoC configuration.
+
+
+
+
+
 
 
 

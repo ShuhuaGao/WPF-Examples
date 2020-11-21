@@ -3,13 +3,12 @@ using StyletStarter.Core.ViewModels;
 
 namespace StyletStarter.Wpf.Pages
 {
-    public class ShellViewModel : Screen
+    public class ShellViewModel : Conductor<Screen>
     {
-        public ShellViewModel()
+        // `vm` will be injected by stylet IoC
+        public ShellViewModel(GuestBookViewModel vm)
         {
-            Content = new GuestBookViewModel();
+            ActiveItem = vm;
         }
-
-        public GuestBookViewModel Content { get; private set; }
     }
 }

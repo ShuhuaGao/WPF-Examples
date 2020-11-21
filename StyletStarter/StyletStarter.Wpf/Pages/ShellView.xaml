@@ -8,5 +8,5 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance local:ShellViewModel}"
         Title="Stylet Project" Height="450" Width="800">
-    <ContentControl s:View.Model="{Binding Content}"/>
+    <ContentControl s:View.Model="{Binding ActiveItem}"/>
 </Window>

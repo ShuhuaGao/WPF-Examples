@@ -3,13 +3,11 @@ using StyletStarter.Core.ViewModels;
 
 namespace StyletStarter.Wpf.Pages
 {
-    public class ShellViewModel : Screen
+    public class ShellViewModel : Conductor<Screen>
     {
         public ShellViewModel()
         {
-            Content = new GuestBookViewModel();
+            ActiveItem = new GuestBookViewModel();
         }
-
-        public GuestBookViewModel Content { get; private set; }
     }
 }

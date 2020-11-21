@@ -1,4 +1,4 @@
-In this beginner tutorial, we try to reproduce step-by-step the introductory *GuestBook* example originally given by Tim Corey, a prominent tutor teaching .Net techniques who has published quite a number of inspiring [tutorial videos on YouTube](https://www.youtube.com/channel/UC-ptWR16ITQyYOglXyQmpzw). For this specific example in this tutorial, the video given by Tim Corey is found [here](https://youtu.be/8E000zu8UhQ?list=PLm97Mr_WwOyk4ug4j4sRA4wyQShxGodyr&t=2124) (starting from 35:20). In that video, Tim Corey turns to the *MVVMCross* framework, since *Caliburn Micro* is no longer actively maintained now 😐. Nonethess, we will use arguably the  more convenient *Stylet* framework here (especially if you only target WPF rather than the mobile stuff with Xamarin🙂), 
+In this beginner tutorial, we try to reproduce step-by-step the introductory *GuestBook* example originally given by Tim Corey, a prominent tutor teaching .Net technology who has published quite a number of inspiring [tutorial videos on YouTube](https://www.youtube.com/channel/UC-ptWR16ITQyYOglXyQmpzw). For this specific example in this tutorial, the video given by Tim Corey is found [here](https://youtu.be/8E000zu8UhQ?list=PLm97Mr_WwOyk4ug4j4sRA4wyQShxGodyr&t=2124) (starting from 35:20). In that video, Tim Corey turns to the *MVVMCross* framework, since *Caliburn Micro* is no longer actively maintained now 😐. Nonethess, we will use arguably the  more convenient *Stylet* framework here (especially if you only target WPF rather than the mobile stuff with Xamarin🙂), 
 
 Overall, this tutorial is a mirror of the one from Tim Corey except that MVVMCross is replaced with Stylet. Therefore, you are strongly recommended to check Tim Corey's video for many common steps and the rationality behind the code. The environment we work with is Visual Studio (VS) 2019, .Net Core 3.1, and *stylet* 1.3.4. 
 
@@ -294,6 +294,42 @@ Now start the application again and it should run normally. Get yourself a coffe
 The final solution structure is 
 
 ![](./img/sol-structure-final.png)
+
+# 3. Advanced techniques in *stylet*
+
+## 3.1 Conductor and viewmodel lifecycle management
+What is a conductor? The concept may be a little abstract until you play with it. In short,
+> A Conductor is, simply, a ViewModel which owns another ViewModel, and knows how to manage its lifecycle.
+
+In our guest book application, there is essentially only one viewmodel, and no lifecycle issue is involved. That is, the unique viewmodel `GuestBookViewModel` (and its view `GuestBookview`) is created at the beginning and disposed (closed) at the end of the application. Nevertheless, if you have multiple viewmodels, their creation, activation, and closing must be managed properly. That is why we need a `Conductor`. Detailed documentation is on the [Screens and Conductors](https://github.com/canton7/Stylet/wiki/Screens-and-Conductors) page. 
+
+Now suppose we want to manage the lifecycle of our `GuestBookViewModel` (which is in fact not necessay in this toy example though). Since there is only one viewmodel, we use the built-in conductor [`Conductor<T>`](https://github.com/canton7/Stylet/wiki/Screens-and-Conductors#conductort), where `T` refers to the type of the viewmodel to be managed.
+
+We can make the `ShellViewModel` inherit `Conductor<Screen>`, since by convention every viewmodel in a *stylet* application is a subclass of `SCreen`. Now the `ShellViewModel` becomes a `Conductor` now and can manage the internal `GuestBookView`. 
+
+In *ShellViewModel.cs* we have the following code, in which the `ActiveItem` of a conductor is initialized to an instance of `GuestBookViewModel`.
+```csharp
+using Stylet;
+using StyletStarter.Core.ViewModels;
+
+namespace StyletStarter.Wpf.Pages
+{
+    public class ShellViewModel : Conductor<Screen>
+    {
+        public ShellViewModel()
+        {
+            ActiveItem = new GuestBookViewModel();
+        }
+    }
+}
+```
+Accordinly, we need to reset the `ContentControl` of `ShellView` to make its Content bind to the `ActiveItem`. That is, change that specific line in *ShellView.xaml* to 
+```xml
+<ContentControl s:View.Model="{Binding ActiveItem}"/>
+```
+
+Now run the program again. As expected, everything works as before. Finally, note that, though not required in this toy example, the `Conductor` is a powerful tool to manage and to coordinate the lifecyle of one or more viewmodels. For instance, you may change its `ActiveItem` (a viewmodel) by calling `ActivateItem(T item)`, which causes the changes of views accordingly. This technique is commonly used in tab-like interfaces. Please check [Conductors in Detail](https://github.com/canton7/Stylet/wiki/Screens-and-Conductors#conductors-in-detail).
+
 
 
 

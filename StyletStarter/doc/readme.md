@@ -295,6 +295,8 @@ The final solution structure is
 
 ![](./img/sol-structure-final.png)
 
+-----------------------
+
 # 3. Advanced techniques in *Stylet* 🌈
 
 ## 3.1 Conductor
@@ -443,6 +445,8 @@ Now it is clear that two modifications of `GuestBookViewModel` are required to a
     }
 ```
 
+Note that we do not need to register the `IWindowManager` service into the IoC in `Bootstrapper`.  *Stylet* has done that for us already. 
+
 Once we get the window manager, it can used to show a message box when the application is going to be closed as documented in [MessageBox](https://github.com/canton7/Stylet/wiki/MessageBox). A good place to put it is the `CanClose` method of a `Screen`. However, the `CanClose` method is labeled obsolete in the current version of *stylet*, and `CanCloseAsync` is suggested instead.
 
 Now let's override the `CanCloseAsync` method in `GuestBookViewModel` that has been inherited from `Screen`.
@@ -472,12 +476,10 @@ Start the program. You should see something like the figure below when you want 
 Try the three different buttons and see whether the effect is desired 🎃.
 
 
-## Summary
+## Summary 🏆🏆🏆
 At this point, we have finished this introductory tutorial. Hope that you have got better understanding of *Stylet* now. There are some other interesting topics to be explored, like [EventAggregator](https://github.com/canton7/Stylet/wiki/The-EventAggregator) and [Validation](https://github.com/canton7/Stylet/wiki/ValidatingModelBase). Have fun! ☕☕	🍻	🍻
 
 The source code for this advanced part is available [here]().
-
-
 
 
 

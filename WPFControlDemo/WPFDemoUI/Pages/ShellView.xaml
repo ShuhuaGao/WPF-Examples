@@ -26,6 +26,15 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBlock Text="{Binding SelectedPerson.FullName}" Grid.Row="1" Background="LawnGreen"/>
+        <ComboBox Grid.Row="1" ItemsSource="{Binding SelectedPerson.Addresses}" SelectedItem="{Binding SelectedPerson.PrimaryAddress}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding FullAddress}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock Grid.Row="2" Text="{Binding SelectedPerson.PrimaryAddress.FullAddress}" Background="Cyan" Margin="0,10,0,0"/>
     </Grid>
 </Window>

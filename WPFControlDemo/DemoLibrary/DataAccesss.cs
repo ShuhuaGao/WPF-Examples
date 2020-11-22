@@ -21,7 +21,18 @@ namespace DemoLibrary
             "4 Ralph Ct",
             "2742 Distribution Way",
             "426 Wolf St",
-            "5 N Cleveland Massillon Rd"
+            "5 N Cleveland Massillon Rd",
+            "5 Williams St",
+            "60 Old Dover Rd",
+            "8 Sheridan Rd",
+            "85092 Southern Blvd",
+            "64 Newman Springs Rd E",
+            "48 Stratford Ave",
+            "80 Pittsford Victor Rd #9",
+            "87163 N Main Ave",
+            "393 Lafayette Ave",
+            "99 5th Ave #33"
+
         };
         private string[] cities = {
             "Brighton",
@@ -37,7 +48,14 @@ namespace DemoLibrary
             "Austin",
             "Littleton",
             "Milwaukee",
-            "New York"
+            "New York",
+            "Homosassa",
+            "Santa Clara",
+            "Hazleton",
+            "Jersey City",
+            "San Ramon",
+            "Bridgewater",
+
         };
         private string[] states =
         {
@@ -50,7 +68,10 @@ namespace DemoLibrary
             "NM",
             "NY",
             "KS",
-            "OR"
+            "OR",
+            "MI",
+            "WI",
+            "LA"
         };
         private string[] zipCodes = {
             "70116",
@@ -67,6 +88,10 @@ namespace DemoLibrary
             "11953",
             "90034",
             "10025",
+            "17517",
+            "63088",
+            "76013",
+
         };
 
         private string[] firstNames =
@@ -83,7 +108,16 @@ namespace DemoLibrary
             "Willard",
             "Maryann",
             "Alisha",
-            "Erick"
+            "Erick",
+            "Adelina",
+            "Derick",
+            "Jerry",
+            "Leota",
+            "Jutta",
+            "Aja",
+            "Kirk",
+            "Leonora",
+            "Winfred"
         };
         private string[] lastNames =
         {
@@ -99,7 +133,14 @@ namespace DemoLibrary
             "Corrio",
             "Vocelka",
             "Stenseth",
-            "Glick"
+            "Glick",
+            "Kaniecki",
+            "Gleich",
+            "Kiel",
+            "Ostolaza",
+            "Borgman",
+            "Nayar",
+
         };
 
         private bool[] aliveStatuses = { true, false };

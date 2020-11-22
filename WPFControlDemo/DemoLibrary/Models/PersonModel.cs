@@ -24,7 +24,15 @@ namespace DemoLibrary.Models
         // auto-property initialization in C# 6
         public List<AddressModel> Addresses { get; set; } = new List<AddressModel>();
 
-        public AddressModel PrimaryAddress { get; set; }
+        private AddressModel primaryAddress;
+        public AddressModel PrimaryAddress
+        {
+            get
+            {
+                return primaryAddress ?? Addresses.FirstOrDefault();
+            }
+            set { primaryAddress = value; }
+        }
 
         public string FullName => $"{FirstName} {LastName}";
 
@@ -33,5 +41,6 @@ namespace DemoLibrary.Models
             return $"{PersonId} {FullName} {Age} {(IsAlive ? "Alive" : "Dead")}\n {Addresses.FirstOrDefault()?.FullAddress}\n";
         }
 
+        
     }
 }

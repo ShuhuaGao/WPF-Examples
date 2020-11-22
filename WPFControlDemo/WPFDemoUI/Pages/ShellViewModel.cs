@@ -1,6 +1,7 @@
 using Stylet;
 using DemoLibrary.Models;
 using DemoLibrary;
+using System.Diagnostics;
 
 namespace WPFDemoUI.Pages
 {
@@ -20,7 +21,13 @@ namespace WPFDemoUI.Pages
         public PersonModel SelectedPerson
         {
             get { return personModel; }
-            set { SetAndNotify(ref personModel, value); }
+            set {
+                //SetAndNotify(ref personModel, value);
+                personModel = value;
+                Debug.WriteLine($"------ Selected: {personModel.FullName}");
+                Debug.WriteLine($"Primary address: {personModel.PrimaryAddress.FullAddress}");
+                NotifyOfPropertyChange(nameof(SelectedPerson));
+            }
         }
 
     }

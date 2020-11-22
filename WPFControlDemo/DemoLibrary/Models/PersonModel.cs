@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace DemoLibrary.Models
 {
@@ -26,6 +27,11 @@ namespace DemoLibrary.Models
         public AddressModel PrimaryAddress { get; set; }
 
         public string FullName => $"{FirstName} {LastName}";
+
+        public override string ToString()
+        {
+            return $"{PersonId} {FullName} {Age} {(IsAlive ? "Alive" : "Dead")}\n {Addresses.FirstOrDefault()?.FullAddress}\n";
+        }
 
     }
 }

@@ -14,5 +14,14 @@ namespace WPFDemoUI.Pages
             var da = new DataAccesss();
             People = new BindableCollection<PersonModel>(da.GetPeople(20));
         }
+
+        private PersonModel personModel;
+
+        public PersonModel SelectedPerson
+        {
+            get { return personModel; }
+            set { SetAndNotify(ref personModel, value); }
+        }
+
     }
 }

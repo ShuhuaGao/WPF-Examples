@@ -9,8 +9,23 @@
         d:DataContext="{d:DesignInstance local:ShellViewModel}"
         Title="Stylet Project" Height="450" Width="800">
     <Grid>
-        <TextBlock FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center">
-            Hello Stylet!
-        </TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <ComboBox Grid.Row="0" ItemsSource="{Binding People}" SelectedItem="{Binding SelectedPerson}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding FullName}"/>
+                        <TextBlock Text=" - Are they alive: "/>
+                        <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsAlive}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock Text="{Binding SelectedPerson.FullName}" Grid.Row="1" Background="LawnGreen"/>
     </Grid>
 </Window>

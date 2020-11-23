@@ -10,7 +10,7 @@ namespace WPFNotepad.ViewModels
 {
     public class FileViewModel
     {
-        public DocumentModel Document { get; private set; }
+        public DocumentModel Document { get; set; }
 
         public FileViewModel(DocumentModel document)
         {

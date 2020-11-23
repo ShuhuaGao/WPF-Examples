@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics;
 
 namespace WPFNotepad.Models
 {
@@ -15,11 +16,12 @@ namespace WPFNotepad.Models
             {
                 // set and notify
                 OnPropertyChanged(ref text, value);
+                Debug.WriteLine($"Text: {value}");
             }
         }
 
 
-        private string filePath;
+        private string filePath = "Empty path";
 
         public string FilePath
         {
@@ -27,7 +29,7 @@ namespace WPFNotepad.Models
             set { OnPropertyChanged(ref filePath, value); }
         }
 
-        private string fileName;
+        private string fileName = "Untitled";
 
         public string FileName
         {
@@ -36,6 +38,11 @@ namespace WPFNotepad.Models
         }
 
         public bool IsEmpty => string.IsNullOrEmpty(FileName) || string.IsNullOrEmpty(FilePath);
+
+        public DocumentModel()
+        {
+            Text = "Some test text";
+        }
 
     }
 }

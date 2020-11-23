@@ -8,9 +8,32 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance local:ShellViewModel}"
         Title="WPF Notepad" Height="400" Width="550">
-    <Grid>
-        <TextBlock FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center">
-            Hello Stylet!
-        </TextBlock>
-    </Grid>
+    <DockPanel Margin="1">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New"/>
+                <MenuItem Header="Open"/>
+                <MenuItem Header="Save"/>
+                <MenuItem Header="Save as..."/>
+                <MenuItem Header="Gen text" Command="{s:Action GenDummyText}"/>
+            </MenuItem>
+            <MenuItem Header="Format">
+                <MenuItem Header="Apply format"/>
+                <MenuItem Header="Wrap words"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="About"/>
+            </MenuItem>
+        </Menu>
+        <DockPanel>
+            <!--Inherited DataContext has property File but not NPC-->
+            <!--Document of class DocumentModel can notify the change of FilePath-->
+            <TextBlock DockPanel.Dock="Bottom" DataContext="{Binding File.Document}" Text="{Binding FilePath}"/>
+            <TextBox DockPanel.Dock="Top" VerticalScrollBarVisibility="Visible" 
+                     DataContext="{Binding Editor}" FontFamily="{Binding Format.Family}" FontWeight="{Binding Format.Weight}"
+                     FontStyle="{Binding Format.Style}" FontSize="{Binding Format.Size}" AcceptsReturn="True" AcceptsTab="True"
+                     TextWrapping="{Binding Format.Wrapping}" 
+                     Text="{Binding Document.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </DockPanel>
+    </DockPanel>
 </Window>

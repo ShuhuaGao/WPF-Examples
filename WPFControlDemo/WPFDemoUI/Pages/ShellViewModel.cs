@@ -16,7 +16,7 @@ namespace WPFDemoUI.Pages
 
         public ShellViewModel()
         {
-            People = new BindableCollection<PersonModel>(da.GetPeople(20));
+            People = new BindableCollection<PersonModel>(da.GetPeople(10));
         }
 
         private PersonModel personModel;

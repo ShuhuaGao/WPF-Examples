@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Diagnostics;
 
 namespace DemoLibrary.Models
 {
@@ -31,7 +32,11 @@ namespace DemoLibrary.Models
             {
                 return primaryAddress ?? Addresses.FirstOrDefault();
             }
-            set { primaryAddress = value; }
+            set
+            {
+                primaryAddress = value;
+                Debug.WriteLine($"--- {FullName}'s primary address set to {value.FullAddress}");
+            }
         }
 
         public string FullName => $"{FirstName} {LastName}";
@@ -41,6 +46,6 @@ namespace DemoLibrary.Models
             return $"{PersonId} {FullName} {Age} {(IsAlive ? "Alive" : "Dead")}\n {Addresses.FirstOrDefault()?.FullAddress}\n";
         }
 
-        
+
     }
 }

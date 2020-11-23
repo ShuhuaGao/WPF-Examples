@@ -154,7 +154,7 @@ namespace DemoLibrary
 
         public string[] StreeAddresses => streetAddresses;
 
-        private PersonModel GetPerson(int id)
+        public PersonModel GetPerson(int id)
         {
             var randomDate = GetRandomDate();
             var p = new PersonModel

@@ -8,33 +8,37 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance local:ShellViewModel}"
         Title="Stylet Project" Height="450" Width="800">
-    <Grid>
+    <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ComboBox Grid.Row="0" ItemsSource="{Binding People}" SelectedItem="{Binding SelectedPerson}">
-            <ComboBox.ItemTemplate>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Button Content="Add New Person" Command="{s:Action AddPerson}" Margin="10"/>
+            <Button Command="{s:Action RemovePerson}">Remove Random Person</Button>
+        </StackPanel>
+        <ItemsControl ItemsSource="{Binding People}" Grid.Row="1">
+            <!--If not set, ItemTemplate is null. And `ToString` of each item is used for display.-->
+            <!--The data source here is each item inside the collection.-->
+            <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding FullName}"/>
-                        <TextBlock Text=" - Are they alive: "/>
-                        <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsAlive}"/>
-                    </StackPanel>
+                    <Border BorderBrush="Black" BorderThickness="1" Padding="5" Margin="10">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Background="CadetBlue" Text="{Binding FullName}"/>
+                            <TextBlock Background="DarkGoldenrod" Text="{Binding AccountBalance}"/>
+                        </StackPanel>
+                    </Border>
                 </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <ComboBox Grid.Row="1" ItemsSource="{Binding SelectedPerson.Addresses}" SelectedItem="{Binding SelectedPerson.PrimaryAddress}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding FullAddress}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <TextBlock Grid.Row="2" Text="{Binding SelectedPerson.PrimaryAddress.FullAddress}" Background="Cyan" Margin="0,10,0,0"/>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
     </Grid>
 </Window>

@@ -10,15 +10,17 @@ namespace WPFNotepad.Pages
     public class ShellViewModel : Screen
     {
         private DocumentModel document;
+        private IWindowManager windowManager;
 
-        public EditorViewModel Editor { get; set; }
+        public FormatViewModel Editor { get; set; }
         public FileViewModel File { get; set; }
         public HelpViewModel Help { get; set; }
 
-        public ShellViewModel()
+        public ShellViewModel(IWindowManager windowManager)
         {
+            this.windowManager = windowManager; // will be injected
             document = new DocumentModel();
-            Editor = new EditorViewModel(document);
+            Editor = new FormatViewModel();
             File = new FileViewModel(document);
             Help = new HelpViewModel();
         }
@@ -27,7 +29,7 @@ namespace WPFNotepad.Pages
         // Generate arbitrary strings for test purposes
         public void GenDummyText()
         {
-            document.Text = RandomString(random.Next(10, 50));
+            document.Text = RandomString(random.Next(10, 200));
         }
 
 
@@ -38,6 +40,16 @@ namespace WPFNotepad.Pages
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        public void ShowFormatDialog()
+        {
+            windowManager.ShowDialog(Editor);
+        }
+
+        public void ToggleWrap()
+        {
+
         }
     }
 }

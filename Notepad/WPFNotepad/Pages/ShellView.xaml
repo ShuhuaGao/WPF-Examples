@@ -17,13 +17,15 @@
                 <MenuItem Header="Open" Command="{s:Action OpenFile}"/>
                 <MenuItem Header="Save" Command="{s:Action SaveFile}"/>
                 <MenuItem Header="Save as..." Command="{s:Action SaveFileAs}"/>
-                <MenuItem Header="Gen text" Command="{s:Action GenDummyText}"/>
+                <!--GenDummyText is a method of the root viewmodel, we use Binding (dot omitted) to get it -->
+                <MenuItem Header="Gen text" s:View.ActionTarget="{Binding .}"  Command="{s:Action GenDummyText}"/>
             </MenuItem>
-            <MenuItem Header="Format" s:View.ActionTarget="{Binding Format}">
-                <MenuItem Header="Apply format" Command="{s:Action OpenStyleDialog}"/>
-                <MenuItem Header="Wrap words" Command="{s:Action ToggleWrap}"/>
+            <MenuItem Header="Format">
+                <MenuItem Header="Apply format" Command="{s:Action ShowFormatDialog}"/>
+                <MenuItem Header="Wrap words" s:View.ActionTarget="{Binding Editor}" Command="{s:Action ToggleWrap}"/>
             </MenuItem>
             <MenuItem Header="Help" s:View.ActionTarget="{Binding Help}">
+                <!--Attached (dependency) property propagation-->
                 <MenuItem Header="About" Command="{s:Action DisplayAbout}"/>
             </MenuItem>
         </Menu>

@@ -1,0 +1,79 @@
+﻿<Window x:Class="WPFNotepad.Views.FormatView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFNotepad.Views"
+        xmlns:win="clr-namespace:System.Windows;assembly=PresentationCore"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:media="clr-namespace:System.Windows.Media;assembly=PresentationCore"
+        mc:Ignorable="d"
+        Title="FontDialogView" Height="350" Width="500">
+    <Window.Resources>
+        <x:Array x:Key="FontSizeOptions" Type="sys:Int32">
+            <sys:Int32>12</sys:Int32>
+            <sys:Int32>18</sys:Int32>
+            <sys:Int32>20</sys:Int32>
+            <sys:Int32>28</sys:Int32>
+            <sys:Int32>43</sys:Int32>
+        </x:Array>
+        <x:Array x:Key="FontStyleOptions" Type="win:FontStyle">
+            <win:FontStyle>Normal</win:FontStyle>
+            <win:FontStyle>Italic</win:FontStyle>
+            <win:FontStyle>Oblique</win:FontStyle>
+        </x:Array>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0" Grid.Row="0">
+            <TextBlock Text="Font Family" DockPanel.Dock="Top" Margin="10"/>
+            <ListBox ItemsSource="{x:Static media:Fonts.SystemFontFamilies}" 
+                     SelectedItem="{Binding Format.Family}" SelectedIndex="0">
+                <!--Format is a property of FormatViewModel, whose type is FormatModel-->
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <!--Text Binding to FontFamily itself: ToString or Converter-->
+                        <TextBlock Text="{Binding}" FontFamily="{Binding}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+        <DockPanel Grid.Column="1" Grid.Row="0">
+            <TextBlock Text="Font Size" DockPanel.Dock="Top" Margin="10"/>
+            <ListBox ItemsSource="{StaticResource FontSizeOptions}"
+                     SelectedItem="{Binding Format.Size}" SelectedIndex="0">
+
+            </ListBox>
+        </DockPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+            <TextBlock Margin="10,5,10,5">Font Weight</TextBlock>
+            <ComboBox SelectedIndex="1" Margin="5,5,10,5"
+                      SelectedValue="{Binding Format.Weight}" SelectedValuePath="Content">
+                <!--ItemsControl: set Items (ItemCollection) directly here-->
+                <!--SelectedItem binding will not work: data convert-back error-->
+                <ComboBoxItem Content="{x:Static win:FontWeights.Light}"/>
+                <ComboBoxItem Content="{x:Static win:FontWeights.Normal}"/>
+                <ComboBoxItem Content="{x:Static win:FontWeights.Bold}"/>
+                <ComboBoxItem>
+                    <!--derive ContentControl-->
+                    <win:FontWeight>UltraBold</win:FontWeight>
+                </ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal">
+            <TextBlock Text="Font Style" Margin="10"/>
+            <ComboBox Margin="10" ItemsSource="{StaticResource FontStyleOptions}"
+                      SelectedItem="{Binding Format.Style}">
+                <!--SelectedItem works directly if we set ItemsSource -->
+            </ComboBox>
+
+        </StackPanel>
+    </Grid>
+</Window>

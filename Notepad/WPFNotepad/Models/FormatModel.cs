@@ -56,7 +56,7 @@ namespace WPFNotepad.Models
             set { OnPropertyChanged(ref isWrapped, value); }
         }
 
-        private int size;
+        private int size = 10;
 
         public int Size
         {

@@ -22,6 +22,7 @@ namespace WPFNotepad.ViewModels
             Document.FileName = "Untitled";
             Document.FilePath = string.Empty;
             Document.Text = string.Empty;
+            Debug.WriteLine("----- New file");
         }
 
         public void SaveFile()

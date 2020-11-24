@@ -10,30 +10,30 @@
         Title="WPF Notepad" Height="400" Width="550">
     <DockPanel Margin="1">
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="File">
-                <MenuItem Header="New"/>
-                <MenuItem Header="Open"/>
-                <MenuItem Header="Save"/>
-                <MenuItem Header="Save as..."/>
+            <MenuItem Header="File" s:View.ActionTarget="{Binding File}">
+                <!--Attached (dependency) property: s:View.ActionTarget-->
+                <!--NewFile is a method of the FileViewModel class accessed by the File property-->
+                <MenuItem Header="New"  Command="{s:Action NewFile}"/>
+                <MenuItem Header="Open" Command="{s:Action OpenFile}"/>
+                <MenuItem Header="Save" Command="{s:Action SaveFile}"/>
+                <MenuItem Header="Save as..." Command="{s:Action SaveFileAs}"/>
                 <MenuItem Header="Gen text" Command="{s:Action GenDummyText}"/>
             </MenuItem>
-            <MenuItem Header="Format">
-                <MenuItem Header="Apply format"/>
-                <MenuItem Header="Wrap words"/>
+            <MenuItem Header="Format" s:View.ActionTarget="{Binding Format}">
+                <MenuItem Header="Apply format" Command="{s:Action OpenStyleDialog}"/>
+                <MenuItem Header="Wrap words" Command="{s:Action ToggleWrap}"/>
             </MenuItem>
-            <MenuItem Header="Help">
-                <MenuItem Header="About"/>
+            <MenuItem Header="Help" s:View.ActionTarget="{Binding Help}">
+                <MenuItem Header="About" Command="{s:Action DisplayAbout}"/>
             </MenuItem>
         </Menu>
         <DockPanel>
-            <!--Inherited DataContext has property File but not NPC-->
-            <!--Document of class DocumentModel can notify the change of FilePath-->
             <TextBlock DockPanel.Dock="Bottom" DataContext="{Binding File.Document}" Text="{Binding FilePath}"/>
-            <TextBox DockPanel.Dock="Top" VerticalScrollBarVisibility="Visible" 
-                     DataContext="{Binding Editor}" FontFamily="{Binding Format.Family}" FontWeight="{Binding Format.Weight}"
-                     FontStyle="{Binding Format.Style}" FontSize="{Binding Format.Size}" AcceptsReturn="True" AcceptsTab="True"
-                     TextWrapping="{Binding Format.Wrapping}" 
-                     Text="{Binding Document.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox DockPanel.Dock="Top" VerticalScrollBarVisibility="Visible"
+                FontFamily="{Binding Editor.Format.Family}" FontWeight="{Binding Editor.Format.Weight}"
+                     FontStyle="{Binding Editor.Format.Style}" FontSize="{Binding Editor.Format.Size}" AcceptsReturn="True" AcceptsTab="True"
+                     TextWrapping="{Binding Editor.Format.Wrapping}" 
+                     Text="{Binding File.Document.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </DockPanel>
     </DockPanel>
 </Window>

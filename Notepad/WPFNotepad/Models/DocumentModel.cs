@@ -16,7 +16,7 @@ namespace WPFNotepad.Models
             {
                 // set and notify
                 OnPropertyChanged(ref text, value);
-                Debug.WriteLine($"Text: {value}");
+                //Debug.WriteLine($"Text: {value}");
             }
         }
 

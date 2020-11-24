@@ -1,0 +1,1 @@
+Check the tutorial in the `doc` folder or this [page](https://github.com/canton7/Stylet/wiki/Introductory-example:-a-guest-book-application)

@@ -32,19 +32,35 @@
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
+        
+        <Style TargetType="TabItem">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="BlueViolet"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Background" Value="Indigo"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Foreground" Value="DarkGreen"/>
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Background" Value="Black"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <TabControl Margin="10">
             <TabItem DataContext="{StaticResource teacher}" Header="{Binding Name}">
                 <!--TabItem inherits ContentControl. We set the content below-->
                 <StackPanel>
-                    <TextBlock Text="{Binding Name}" Margin="10" Background="Aquamarine"/>
+                    <TextBlock Text="{Binding Name}" Margin="10"/>
                     <TextBlock Text="{Binding Age}" Margin="10"/>
                     <TextBlock Text="{Binding Sex}" Margin="10"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Student" Content="{StaticResource stu1}"></TabItem>
             <TabItem Header="Student" Content="{StaticResource stu2}"></TabItem>
+            <!--<TabItem Header="Fourth" Background="PaleVioletRed"/>-->
         </TabControl>
     </Grid>
 </Window>

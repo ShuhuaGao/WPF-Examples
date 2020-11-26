@@ -130,6 +130,26 @@ We add another tab item by `<TabItem Header="Student" Content="{StaticResource s
 The final result is:
 ![](./img/stu-tab-trigger.png)
 
+## Mouse over header effect (`HeaderTemplate`)
+Let's begin with a simpler task: how to set the background of the header? We just need to set the `Background` property. Note that it will affect the content area background.
+
+Thus, we expect that, when the mouse is over the header, the header changes its color; otherwise, remain the default color. That is, *an condition + transient state change* --> **Trigger**.
+
+- `Trigger`: condition is based on the property value of the element, typically those related to user actions (and transient). 
+    >WPF defines properties that correspond to end-user actions, such as the IsMouseOver property that is set to true when the user hovers the cursor over a UIElement
+
+- `DataTrigger`: condition is based on value of the bound data.
+
+All kinds of triggers are defined within your Style, ControlTemplate, and DataTemplate.
+
+Let's first try `Style` for `TabItem`. Refer to an [official example](https://docs.microsoft.com/en-us/dotnet/api/system.windows.trigger?view=net-5.0).
+
+https://stackoverflow.com/questions/35108366/trigger-for-tabitem-isselected-doesnt-work
+
+https://stackoverflow.com/questions/11299904/setting-the-tabitem-isselected-background
+
+
+
 
 
 

@@ -40,6 +40,12 @@ Therefore, the data templates of `TabControl` only works with `ItemsSource` (rat
 
 Finally, recall that a data template **Describes the visual structure of a data object.** Thus, when working with data template, we must have some backing data (usually a Property of a viewmodel, or, sometimes, a static resource).
 
+## Projects
+1. [StyledTabUI](./StyledTabUI). In this project, the `TabItem`s are added directly, and the main purpose is to play with data templates for a `TabItem`.
+    - Definition of `DataTemplate`
+    - `DataTemplate.DataType`
+    - `DataTrigger` in `DataTemplate.Triggers` that determine property values according to data source values.
+2. 
 TODO 
 1. Add TabItem directly. Three. The first has its own template. The last two shares a resource template.
 2. Add ItemsSource.

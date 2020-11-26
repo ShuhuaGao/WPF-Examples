@@ -1,0 +1,50 @@
+﻿<Window x:Class="StyledTabUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StyledTabUI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="400">
+    <Window.Resources>
+        <local:Teacher x:Key="teacher"/>
+        <local:Student x:Key="stu1" Sex="Male" Age="14">
+            <local:Student.Name>Jack Ma</local:Student.Name>
+        </local:Student>
+        <local:Student x:Key="stu2" Sex="Female" Age="15" Name="Lucy Lee"/>
+        <DataTemplate DataType="{x:Type local:Student}">
+            <StackPanel>
+                <TextBlock FontSize="20" HorizontalAlignment="Center">Student Info</TextBlock>
+                <TextBlock Text="{Binding Name}" Margin="10" Background="Coral"/>
+                <TextBlock Text="{Binding Age}" Margin="10"/>
+                <Image x:Name="imgSex" Width="100"/>
+            </StackPanel>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Sex}" Value="Male">
+                    <!--Collection: DataTrigger.Setters-->
+                    <Setter TargetName="imgSex" Property="Source" Value="pack://siteoforigin:,,,/img/boy.png"/>
+                    <Setter TargetName="imgSex" Property="ToolTip" Value="Boy"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Sex}">
+                    <DataTrigger.Value>Female</DataTrigger.Value>
+                    <Setter TargetName="imgSex" Property="Source" Value="pack://siteoforigin:,,,/img/girl.png"/>
+                    <Setter TargetName="imgSex" Property="ToolTip" Value="Girl"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <TabControl Margin="10">
+            <TabItem DataContext="{StaticResource teacher}" Header="{Binding Name}">
+                <!--TabItem inherits ContentControl. We set the content below-->
+                <StackPanel>
+                    <TextBlock Text="{Binding Name}" Margin="10" Background="Aquamarine"/>
+                    <TextBlock Text="{Binding Age}" Margin="10"/>
+                    <TextBlock Text="{Binding Sex}" Margin="10"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Student" Content="{StaticResource stu1}"></TabItem>
+            <TabItem Header="Student" Content="{StaticResource stu2}"></TabItem>
+        </TabControl>
+    </Grid>
+</Window>

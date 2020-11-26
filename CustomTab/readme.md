@@ -38,7 +38,7 @@ Therefore, the data templates of `TabControl` only works with `ItemsSource` (rat
 
 >If you do not want to use an object that implements IEnumerable to populate the ItemsControl, you can add items by using the Items property. The items in an ItemsControl can have different types. For example, a ListBox can contain one item that is a string and another item that is an Image.
 
-Finally, recall that **Describes the visual structure of a data object.** Thus, when working with data template, we must have some backing data (usually a Property of a viewmodel, or, sometimes, a static resource).
+Finally, recall that a data template **Describes the visual structure of a data object.** Thus, when working with data template, we must have some backing data (usually a Property of a viewmodel, or, sometimes, a static resource).
 
 TODO 
 1. Add TabItem directly. Three. The first has its own template. The last two shares a resource template.

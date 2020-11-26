@@ -77,6 +77,10 @@ If no selection happens, then the *current* item defaults to the first one.
 
 Note that a custom `CollectionView` (via `CollectionViewSource`) can explicitly defined in XAML for advanced customization. Check [this example](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.itemscontrol.displaymemberpath?view=net-5.0#examples)
 
+#### Alternative way
+Another method to attain the above synchronization is to viewed it from a *control-first* (instead of *data-first*) perspective. A detailed control may bind to the `Selector.SelectedItem` property of its master control with relative source of `ElementName` source. For example, `ItemsSource="{Binding SelectedItem.REGIONS, ElementName=CityCB}"`. It may be easier to understand but less elegant.
+
+
 ## About data presentation/visualization
 Note that we did not provide any data template to render our data. Internally, the content of a `ContentControl` is displayed by its internal `ContentPresenter` (accessible in a control template). The logic (order) of display is illustrated [here](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.contentpresenter?view=net-5.0#remarks).
 

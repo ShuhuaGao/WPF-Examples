@@ -162,6 +162,31 @@ Unfortunately, the following naive style does not work here. The reason is uncle
 ### `DataTemplate`
 
 We now try to define a custom header with a `DataTemplate`. The header contains a `TextBlock` (or more generally, a `ContentBlock`) to display `TabItem.Header` (an `Object`) and has `IsMouseOver` trigger.
+```xml
+<DataTemplate x:Key="dtHeader">
+    <TextBlock Text="{Binding}" x:Name="tbkLabel"/>
+    <DataTemplate.Triggers>
+        <Trigger Property="IsMouseOver" Value="True">
+            <Setter TargetName="tbkLabel" Property="Background" Value="Yellow"/>
+        </Trigger>
+    </DataTemplate.Triggers>
+</DataTemplate>
+```
+Then, set the `HeaderTemplate` of a `TabItem` to the above template. It works!
+```xml
+<TabItem DataContext="{StaticResource teacher}" Header="{Binding Name}"
+                     HeaderTemplate="{StaticResource dtHeader}">
+```
+
+We have to apply the above header template to each `TabItem` we added. It can reduce such repetition by setting up a `Style` for `TabItem`, in which the template is used.
+```xml
+<Style TargetType="{x:Type TabItem}">
+    <Setter Property="HeaderTemplate" Value="{StaticResource dtHeader}"/>
+    <!--the template value can also be defined here with property tag syntax-->
+</Style>
+```
+Now the `Style` is applied automatically to each `TabItem` (due to its `TargetType`).
+
 
 https://stackoverflow.com/questions/35108366/trigger-for-tabitem-isselected-doesnt-work
 

@@ -32,16 +32,18 @@
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
-
-        <Style TargetType="TabItem">
-            <Style.Triggers>
-                <!--this trigger does not work-->
+        <!--to be used as TabItem.HeaderTemplate-->
+        <DataTemplate x:Key="dtHeader">
+            <TextBlock Text="{Binding}" x:Name="tbkLabel"/>
+            <DataTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="BlueViolet"/>
+                    <Setter TargetName="tbkLabel" Property="Background" Value="Yellow"/>
                 </Trigger>
-            </Style.Triggers>
-            <!--this setter works-->
-            <Setter Property="Foreground" Value="Gold"/>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="HeaderTemplate" Value="{StaticResource dtHeader}"/>
+            <!--the template value can also be defined here with property tag syntax-->
         </Style>
     </Window.Resources>
     <Grid>

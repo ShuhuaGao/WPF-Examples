@@ -5,29 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:s="https://github.com/canton7/Stylet"
         xmlns:local="clr-namespace:CustomTabUI.ViewModels"
+        xmlns:r="clr-namespace:CustomTabUI"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance local:ShellViewModel}"
         Title="Stylet Project" Height="450" Width="800">
-    <Window.Resources>
-        <!--Data template for Tab item, i.e., the header-->
-        <DataTemplate x:Key="tabitem">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="template"/>
-                <Ellipse Width="10" Height="10" Fill="DarkGray" Margin="5,0,0,0"/>
-            </StackPanel>
-        </DataTemplate>
-    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="New" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed"/>
+    </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Button Margin="10" Grid.Row="0">Open Tab</Button>
-        <TabControl Grid.Row="1" Margin="10" Background="AliceBlue" ItemTemplate="{StaticResource tabitem}">
-            <TabItem Header="Tab 1">
+        <TabControl Grid.Row="1" Margin="10" Background="AliceBlue">
+            <TabControl.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/ButtonTabItem.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </TabControl.Resources>
+            <TabItem Header="Tab 1" Style="{StaticResource ButtonTabItemStyle}" r:AP.Command="New">
                 <TextBlock>Tab 1</TextBlock>
             </TabItem>
-            <TabItem Header="Tab 2">
+            <TabItem Header="Tab 2" r:AP.Command="Close">
                 <Button Margin="20">Tab 2</Button>
             </TabItem>
         </TabControl>

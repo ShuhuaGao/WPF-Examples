@@ -96,6 +96,8 @@ The above "New" refers to the built-in command `ApplicationCommands.New`. For te
     </Window.CommandBindings>
 ```
 
+The full example is given in commit `f51853de`.
+
 #### More about attached property
 In fact, we can attach a dependency property to any `DependencyObject` because the method signature is `public static void SetCommand(DependencyObject obj, ICommand value)`. For instance, we can also set the attached property for the second `TabItem` though it makes no sense (since it is never used).
 ```xml
@@ -103,6 +105,9 @@ In fact, we can attach a dependency property to any `DependencyObject` because t
     <Button Margin="20">Tab 2</Button>
 </TabItem>
 ```
+
+## `ItemsSource`, `DataTemplate`, and MVVM
+Now suppose we have a collection of `Student`. We want to render them, one per `TabItem`. Besides, the tab item can be closed.
 
 
 

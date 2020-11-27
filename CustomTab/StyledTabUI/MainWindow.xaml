@@ -32,20 +32,16 @@
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
-        
+
         <Style TargetType="TabItem">
             <Style.Triggers>
+                <!--this trigger does not work-->
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="BlueViolet"/>
                 </Trigger>
-                <Trigger Property="IsMouseOver" Value="False">
-                    <Setter Property="Background" Value="Indigo"/>
-                </Trigger>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Foreground" Value="DarkGreen"/>
-                </Trigger>
             </Style.Triggers>
-            <Setter Property="Background" Value="Black"/>
+            <!--this setter works-->
+            <Setter Property="Foreground" Value="Gold"/>
         </Style>
     </Window.Resources>
     <Grid>

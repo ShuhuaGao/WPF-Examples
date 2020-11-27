@@ -144,6 +144,25 @@ All kinds of triggers are defined within your Style, ControlTemplate, and DataTe
 
 Let's first try `Style` for `TabItem`. Refer to an [official example](https://docs.microsoft.com/en-us/dotnet/api/system.windows.trigger?view=net-5.0).
 
+### First attempt (not working)
+Unfortunately, the following naive style does not work here. The reason is unclear, but it seems we have to manipulate the template to detect the `IsMouseOver` condition.
+```xml
+<Style TargetType="TabItem">
+    <Style.Triggers>
+        <!--this trigger does not work-->
+        <Trigger Property="IsMouseOver" Value="True">
+            <Setter Property="Background" Value="BlueViolet"/>
+        </Trigger>
+    </Style.Triggers>
+    <!--this setter works-->
+    <Setter Property="Foreground" Value="Gold"/>
+</Style>
+```
+
+### `DataTemplate`
+
+We now try to define a custom header with a `DataTemplate`. The header contains a `TextBlock` (or more generally, a `ContentBlock`) to display `TabItem.Header` (an `Object`) and has `IsMouseOver` trigger.
+
 https://stackoverflow.com/questions/35108366/trigger-for-tabitem-isselected-doesnt-work
 
 https://stackoverflow.com/questions/11299904/setting-the-tabitem-isselected-background

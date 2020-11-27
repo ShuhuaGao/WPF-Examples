@@ -185,12 +185,43 @@ We have to apply the above header template to each `TabItem` we added. It can re
     <!--the template value can also be defined here with property tag syntax-->
 </Style>
 ```
-Now the `Style` is applied automatically to each `TabItem` (due to its `TargetType`).
+Now the `Style` is applied automatically to each `TabItem` (due to its `TargetType`). For detailed files, check commit `0341029`.
 
+### `ControlTemplate`
+The above solution is not perfect, since only the text block's background is changed (the remaining area of the header remains the same).
+
+A better approach is to refine the control template (its `Template` property) to change the appearance. In the `ControlTemplate.Triggers`, we can do what we like.
+```xml
+            <TabItem Header="Student" Content="{StaticResource stu1}">
+                <TabItem.Template>
+                    <ControlTemplate/>
+                </TabItem.Template>
+            </TabItem>
+```
+
+
+However, it is almost impossible to write a control template from scratch. Thus, we usually change the default one. In VS XAML designer, right click a tab item, and "Edit Template" --> "Edit a Copy". The default control template is presented inside a style, which is long and complicated. After digging into the code, we can make the following change to modify the default color during mouse over:
+```xml
+...
+<MultiDataTrigger>
+    <MultiDataTrigger.Conditions>
+        <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
+        <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top"/>
+    </MultiDataTrigger.Conditions>
+    <!--edit value here-->
+    <Setter Property="Background" TargetName="mainBorder" Value="Yellow"/>
+    <Setter Property="BorderBrush" TargetName="mainBorder" Value="{StaticResource TabItem.MouseOver.Border}"/>
+    <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,1,1,0"/>
+    <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,1,0"/>
+</MultiDataTrigger>
+...
+```
 
 https://stackoverflow.com/questions/35108366/trigger-for-tabitem-isselected-doesnt-work
 
 https://stackoverflow.com/questions/11299904/setting-the-tabitem-isselected-background
+
+We may also add some new internal controls to the control template (like a close button), though we can also do it in data template.
 
 
 

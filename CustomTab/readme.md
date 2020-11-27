@@ -45,7 +45,7 @@ Finally, recall that a data template **Describes the visual structure of a data 
     - Definition of `DataTemplate`
     - `DataTemplate.DataType`
     - `DataTrigger` in `DataTemplate.Triggers` that determine property values according to data source values.
+    - `ControlTemplate`
+    - `Style`
 2. 
-TODO 
-1. Add TabItem directly. Three. The first has its own template. The last two shares a resource template.
-2. Add ItemsSource.
+

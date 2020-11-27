@@ -188,7 +188,7 @@ We have to apply the above header template to each `TabItem` we added. It can re
 Now the `Style` is applied automatically to each `TabItem` (due to its `TargetType`). For detailed files, check commit `0341029`.
 
 ### `ControlTemplate`
-The above solution is not perfect, since only the text block's background is changed (the remaining area of the header remains the same).
+The above solution is not perfect, <del>since only the text block's background is changed (the remaining area of the header remains the same).</del> (see *note* below)
 
 A better approach is to refine the control template (its `Template` property) to change the appearance. In the `ControlTemplate.Triggers`, we can do what we like.
 ```xml
@@ -223,6 +223,25 @@ https://stackoverflow.com/questions/11299904/setting-the-tabitem-isselected-back
 
 We may also add some new internal controls to the control template (like a close button), though we can also do it in data template.
 
+### note
+The data template can be made *perfect* by minor adjustment. However, it is semantically better to provide a control template, because we only want to customize the appearance of the control itself (which does not depend on the data to be displayed).
+```xml
+<DataTemplate x:Key="dtHeader">
+    <TextBlock Text="{Binding}" x:Name="tbkLabel" Padding="5,1,5,1"/>
+    <DataTemplate.Triggers>
+        <Trigger Property="IsMouseOver" Value="True">
+            <Setter TargetName="tbkLabel" Property="Background" Value="Yellow"/>
+        </Trigger>
+    </DataTemplate.Triggers>
+</DataTemplate>
+<Style TargetType="{x:Type TabItem}">
+    <Setter Property="HeaderTemplate" Value="{StaticResource dtHeader}"/>
+    <Setter Property="Padding" Value="0"/>
+</Style>
+
+```
+That is, the padding of a `TabItem` is 0. Thus, the `TextBlock` (more precisely, the internal `ContentPresenter` of the `TabItem`) will occupy all space (if no margin is applied). In this case, the text will be shown on the edge. We thus further set the `Padding` of the text block to create some space
+>Gets or sets a value that indicates the thickness of padding space between the boundaries of the content area, and the content displayed by a TextBlock.
 
 
 

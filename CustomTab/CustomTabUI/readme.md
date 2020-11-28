@@ -106,8 +106,34 @@ In fact, we can attach a dependency property to any `DependencyObject` because t
 </TabItem>
 ```
 
-## `ItemsSource`, `DataTemplate`, and MVVM
+## `ItemsSource`, `DataTemplate`
 Now suppose we have a collection of `Student`. We want to render them, one per `TabItem`. Besides, the tab item can be closed.
+
+The `ShellViewModel` class shows that 
+1. Conductor<T> from *Stylet*: the `T` can be any type, not limited to ViewModel. For instance, in our code, the `T` refers to `Student`, which is purely a model. In this particular example, no viewmodel is involved.
+2. However, do note that, the lifecycle management makes sense only for those types that implement specific interfaces like `IScreenState`. The conductor will check whether `T` implements given interfaces and performs proper method calls.
+3. In this example, we simply want to use the `Items` collection and `ActiveItem` properties in `Conductor<Student>.Collection.OneActive` with no connection to lifecycle management.
+
+Then, the data source of the `TabControl` is set to 
+```xml
+<TabControl Grid.Row="1" Margin="10" Background="AliceBlue" DisplayMemberPath="Name"
+                    ItemsSource="{Binding Items}" SelectedItem="{Binding ActiveItem}"
+                    ItemContainerStyle="{StaticResource ButtonTabItemStyle}">
+```
+The `ItemContainerStyle` is the style of the generated `TabItem`.
+
+#### Note about resource
+>A StaticResource must not attempt to make a forward reference to a resource that is defined lexically further within the XAML file. 
+
+Thus, the following xaml code will not work because `StaticResource` can only be located that is already defined and loaded from the markup.
+```xml
+<!--Error-->
+<Button Margin="10" Grid.Row="0" Content="{StaticResource buttonStr}">
+    <Button.Resources>
+        <sys:String x:Key="buttonStr">Open a tab</sys:String>
+    </Button.Resources>
+</Button>
+```
 
 
 

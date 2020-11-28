@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:s="https://github.com/canton7/Stylet"
         xmlns:local="clr-namespace:CustomTabUI.ViewModels"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:r="clr-namespace:CustomTabUI"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance local:ShellViewModel}"
@@ -17,21 +18,43 @@
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Margin="10" Grid.Row="0">Open Tab</Button>
-        <TabControl Grid.Row="1" Margin="10" Background="AliceBlue">
-            <TabControl.Resources>
-                <ResourceDictionary>
-                    <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="pack://application:,,,/ButtonTabItem.xaml"/>
-                    </ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary>
-            </TabControl.Resources>
-            <TabItem Header="Tab 1" Style="{StaticResource ButtonTabItemStyle}" r:AP.Command="New">
-                <TextBlock>Tab 1</TextBlock>
-            </TabItem>
-            <TabItem Header="Tab 2" r:AP.Command="Close">
-                <Button Margin="20">Tab 2</Button>
-            </TabItem>
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="pack://application:,,,/ButtonTabItem.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+        <Button Margin="10" Grid.Row="0" Content="{StaticResource buttonStr}">
+            <Button.Resources>
+                <sys:String x:Key="buttonStr">Open a tab</sys:String>
+            </Button.Resources>
+        </Button>
+        <TabControl Grid.Row="1" Margin="10" Background="AliceBlue" DisplayMemberPath="Name"
+                    ItemsSource="{Binding Items}" SelectedItem="{Binding ActiveItem}"
+                    ItemContainerStyle="{StaticResource ButtonTabItemStyle}">
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock FontSize="20" HorizontalAlignment="Center">Student Info</TextBlock>
+                        <TextBlock Text="{Binding Name}" Margin="10" Background="Coral"/>
+                        <TextBlock Text="{Binding Age}" Margin="10"/>
+                        <Image x:Name="imgSex" Width="100"/>
+                    </StackPanel>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Sex}" Value="Male">
+                            <!--Collection: DataTrigger.Setters-->
+                            <Setter TargetName="imgSex" Property="Source" Value="pack://application:,,,/img/boy.png"/>
+                            <Setter TargetName="imgSex" Property="ToolTip" Value="Boy"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Sex}">
+                            <DataTrigger.Value>Female</DataTrigger.Value>
+                            <Setter TargetName="imgSex" Property="Source" Value="pack://application:,,,/img/girl.png"/>
+                            <Setter TargetName="imgSex" Property="ToolTip" Value="Girl"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
         </TabControl>
     </Grid>
 </Window>

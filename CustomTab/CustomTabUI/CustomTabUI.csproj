@@ -15,7 +15,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="img\boy.png" />
+	  <None Remove="img\girl.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Stylet" Version="1.3.*" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="img\boy.png" />
+	  <Resource Include="img\girl.png" />
 	</ItemGroup>
 
 </Project>

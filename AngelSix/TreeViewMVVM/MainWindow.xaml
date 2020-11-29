@@ -12,7 +12,7 @@
         <vm:FileSystemViewModel/>
     </Window.DataContext>
     <Window.Resources>
-        <HierarchicalDataTemplate DataType="{x:Type vm:DirectoryItemViewModel}" ItemsSource="{Binding Children, Mode=OneWay, diag:PresentationTraceSources.TraceLevel=High}">
+        <HierarchicalDataTemplate DataType="{x:Type vm:DirectoryItemViewModel}" ItemsSource="{Binding Children, Mode=OneWay}">
             <StackPanel Orientation="Horizontal" Margin="0, 3, 0, 0">
                 <Image Source="{Binding ImageUri}" Width="32"/>
                 <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>

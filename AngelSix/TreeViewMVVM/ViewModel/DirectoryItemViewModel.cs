@@ -9,20 +9,16 @@ using System.Collections.Specialized;
 
 namespace TreeViewMVVM.ViewModel
 {
-    class DirectoryItemViewModel : INotifyPropertyChanged, INotifyCollectionChanged
+    class DirectoryItemViewModel
     {
         private DirectoryInfo di;
-        private string path;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-
-        // in this example, we only need one-way binding for most properties
+        // in this example, we only need one-way binding for most properties because they will not be changed after construction
         public DirectoryItemType Type { get; private set; }
         public string FullPath { get; private set; }
         public string Name { get; private set; }
         public string ImageUri { get; private set; }
-        public List<DirectoryItemViewModel> Children { get; private set; } = new List<DirectoryItemViewModel>();
+        public ICollection<DirectoryItemViewModel> Children { get; private set; } = new ObservableCollection<DirectoryItemViewModel>();
 
         // listen to the change of the property directly and no need to handle the expanded/collapsed event
         // Expanded event occurs when the IsExpanded property value changes from false to true.
@@ -31,7 +27,7 @@ namespace TreeViewMVVM.ViewModel
         {
             get  // this part is never called since the binding mode is `OneWayToSource`
             {
-                Debug.WriteLine("IsExpanded get");
+                Debug.WriteLine("---IsExpanded get");
                 return isExpanded;
             }
             set
@@ -40,7 +36,6 @@ namespace TreeViewMVVM.ViewModel
                 {
                     Debug.WriteLine("IsExpanded set: false --> true");
                     SpawnChildren();
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Children)));
 
                 }
                 isExpanded = value;
@@ -51,7 +46,6 @@ namespace TreeViewMVVM.ViewModel
 
         public DirectoryItemViewModel(string path)
         {
-            this.path = path;
             di = new DirectoryInfo(path);
             FullPath = di.FullName;
             Name = di.Name;
@@ -84,11 +78,10 @@ namespace TreeViewMVVM.ViewModel
         private void SpawnChildren()
         {
             Children.Clear();
-            //di.Refresh(); // in case the file system has been changed
-            var di = new DirectoryInfo(path);
+            di.Refresh(); // in case the file system has been changed
             foreach (var info in di.EnumerateFileSystemInfos())
             {
-                Debug.WriteLine(info.Name);
+                //Debug.WriteLine(info.Name);
                 Children.Add(new DirectoryItemViewModel(info.FullName));
             }
         }

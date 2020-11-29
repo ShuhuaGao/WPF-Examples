@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30709.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeViews", "TreeViews\TreeViews.csproj", "{1EFE20C5-93BD-42A3-A37A-243162FBA515}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeViewMVVM", "TreeViewMVVM\TreeViewMVVM.csproj", "{ACC36264-0341-4FDD-A42F-E879B75A3409}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1EFE20C5-93BD-42A3-A37A-243162FBA515}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EFE20C5-93BD-42A3-A37A-243162FBA515}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EFE20C5-93BD-42A3-A37A-243162FBA515}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACC36264-0341-4FDD-A42F-E879B75A3409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACC36264-0341-4FDD-A42F-E879B75A3409}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACC36264-0341-4FDD-A42F-E879B75A3409}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACC36264-0341-4FDD-A42F-E879B75A3409}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

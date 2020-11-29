@@ -48,8 +48,8 @@ namespace TreeViews
 
         private void Item_Expanded(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("Expanded");
             var item = sender as TreeViewItem;
+            Debug.WriteLine($"Expanded {item.IsExpanded}");
             if (item.Tag is null)  // this is a file node
             {
                 e.Handled = true;

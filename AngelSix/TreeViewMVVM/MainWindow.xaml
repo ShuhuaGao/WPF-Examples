@@ -14,9 +14,20 @@
     <Window.Resources>
         <HierarchicalDataTemplate DataType="{x:Type vm:DirectoryItemViewModel}" ItemsSource="{Binding Children, Mode=OneWay}">
             <StackPanel Orientation="Horizontal" Margin="0, 3, 0, 0">
-                <Image Source="{Binding ImageUri}" Width="32"/>
+                <Image Source="{Binding ImageUri}" Width="32" x:Name="image"/>
                 <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
             </StackPanel>
+            <HierarchicalDataTemplate.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsExpanded, 
+                            RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}}}" Value="True"/>
+                        <!--enum value can be specified as string directly-->
+                        <Condition Binding="{Binding Type}" Value="Folder"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter TargetName="image" Property="Source" Value="pack://siteoforigin:,,,/images/folder-open.png"/>
+                </MultiDataTrigger>
+            </HierarchicalDataTemplate.Triggers>
         </HierarchicalDataTemplate>
     </Window.Resources>
     <Grid>

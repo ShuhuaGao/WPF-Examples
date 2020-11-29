@@ -4,6 +4,10 @@ Follow this [tutorial](https://www.youtube.com/watch?v=U2ZvZwDZmJU&list=PLrW43fN
 + No Command.
 + Code simplified. E.g., all file info related operations are implemented with the more convenient `DirectoryInfo` class.
 
+## Notes about `TreeViewItem.IsExpanded`
+1. It is a dependency property.
+2. Even if an item has no expander shown (whose children collection is empty at that time), double click the item can still caused the change its property `IsExpanded` and raise the event `Expanded` or `collapsed`. That is why the file type is excluded in `SpawnChildren`.
+
 ## `HierarchicalDataTemplate`
 This data template is especially useful to *recursive* `HeaderedItemsControl`, such as TreeViewItem or MenuItem.
 Its main part is just like a normal `HeaderTemplate`. However, it has a property `ItemsSource` (an analogy to `ItemsControl.Items`) that species the source for the next-level controls. 

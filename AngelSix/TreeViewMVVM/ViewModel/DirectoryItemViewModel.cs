@@ -32,12 +32,9 @@ namespace TreeViewMVVM.ViewModel
             }
             set
             {
+                Debug.WriteLine($"IsExpanded set: {isExpanded} --> {value}");
                 if (!isExpanded && value)  // to expand
-                {
-                    Debug.WriteLine("IsExpanded set: false --> true");
                     SpawnChildren();
-
-                }
                 isExpanded = value;
             }
         }
@@ -71,12 +68,18 @@ namespace TreeViewMVVM.ViewModel
                 default:
                     break;
             }
+            // if Children is empty, then no expander is shown. 
+            // Enforce the show-up the expander by inserting null
+            if (Type != DirectoryItemType.File)
+                Children.Add(null);
         }
 
 
         // refresh sub-folders and files 
         private void SpawnChildren()
         {
+            if (Type == DirectoryItemType.File)
+                return;
             Children.Clear();
             di.Refresh(); // in case the file system has been changed
             foreach (var info in di.EnumerateFileSystemInfos())

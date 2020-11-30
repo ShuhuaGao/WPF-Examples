@@ -4,10 +4,20 @@
              xmlns:local="clr-namespace:Fasetto.Word"
              xmlns:s="https://github.com/canton7/Stylet">
     <Application.Resources>
-        <s:ApplicationLoader>
-            <s:ApplicationLoader.Bootstrapper>
-                <local:Bootstrapper/>
-            </s:ApplicationLoader.Bootstrapper>
-        </s:ApplicationLoader>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <s:ApplicationLoader>
+                    <s:ApplicationLoader.Bootstrapper>
+                        <local:Bootstrapper/>
+                    </s:ApplicationLoader.Bootstrapper>
+                </s:ApplicationLoader>
+                <!--Order matters-->
+                <ResourceDictionary Source="/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="/Styles/Fonts.xaml"/>
+                <ResourceDictionary Source="/Styles/Buttons.xaml"/>
+                <ResourceDictionary Source="/Styles/Texts.xaml"/>
+                <ResourceDictionary Source="/Styles/Windows.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

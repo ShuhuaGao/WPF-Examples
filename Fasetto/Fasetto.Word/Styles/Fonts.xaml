@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Fasetto.Word">
+    <!--specify `font name` after #-->
+    <!--relative pack URI-->
+    <FontFamily x:Key="Lato-Black">/Fonts/#Lato Black</FontFamily>
+    <FontFamily x:Key="Lato-BlackItalic">/Fonts/#Lato Black Italic</FontFamily>
+    <FontFamily x:Key="Lato-Thin">/Fonts/#Lato Thin</FontFamily>
+</ResourceDictionary>

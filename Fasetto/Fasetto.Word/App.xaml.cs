@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Stylet;
 
 namespace Fasetto.Word
 {
@@ -13,5 +14,6 @@ namespace Fasetto.Word
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

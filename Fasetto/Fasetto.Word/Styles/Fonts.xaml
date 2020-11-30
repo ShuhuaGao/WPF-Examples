@@ -6,4 +6,6 @@
     <FontFamily x:Key="Lato-Black">/Fonts/#Lato Black</FontFamily>
     <FontFamily x:Key="Lato-BlackItalic">/Fonts/#Lato Black Italic</FontFamily>
     <FontFamily x:Key="Lato-Thin">/Fonts/#Lato Thin</FontFamily>
+    <FontFamily x:Key="Lato-Hairline">/Fonts/#Lato Hairline</FontFamily>
+    <FontFamily x:Key="Lato-Lightitalic">/Fonts/#Lato Light Italic</FontFamily>
 </ResourceDictionary>

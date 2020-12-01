@@ -6,9 +6,12 @@
         xmlns:local="clr-namespace:Fasetto.Word.Views"
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800"
-        WindowStyle="None" AllowsTransparency="True">
+        >
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
     <StackPanel>
-        <TextBlock Text="Hello!" FontFamily="{StaticResource Lato-Thin}" FontSize="22"/>
+        <TextBlock Text="Hello!" FontSize="22"/>
         <TextBlock Text="Hello!" FontSize="22"/>
         <TextBlock Text="Hello!" FontFamily="{StaticResource Lato-Lightitalic}" FontSize="22"/>
         <TextBlock Text="Hello!" FontFamily="{StaticResource Lato-Black}" FontSize="22"/>

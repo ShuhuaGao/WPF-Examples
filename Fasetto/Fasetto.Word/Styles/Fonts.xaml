@@ -8,4 +8,15 @@
     <FontFamily x:Key="Lato-Thin">/Fonts/#Lato Thin</FontFamily>
     <FontFamily x:Key="Lato-Hairline">/Fonts/#Lato Hairline</FontFamily>
     <FontFamily x:Key="Lato-Lightitalic">/Fonts/#Lato Light Italic</FontFamily>
+
+    <Style TargetType="Control" x:Key="BaseStyle">
+        <Setter Property="FontFamily" Value="{StaticResource Lato-Thin}"/>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="TextBlockBaseStyle">
+        <Setter Property="FontFamily" Value="{StaticResource Lato-Thin}"/>
+    </Style>
+
+    <Style TargetType="Button" BasedOn="{StaticResource BaseStyle}"/>
+    <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}"/>
 </ResourceDictionary>

@@ -18,4 +18,21 @@ One solution is given [here](https://stackoverflow.com/questions/25586037/invali
 A possibly simple way is just to handle `TextBlock` separately.
 
 # Borderless window
-Reference: [How to create a WPF Window without a border that can be resized via a grip only?](https://stackoverflow.com/questions/611298/how-to-create-a-wpf-window-without-a-border-that-can-be-resized-via-a-grip-only)
+
+## Importance changes in newer .Net versions
+- Unlike the video tutorial, no need to install the NuGet package now. The `WindowChrome` class has been built-in after .Net 4.5. See (WindowChrome Class)[https://docs.microsoft.com/en-us/dotnet/api/system.windows.shell.windowchrome?view=net-5.0#definition] and the excellent explanation therein on how to customize the window.
+- To bind a `Thickness`-like type to a *single* number, there is no need to define a converter nor to return a `Thickness` directly. There is `System.Windows.ThicknessConverter` after .NET 3.0. We can check its [source code](https://referencesource.microsoft.com/#PresentationFramework/src/Framework/System/Windows/ThicknessConverter.cs,4c4a0e5660ee993d) to confirm what kinds of types it supports.  For example,
+```csharp
+public override object ConvertFrom(ITypeDescriptorContext typeDescriptorContext, CultureInfo cultureInfo, object source)
+{
+    if (source != null)
+    {
+        if (source is string)      { return FromString((string)source, cultureInfo); }
+        else if (source is double) { return new Thickness((double)source); }
+        else                       { return new Thickness(Convert.ToDouble(source, cultureInfo)); }
+    }
+    throw GetConvertFromException(source);
+}
+```
+which means any type can be converted to `double` can be used. 
+- It seems that the `WindowChrome.CornerRadius` is reduced to zero automatically once the window is maximized. Thus, no need to follow the window to handle the maximization event.

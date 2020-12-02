@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace Fasetto.Word.Views
 {
@@ -21,5 +22,15 @@ namespace Fasetto.Word.Views
         {
             InitializeComponent();
         }
+
+        private void IconButton_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var pos = e.GetPosition(appWindow);
+            var posScreen = appWindow.PointToScreen(pos);
+            Debug.WriteLine($"Pos: {pos}. Pos on screen: {posScreen}");
+            SystemCommands.ShowSystemMenu(appWindow, posScreen);
+        }
+
+      
     }
 }

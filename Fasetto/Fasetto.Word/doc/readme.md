@@ -75,3 +75,12 @@ public WindowState WindowState
 }
 ```
 
+## The `MouseDown` event of `Button` is not fired: used `PreviewMouseDown`
+> Button suppresses MouseLeftButtonDown and MouseRightButtonDown bubbling events raised by the Button or its composite elements in favor of capturing the mouse and raising a Click event that is always raised by the Button itself. 
+
+> But often a simpler technique is to change the routing direction you handle to be the Preview equivalent of an input event. 
+
+Source: [Working Around Event Suppression by Controls](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/preview-events?redirectedfrom=MSDN&view=netframeworkdesktop-4.8#working-around-event-suppression-by-controls)
+
+
+

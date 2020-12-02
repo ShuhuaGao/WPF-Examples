@@ -1,5 +1,5 @@
 ﻿<Window x:Class="Fasetto.Word.Views.ShellView"
-        x:Name="AppWindow"
+        x:Name="appWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Fasetto.Word.Views"
         xmlns:vm="clr-namespace:Fasetto.Word.ViewModels"
         mc:Ignorable="d"
-        Title="ShellView" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        Title="Hello, world!" Height="450" Width="800" WindowStartupLocation="CenterScreen"
         WindowState="{Binding WindowState}"
         d:DataContext="{d:DesignInstance vm:ShellViewModel}"
         >
@@ -20,24 +20,25 @@
 
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
-            <RowDefinition Height="{Binding ResizeBorderThickness}"/>
             <RowDefinition Height="{Binding CaptionHeight, FallbackValue=42}"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="{Binding ResizeBorderThickness}"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="0" Grid.Column="0">
             <!--window header-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button WindowChrome.IsHitTestVisibleInChrome="True" Padding="0" Margin="5">
+            <Button Style="{StaticResource HoverlessButton}" Padding="3" Margin="5" VerticalContentAlignment="Center"
+                    WindowChrome.IsHitTestVisibleInChrome="True" PreviewMouseDown="IconButton_PreviewMouseDown">
                 <Image Source="/Images/Logo/logo-small.png"/>
             </Button>
+            <TextBlock Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                       Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
         </Grid>
     </Grid>
 </Window>

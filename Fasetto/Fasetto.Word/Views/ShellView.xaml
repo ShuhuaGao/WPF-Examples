@@ -8,13 +8,36 @@
         xmlns:vm="clr-namespace:Fasetto.Word.ViewModels"
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800" WindowStartupLocation="CenterScreen"
-    d:DataContext="{d:DesignInstance Type={x:Type vm:ShellViewModel}}"
+        WindowState="{Binding WindowState}"
+        d:DataContext="{d:DesignInstance vm:ShellViewModel}"
         >
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="{Binding CaptionHeight}" CornerRadius="{Binding CornerRadius}"
                       ResizeBorderThickness="{Binding ResizeBorderThickness}" GlassFrameThickness="0"/>
     </WindowChrome.WindowChrome>
-    <Grid>
+    <Window.Resources>
+    </Window.Resources>
 
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding ResizeBorderThickness}"/>
+            <RowDefinition Height="{Binding CaptionHeight, FallbackValue=42}"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding ResizeBorderThickness}"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <!--window header-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button WindowChrome.IsHitTestVisibleInChrome="True" Padding="0" Margin="5">
+                <Image Source="/Images/Logo/logo-small.png"/>
+            </Button>
+        </Grid>
     </Grid>
 </Window>

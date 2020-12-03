@@ -13,7 +13,7 @@ namespace Fasetto.Word.ViewModels
 
         public double ResizeBorderThickness { get; set; } = NormalResizeBorderThickness;
 
-        public double CaptionHeight { get; private set; } = 42;
+        public double CaptionHeight { get; private set; } = 40;
         public double CornerRadius { get; set; } = 10;
         public WindowState WindowState { get; set; } = WindowState.Normal;
 
@@ -30,6 +30,17 @@ namespace Fasetto.Word.ViewModels
             else
                 ResizeBorderThickness = NormalResizeBorderThickness;
 
+        }
+
+
+        public void maximizeWindow()
+        {
+            WindowState = WindowState.Maximized;
+        }
+
+        public void minimizeWindow()
+        {
+            WindowState = WindowState.Minimized;
         }
     }
 }

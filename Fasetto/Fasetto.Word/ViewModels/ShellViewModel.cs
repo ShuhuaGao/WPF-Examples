@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace Fasetto.Word.ViewModels
 {
-    class ShellViewModel : Screen
+    public class ShellViewModel : Screen
     {
         private const double NormalResizeBorderThickness = 5;
 
@@ -16,6 +16,9 @@ namespace Fasetto.Word.ViewModels
         public double CaptionHeight { get; private set; } = 42;
         public double CornerRadius { get; set; } = 10;
         public WindowState WindowState { get; set; } = WindowState.Normal;
+
+        public double MinWidth { get; private set; } = 350;
+        public double MinHeight { get; private set; } = 400;
 
 
         // FODY: On_PropertyName_Changed https://github.com/Fody/PropertyChanged/wiki/On_PropertyName_Changed

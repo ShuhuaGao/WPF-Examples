@@ -7,17 +7,16 @@
         xmlns:local="clr-namespace:Fasetto.Word.Views"
         xmlns:vm="clr-namespace:Fasetto.Word.ViewModels"
         xmlns:s="https://github.com/canton7/Stylet"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowState="Maximized"
         Title="Hello, world!" Height="450" Width="800" WindowStartupLocation="CenterScreen"
-        WindowState="{Binding WindowState}" MinHeight="{Binding MinHeight}" MinWidth="{Binding MinWidth}"
+         MinHeight="{Binding MinHeight}" MinWidth="{Binding MinWidth}"
         d:DataContext="{d:DesignInstance vm:ShellViewModel}"
         >
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="{Binding CaptionHeight}" CornerRadius="{Binding CornerRadius}"
                       ResizeBorderThickness="{Binding ResizeBorderThickness}" GlassFrameThickness="0"/>
     </WindowChrome.WindowChrome>
-    <Window.Resources>
-    </Window.Resources>
+
 
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
@@ -42,17 +41,28 @@
             <TextBlock Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                        Grid.Column="1" Style="{StaticResource HeaderText}"/>
             <StackPanel Grid.Column="2" Margin="0,0,5,0" Orientation="Horizontal">
-                <Button  Style="{StaticResource HoverlessButton}" WindowChrome.IsHitTestVisibleInChrome="True">
+                <Button  Style="{StaticResource HoverlessButton}" Click="minimizeWindow">
                     <Image Stretch="None">
                         <Image.Source>
                             <CroppedBitmap Source="/Images/Buttons/min.png" SourceRect="0,15,31,16"/>
                         </Image.Source>
                     </Image>
                 </Button>
-                <Button  Style="{StaticResource HoverlessButton}" Command="{s:Action maximizeWindow}">
-                    <Image Source="/Images/Buttons/max.png"/>
+                <Button  x:Name="maxButton"
+                    Style="{StaticResource HoverlessButton}" Click="maximizeWindow">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Image x:Name="btnImage" Source="/Images/Buttons/max.png"/>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=WindowState}"
+                                             Value="Maximized">
+                                    <Setter TargetName="btnImage" Property="Source" Value="/Images/Buttons/restore.png"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
                 </Button>
-                <Button  Style="{StaticResource HoverlessButton}">
+                <Button  Style="{StaticResource HoverlessButton}" Click="closeWindow">
                     <Image Source="/Images/Buttons/close.png"/>
                 </Button>
             </StackPanel>

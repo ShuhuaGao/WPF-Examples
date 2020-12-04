@@ -31,6 +31,24 @@ namespace Fasetto.Word.Views
             SystemCommands.ShowSystemMenu(appWindow, posScreen);
         }
 
-      
+        private void minimizeWindow(object sender, RoutedEventArgs e) => this.WindowState = WindowState.Minimized;
+
+
+        private void maximizeWindow(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Normal)
+            {
+                this.WindowState = WindowState.Maximized;
+
+            }
+            else
+            {
+                this.WindowState = WindowState.Normal;
+
+            }
+        }
+
+        private void closeWindow(object sender, RoutedEventArgs e) => Close();
+
     }
 }

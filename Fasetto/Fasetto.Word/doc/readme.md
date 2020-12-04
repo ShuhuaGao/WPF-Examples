@@ -82,5 +82,37 @@ public WindowState WindowState
 
 Source: [Working Around Event Suppression by Controls](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/preview-events?redirectedfrom=MSDN&view=netframeworkdesktop-4.8#working-around-event-suppression-by-controls)
 
+## Code-behind is not evil and can benefit if properly used
+
+View (UI state)-only logic, which is independent from the data (e.g., model), is recommended to be placed into the code-behind. In general, no data binding is really needed for such operations (though we may set up some unnecessary data bindings for view manipulation purposes). 
+
+Refer to this stackoverflow [ using code-behind or viewmodel](https://stackoverflow.com/questions/42085063/mvvm-manipulating-the-view-using-code-behind-or-viewmodel).
+
+Example: the window state change maximization/minimization etc. does NOT depend on the underlying data and is a pure view state manipulation according to user inputs. It is better to put this view logic into the code-behind to clean the view model.
+
+### Change button image according to the window state
+1. We may implement it in `Button.Click` or `Window.StateChanged` event
+2. An issue with the above event handlers is that, if the window initial state is `Maximized`, then no event is raised. Thus, some kind of logic is also needed in `init`-like event. Alternatively, we may fix the initial state to `Normalized`.
+3. A better approach is to apply data trigger: a `Trigger` has the capacity to restore its previous state automatically, and the initial state can also trigger (i.e., unlike an event).
+```xml
+<Button  x:Name="maxButton"
+    Style="{StaticResource HoverlessButton}" Click="maximizeWindow">
+    <Button.ContentTemplate>
+        <DataTemplate>
+            <Image x:Name="btnImage" Source="/Images/Buttons/max.png"/>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=WindowState}"
+                             Value="Maximized">
+                    <Setter TargetName="btnImage" Property="Source" Value="/Images/Buttons/restore.png"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+    </Button.ContentTemplate>
+</Button>
+```
+NOTE
+- We cannot use `Trigger` (usually inside a `Style`) here because we need to access the property of another control (not the one associated with the template).
+- The above code also shows that a `DataTemplate` may contain no bindings at all.
+
 
 

@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Fonts\iconfont.ttf" />
+    <None Remove="Assets\Images\Demo\verification.png" />
     <None Remove="Assets\Images\Logo.png" />
   </ItemGroup>
 
@@ -17,12 +19,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Common\" />
     <Folder Include="DataAccess\" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Fonts\iconfont.ttf" />
+    <Resource Include="Assets\Images\Demo\verification.png" />
     <Resource Include="Assets\Images\Logo.png" />
   </ItemGroup>
 </Project>

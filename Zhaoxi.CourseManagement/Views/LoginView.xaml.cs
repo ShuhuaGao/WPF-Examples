@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Zhaoxi.CourseManagement.ViewModels;
 
 namespace Zhaoxi.CourseManagement.Views
 {
@@ -22,6 +24,18 @@ namespace Zhaoxi.CourseManagement.Views
         public LoginView()
         {
             InitializeComponent();
+            DataContext = new LoginViewModel();
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();  // move the window
+            //Debug.WriteLine("Move");
         }
     }
 }

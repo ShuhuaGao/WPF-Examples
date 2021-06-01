@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zhaoxi.CourseManagement.DataAccess.Entity;
 
 namespace Zhaoxi.CourseManagement.DataAccess
 {
@@ -38,6 +39,9 @@ namespace Zhaoxi.CourseManagement.DataAccess
         private MySqlCommand comm;
         private MySqlDataAdapter adapter;
 
+        public UserEntity CheckUserInfo(string userName, string pwd)
+        {
 
+        }
     }
 }

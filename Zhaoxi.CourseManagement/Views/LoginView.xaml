@@ -4,11 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zhaoxi.CourseManagement.Views"
+        xmlns:s="https://github.com/canton7/Stylet"
         mc:Ignorable="d"
         Title="系统登录" Height="600" Width="360"
         FontFamily="Microsoft YaHei" FontWeight="ExtraLight"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
-        WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        s:View.ActionTarget="{Binding RelativeSource={RelativeSource Self},Path=DataContext}">
     <Window.Resources>
         <ControlTemplate TargetType="Button" x:Key="CloseButtonTemplate">
             <Border Background="Transparent" Name="back">
@@ -232,12 +234,14 @@
                     <RowDefinition Height="auto" MinHeight="25"/>
                 </Grid.RowDefinitions>
                 <TextBox Style="{DynamicResource UserNameTextBoxStyle}" x:Name="user_name" Height="40" Text="{Binding LoginModel.UserName}" FontSize="16"/>
-                <PasswordBox Style="{DynamicResource PasswordBoxStyle}" Grid.Row="1" Password="1234" Height="40"/>
+                <PasswordBox Style="{DynamicResource PasswordBoxStyle}" Grid.Row="1" Password="1234" Height="40" PasswordChanged="PasswordBox_PasswordChanged"/>
                 <TextBox Style="{DynamicResource ValidationTextBoxStyle}" Grid.Row="2" Height="40" x:Name="validation_box" FontSize="16" Text="{Binding LoginModel.VerificationCode}"/>
                 <Button Grid.Row="3" Content="登    录" Height="40" Template="{StaticResource loginButtonTemplate}"
-                        Foreground="White" FontSize="16"/>
+                        Foreground="White" FontSize="16"
+                        Command="{s:Action DoLogin}"/>
                 <TextBlock Grid.Row="4" Foreground="Red"  VerticalAlignment="Center" HorizontalAlignment="Center"
-                           FontSize="30" TextWrapping="Wrap" LineHeight="22"/>
+                           FontSize="30" TextWrapping="Wrap" LineHeight="22"
+                           Text="{Binding ErrorMessage}"/>
             </Grid>
             <!--third party login-->
             <Grid Grid.Row="2">

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Stylet;
@@ -17,12 +18,12 @@ namespace Zhaoxi.CourseManagement.Models
             set { SetAndNotify(ref userName, value); }
         }
 
-        private string passWord;
+        private SecureString password;
 
-        public string PassWord
+        public SecureString Password
         {
-            get => passWord;
-            set => SetAndNotify(ref passWord, value);
+            get => password;
+            set => SetAndNotify(ref password, value);
         }
 
         private string verificationCode;

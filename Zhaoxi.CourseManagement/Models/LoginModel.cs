@@ -10,7 +10,7 @@ namespace Zhaoxi.CourseManagement.Models
 {
     public class LoginModel : PropertyChangedBase
     {
-        private string userName;
+        private string userName = "Megan";
 
         public string UserName
         {
@@ -18,9 +18,9 @@ namespace Zhaoxi.CourseManagement.Models
             set { SetAndNotify(ref userName, value); }
         }
 
-        private SecureString password;
+        private String password = "123456";
 
-        public SecureString Password
+        public String Password
         {
             get => password;
             set => SetAndNotify(ref password, value);

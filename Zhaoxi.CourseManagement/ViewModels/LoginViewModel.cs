@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zhaoxi.CourseManagement.Models;
+using Zhaoxi.CourseManagement.DataAccess;
+using Zhaoxi.CourseManagement.Common;
 
 namespace Zhaoxi.CourseManagement.ViewModels
 {
@@ -25,7 +27,6 @@ namespace Zhaoxi.CourseManagement.ViewModels
         public LoginViewModel()
         {
             LoginModel = new LoginModel();
-            LoginModel.UserName = "Gao Shuhua";
             LoginModel.VerificationCode = "12345";
         }
 
@@ -49,6 +50,18 @@ namespace Zhaoxi.CourseManagement.ViewModels
                 ErrorMessage = "请输入验证码";
                 return;
             }
+            // check whether this account is valid
+            var user = LocalDataAccess.Instance.CheckUserInfo(LoginModel.UserName, LoginModel.Password);
+            if (user == null)
+            {
+                ErrorMessage = "登录失败！";
+            }
+            else
+            {
+                ErrorMessage = string.Empty;
+                Debug.WriteLine("登录成功.");
+            }
+            GlobalValues.UserInfo = user;
         }
     }
 }

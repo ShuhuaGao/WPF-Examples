@@ -233,8 +233,8 @@
                     <RowDefinition/>
                     <RowDefinition Height="auto" MinHeight="25"/>
                 </Grid.RowDefinitions>
-                <TextBox Style="{DynamicResource UserNameTextBoxStyle}" x:Name="user_name" Height="40" Text="{Binding LoginModel.UserName}" FontSize="16"/>
-                <PasswordBox Style="{DynamicResource PasswordBoxStyle}" Grid.Row="1" Password="1234" Height="40" PasswordChanged="PasswordBox_PasswordChanged"/>
+                <TextBox Style="{DynamicResource UserNameTextBoxStyle}" x:Name="user_name" Height="40" Text="{Binding LoginModel.UserName, Mode=TwoWay}" FontSize="16"/>
+                <PasswordBox Style="{DynamicResource PasswordBoxStyle}" Grid.Row="1" Height="40" PasswordChanged="PasswordBox_PasswordChanged"/>
                 <TextBox Style="{DynamicResource ValidationTextBoxStyle}" Grid.Row="2" Height="40" x:Name="validation_box" FontSize="16" Text="{Binding LoginModel.VerificationCode}"/>
                 <Button Grid.Row="3" Content="登    录" Height="40" Template="{StaticResource loginButtonTemplate}"
                         Foreground="White" FontSize="16"

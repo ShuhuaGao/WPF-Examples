@@ -38,14 +38,15 @@ namespace Zhaoxi.CourseManagement.Views
             //Debug.WriteLine("Move");
         }
 
+        // because Password does not allow binding; we just assign it with the code behind
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             // assign the password to the viewmodel if it exists
             if (DataContext != null)
             {
                 dynamic vm = DataContext;  // use `dynamic` to pass static type check
-                vm.LoginModel.Password = (sender as PasswordBox).SecurePassword;
-                Debug.WriteLine("Password changed.");
+                vm.LoginModel.Password = (sender as PasswordBox).Password;
+                //Debug.WriteLine("Password changed.");
             }
         }
     }

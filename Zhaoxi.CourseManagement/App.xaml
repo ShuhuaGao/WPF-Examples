@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:s="https://github.com/canton7/Stylet"
              xmlns:local="clr-namespace:Zhaoxi.CourseManagement"
-             StartupUri="Views/LoginView.xaml">
+             ShutdownMode="OnExplicitShutdown">
     <!--<Application.Resources>
         <s:ApplicationLoader>
             <s:ApplicationLoader.Bootstrapper>

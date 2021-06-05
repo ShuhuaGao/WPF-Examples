@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Zhaoxi.CourseManagement.Models;
 using Zhaoxi.CourseManagement.DataAccess;
 using Zhaoxi.CourseManagement.Common;
+using System.Windows;
 
 namespace Zhaoxi.CourseManagement.ViewModels
 {
@@ -30,7 +31,7 @@ namespace Zhaoxi.CourseManagement.ViewModels
             LoginModel.VerificationCode = "12345";
         }
 
-        public void DoLogin()
+        public void DoLogin(Window o)
         {
             ErrorMessage = string.Empty;
             if (string.IsNullOrEmpty(LoginModel.UserName))
@@ -55,13 +56,15 @@ namespace Zhaoxi.CourseManagement.ViewModels
             if (user == null)
             {
                 ErrorMessage = "登录失败！";
+                return;
             }
             else
             {
                 ErrorMessage = string.Empty;
                 Debug.WriteLine("登录成功.");
+                GlobalValues.UserInfo = user;  // STORE the user info for app-wide usage
+                o.DialogResult = true;
             }
-            GlobalValues.UserInfo = user;
         }
     }
 }

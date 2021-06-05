@@ -1,0 +1,16 @@
+﻿<Window x:Class="Zhaoxi.CourseManagement.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zhaoxi.CourseManagement.Views"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="MainView" Height="450" Width="800"
+        FontFamily="Microsoft YaHei" FontWeight="ExtraLight"
+        FontSize="12"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+    <Grid>
+        
+    </Grid>
+</Window>

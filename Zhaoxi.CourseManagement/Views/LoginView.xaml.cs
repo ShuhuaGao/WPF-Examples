@@ -27,9 +27,9 @@ namespace Zhaoxi.CourseManagement.Views
             DataContext = new LoginViewModel();
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            Debug.WriteLine("Login button is clicked");
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -47,6 +47,15 @@ namespace Zhaoxi.CourseManagement.Views
                 dynamic vm = DataContext;  // use `dynamic` to pass static type check
                 vm.LoginModel.Password = (sender as PasswordBox).Password;
                 //Debug.WriteLine("Password changed.");
+            }
+        }
+
+        private void PasswordBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext != null)
+            {
+                // set the initial password if any
+                (sender as PasswordBox).Password = (DataContext as dynamic).LoginModel.Password;
             }
         }
     }

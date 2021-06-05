@@ -1,8 +1,8 @@
 ﻿<Application x:Class="Zhaoxi.CourseManagement.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:s="https://github.com/canton7/Stylet"
              xmlns:local="clr-namespace:Zhaoxi.CourseManagement"
+             xmlns:s="https://github.com/canton7/Stylet"
              ShutdownMode="OnExplicitShutdown">
     <!--<Application.Resources>
         <s:ApplicationLoader>

@@ -2,15 +2,47 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zhaoxi.CourseManagement.Views"
-        mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
-        Title="MainView" Height="450" Width="800"
-        FontFamily="Microsoft YaHei" FontWeight="ExtraLight"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="朝夕教育"
+        Width="1250"
+        Height="800"
+        AllowsTransparency="True"
+        Background="Transparent"
+        FontFamily="Microsoft YaHei"
         FontSize="12"
-        WindowStyle="None" AllowsTransparency="True" Background="Transparent">
-    <Grid>
-        
-    </Grid>
+        FontWeight="ExtraLight"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        mc:Ignorable="d">
+    <!-- overall border around the main window -->
+    <Border Margin="5"
+            Background="White"
+            CornerRadius="10">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="5"
+                              Direction="3"
+                              Opacity="0.3"
+                              ShadowDepth="2"
+                              Color="Gray" />
+        </Border.Effect>
+        <Grid>
+            <!-- the top blue block -->
+            <Border Height="200"
+                    VerticalAlignment="Top"
+                    Background="#007DFA"
+                    CornerRadius="8,8,0,0" />
+            <!-- overlap the above border -->
+            <StackPanel HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+                <Button Width="40"
+                        Height="40" />
+                <Button Width="40"
+                        Height="40" />
+                <Button Width="40"
+                        Height="40" />
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

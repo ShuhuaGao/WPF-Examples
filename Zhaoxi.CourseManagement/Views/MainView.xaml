@@ -46,6 +46,47 @@
                 <Button Content="&#xe616;"
                         Style="{StaticResource WindowControlButtonStyle}" />
             </StackPanel>
+            <!-- still overlap -->
+            <Grid Margin="50,20"
+                  ShowGridLines="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65" />
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!-- both dock panels in the first row -->
+                <DockPanel HorizontalAlignment="Left"
+                           VerticalAlignment="Center">
+                    <Image Width="40"
+                           Height="40"
+                           DockPanel.Dock="Left"
+                           Source="../Assets/Images/Logo.png" />
+                    <TextBlock DockPanel.Dock="Top"
+                               FontSize="20"
+                               Foreground="White"
+                               Text="朝夕教育课程管理平台" />
+                    <!-- last child fills the remaining space -->
+                    <TextBlock Foreground="#88DDDDDD"
+                               Text="ZHAOXI EDUCATION" />
+                </DockPanel>
+                <StackPanel HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                    <!-- use a border to make a round image -->
+                    <Border Width="40"
+                            Height="40"
+                            CornerRadius="20">
+                        <!-- can also use Image here -->
+                        <Border.Background>
+                            <ImageBrush ImageSource="../Assets/Images/default_avatar_female.png" />
+                        </Border.Background>
+                    </Border>
+                    <TextBlock Margin="10,0,0,0"
+                               VerticalAlignment="Center"
+                               Foreground="White"
+                               Text="Administrator" />
+                </StackPanel>
+            </Grid>
         </Grid>
     </Border>
 </Window>

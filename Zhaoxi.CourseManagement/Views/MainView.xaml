@@ -15,6 +15,9 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary Source="../Assets/Styles/DefaultStyle.xaml" />
+    </Window.Resources>
     <!-- overall border around the main window -->
     <Border Margin="5"
             Background="White"
@@ -36,12 +39,12 @@
             <StackPanel HorizontalAlignment="Right"
                         VerticalAlignment="Top"
                         Orientation="Horizontal">
-                <Button Width="40"
-                        Height="40" />
-                <Button Width="40"
-                        Height="40" />
-                <Button Width="40"
-                        Height="40" />
+                <Button Content="&#xe60c;"
+                        Style="{StaticResource WindowControlButtonStyle}" />
+                <Button Content="&#xe65b;"
+                        Style="{StaticResource WindowControlButtonStyle}" />
+                <Button Content="&#xe616;"
+                        Style="{StaticResource WindowControlButtonStyle}" />
             </StackPanel>
         </Grid>
     </Border>

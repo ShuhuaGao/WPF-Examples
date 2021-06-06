@@ -16,7 +16,42 @@
         WindowStyle="None"
         mc:Ignorable="d">
     <Window.Resources>
-        <ResourceDictionary Source="../Assets/Styles/DefaultStyle.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Assets/Styles/DefaultStyle.xaml" />
+                <ResourceDictionary>
+                    <Style x:Key="NavButtonStyle"
+                           TargetType="RadioButton">
+                        <Setter Property="Foreground"
+                                Value="White" />
+                        <Setter Property="FontSize"
+                                Value="13" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="RadioButton">
+                                    <Border x:Name="back"
+                                            Background="Transparent"
+                                            CornerRadius="8">
+                                        <ContentPresenter Margin="20,4"
+                                                          HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked"
+                                                 Value="True">
+                                            <Setter TargetName="back"
+                                                    Property="Background"
+                                                    Value="#44FFFFFF" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
     </Window.Resources>
     <!-- overall border around the main window -->
     <Border Margin="5"
@@ -54,7 +89,8 @@
                     <RowDefinition Height="35" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <!-- both dock panels in the first row -->
+                <!--#region first row-->
+                <!-- both dock panels in the first row and separated by HorizontalAlignment -->
                 <DockPanel HorizontalAlignment="Left"
                            VerticalAlignment="Center">
                     <Image Width="40"
@@ -86,6 +122,25 @@
                                Foreground="White"
                                Text="Administrator" />
                 </StackPanel>
+                <!--#endregion-->
+                <StackPanel Grid.Row="1"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                    <RadioButton Content="首页"
+                                 FontSize="20"
+                                 IsChecked="True"
+                                 Style="{StaticResource NavButtonStyle}" />
+                    <RadioButton Content="关于我们"
+                                 Style="{StaticResource NavButtonStyle}" />
+                    <RadioButton Content="课程中心"
+                                 Style="{StaticResource NavButtonStyle}" />
+                    <RadioButton Content="诚聘英才"
+                                 Style="{StaticResource NavButtonStyle}" />
+                    <RadioButton Content="个人中心"
+                                 Style="{StaticResource NavButtonStyle}" />
+                </StackPanel>
+
             </Grid>
         </Grid>
     </Border>

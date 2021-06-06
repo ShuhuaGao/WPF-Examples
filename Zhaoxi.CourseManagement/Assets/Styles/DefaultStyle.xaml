@@ -1,38 +1,24 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <ControlTemplate x:Key="WindowControlButtonTemplate"
-                     TargetType="{x:Type Button}">
-        <Border Name="back"
-                Background="Transparent">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTemplate x:Key="WindowControlButtonTemplate" TargetType="{x:Type Button}">
+        <Border Name="back" Background="Transparent">
             <TextBlock HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        FontFamily="../Fonts/#iconfont"
                        Text="{TemplateBinding Content}" />
         </Border>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver"
-                     Value="True">
-                <Setter TargetName="back"
-                        Property="Background"
-                        Value="#22FFFFFF" />
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="back" Property="Background" Value="#22FFFFFF" />
             </Trigger>
-            <Trigger Property="IsPressed"
-                     Value="True">
-                <Setter TargetName="back"
-                        Property="Background"
-                        Value="#44FFFFFF" />
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="back" Property="Background" Value="#44FFFFFF" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <Style x:Key="WindowControlButtonStyle"
-           TargetType="Button">
-        <Setter Property="Width"
-                Value="40" />
-        <Setter Property="Height"
-                Value="40" />
-        <Setter Property="Foreground"
-                Value="White" />
-        <Setter Property="Template"
-                Value="{StaticResource WindowControlButtonTemplate}" />
+    <Style x:Key="WindowControlButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Template" Value="{StaticResource WindowControlButtonTemplate}" />
     </Style>
 </ResourceDictionary>

@@ -32,7 +32,8 @@
                                     <Border x:Name="back"
                                             Background="Transparent"
                                             CornerRadius="8">
-                                        <ContentPresenter Margin="20,4"
+                                        <ContentPresenter x:Name="cp"
+                                                          Margin="20,4"
                                                           HorizontalAlignment="Center"
                                                           VerticalAlignment="Center" />
                                     </Border>
@@ -42,6 +43,8 @@
                                             <Setter TargetName="back"
                                                     Property="Background"
                                                     Value="#44FFFFFF" />
+                                            <Setter Property="FontWeight"
+                                                    Value="Bold" />
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -128,7 +131,6 @@
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
                     <RadioButton Content="首页"
-                                 FontSize="20"
                                  IsChecked="True"
                                  Style="{StaticResource NavButtonStyle}" />
                     <RadioButton Content="关于我们"

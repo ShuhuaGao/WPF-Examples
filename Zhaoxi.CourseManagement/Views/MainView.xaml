@@ -85,14 +85,15 @@
                         Style="{StaticResource WindowControlButtonStyle}" />
             </StackPanel>
             <!-- still overlap -->
-            <Grid Margin="50,20"
+            <Grid x:Name="mainGrid"
+                  Margin="50,20"
                   ShowGridLines="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="65" />
                     <RowDefinition Height="35" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <!--#region first row-->
+                <!--#region row 0-->
                 <!-- both dock panels in the first row and separated by HorizontalAlignment -->
                 <DockPanel HorizontalAlignment="Left"
                            VerticalAlignment="Center">
@@ -126,6 +127,7 @@
                                Text="Administrator" />
                 </StackPanel>
                 <!--#endregion-->
+                <!--#region row 1-->
                 <StackPanel Grid.Row="1"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
@@ -142,7 +144,58 @@
                     <RadioButton Content="个人中心"
                                  Style="{StaticResource NavButtonStyle}" />
                 </StackPanel>
+                <!-- search box -->
+                <TextBox Grid.Row="1"
+                         Width="300"
+                         MinWidth="80"
+                         HorizontalAlignment="Right"
+                         VerticalAlignment="Center"
+                         Background="#22000000"
+                         Foreground="White"
+                         Text="">
+                    <TextBox.Template>
+                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                            <Border Name="Border"
+                                    Padding="2"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock VerticalAlignment="Center"
+                                               FontFamily="../Assets/Fonts/#iconfont"
+                                               Text="&#xe62a;" />
+                                    <!-- set up a watermark by overlapping -->
+                                    <TextBlock x:Name="tbkWatermark"
+                                               Grid.Column="1"
+                                               Margin="3"
+                                               VerticalAlignment="Center"
+                                               Text="Search something?"
+                                               Visibility="Hidden" />
+                                    <ScrollViewer x:Name="PART_ContentHost"
+                                                  Grid.Column="1"
+                                                  Margin="3"
+                                                  VerticalAlignment="Center"
+                                                  VerticalScrollBarVisibility="Hidden" />
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}"
+                                             Value="">
+                                    <Setter TargetName="tbkWatermark"
+                                            Property="Visibility"
+                                            Value="Visible" />
+                                </DataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
 
+                    </TextBox.Template>
+                </TextBox>
+                <!-- endregion -->
             </Grid>
         </Grid>
     </Border>

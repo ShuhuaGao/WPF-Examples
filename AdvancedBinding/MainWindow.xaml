@@ -29,14 +29,14 @@
 
         <Button Grid.Row="2"
                 Margin="10"
+                Background="Beige"
                 Content="This is button 3">
             <Button.Style>
                 <Style TargetType="Button">
                     <Style.Triggers>
-                        <Trigger Property="IsMouseOver"
-                                 Value="True">
-                            <Setter Property="FontSize"
-                                    Value="{c:Binding FontSize+20, RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}" />
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="FontSize" Value="{c:Binding Mode=OneTime, RelativeSource={x:Static RelativeSource.Self}, Path=FontSize+20}" />
+                            <Setter Property="Foreground" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Background}" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>

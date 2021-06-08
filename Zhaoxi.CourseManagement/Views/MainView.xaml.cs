@@ -22,6 +22,39 @@ namespace Zhaoxi.CourseManagement.Views
         public MainView()
         {
             InitializeComponent();
+            // avoid hiding the Windows Taskbar
+            MaxHeight = SystemParameters.PrimaryScreenHeight;
+        }
+
+        // to allow that the window can be dragged to move: view logic only
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void MinimizeWindow(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void MaximizeOrNormalizeWindow(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+                // Char does not work: '\ue64c' '\xe64c'
+                (sender as Button).Content = "\xe64c";
+            }
+            else
+            {
+                WindowState = WindowState.Maximized;
+                (sender as Button).Content = "\ue65b";
+            }
+        }
+
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -12,8 +12,10 @@
         FontFamily="Microsoft YaHei"
         FontSize="12"
         FontWeight="ExtraLight"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
+        WindowState="Maximized"
         mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
@@ -77,11 +79,14 @@
             <StackPanel HorizontalAlignment="Right"
                         VerticalAlignment="Top"
                         Orientation="Horizontal">
-                <Button Content="&#xe60c;"
+                <Button Click="MinimizeWindow"
+                        Content="&#xe60c;"
                         Style="{StaticResource WindowControlButtonStyle}" />
                 <Button Content="&#xe65b;"
+                        Click="MaximizeOrNormalizeWindow"
                         Style="{StaticResource WindowControlButtonStyle}" />
                 <Button Content="&#xe616;"
+                        Click="CloseWindow"
                         Style="{StaticResource WindowControlButtonStyle}" />
             </StackPanel>
             <!-- still overlap -->
@@ -196,6 +201,8 @@
                     </TextBox.Template>
                 </TextBox>
                 <!-- endregion -->
+                <!-- row 2, main part -->
+                <ContentControl Grid.Row="2" />
             </Grid>
         </Grid>
     </Border>

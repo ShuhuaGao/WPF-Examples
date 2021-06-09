@@ -21,7 +21,8 @@ namespace HelloLogin.Pages
             return true;
         }
 
-        public override Task<bool> CanCloseAsync()
+        // Action for the Login button
+        public void Login()
         {
             if (CanLogin())
             {
@@ -29,9 +30,8 @@ namespace HelloLogin.Pages
                 var mainVM = new MainViewModel();
                 windowManager.ShowWindow(mainVM);
                 // close the current login window
-                return Task.FromResult(true);
+                RequestClose();
             }
-            return Task.FromResult(false);
         }
     }
 }

@@ -12,7 +12,7 @@ using System.Windows;
 
 namespace Zhaoxi.CourseManagement.ViewModels
 {
-    public class LoginViewModel : PropertyChangedBase
+    public class LoginViewModel : Screen
     {
         public LoginModel LoginModel { get; set; }
 
@@ -24,14 +24,16 @@ namespace Zhaoxi.CourseManagement.ViewModels
             set { SetAndNotify(ref errorMessage, value); }
         }
 
+        private readonly IWindowManager windowManager;
 
-        public LoginViewModel()
+        public LoginViewModel(IWindowManager wm)
         {
             LoginModel = new LoginModel();
             LoginModel.VerificationCode = "12345";
+            windowManager = wm;
         }
 
-        public void DoLogin(Window o)
+        public void DoLogin()
         {
             ErrorMessage = string.Empty;
             if (string.IsNullOrEmpty(LoginModel.UserName))
@@ -63,7 +65,12 @@ namespace Zhaoxi.CourseManagement.ViewModels
                 ErrorMessage = string.Empty;
                 Debug.WriteLine("登录成功.");
                 GlobalValues.UserInfo = user;  // STORE the user info for app-wide usage
-                o.DialogResult = true;
+                // close the login window and show the main window
+                var mainWindow = new MainViewModel();
+                windowManager.ShowWindow(mainWindow);
+                // the order matters; otherwise, the app will stop immediately if the current window is first closed.
+                // See Application.ShutdownMode 
+                RequestClose();
             }
         }
     }

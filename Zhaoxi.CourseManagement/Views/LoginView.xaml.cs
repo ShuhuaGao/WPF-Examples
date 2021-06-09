@@ -24,12 +24,12 @@ namespace Zhaoxi.CourseManagement.Views
         public LoginView()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private void CloseWindow(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("Login button is clicked");
+            Debug.WriteLine("Login close button clicked");
+            Close();
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

@@ -7,6 +7,7 @@
         Title="朝夕教育"
         Width="1250"
         Height="800"
+        MaxHeight="{x:Static SystemParameters.PrimaryScreenHeight}"
         AllowsTransparency="True"
         Background="Transparent"
         FontFamily="Microsoft YaHei"
@@ -14,8 +15,8 @@
         FontWeight="ExtraLight"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
         WindowState="Maximized"
+        WindowStyle="None"
         mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
@@ -82,11 +83,11 @@
                 <Button Click="MinimizeWindow"
                         Content="&#xe60c;"
                         Style="{StaticResource WindowControlButtonStyle}" />
-                <Button Content="&#xe65b;"
-                        Click="MaximizeOrNormalizeWindow"
+                <Button Click="MaximizeOrNormalizeWindow"
+                        Content="&#xe65b;"
                         Style="{StaticResource WindowControlButtonStyle}" />
-                <Button Content="&#xe616;"
-                        Click="CloseWindow"
+                <Button Click="CloseWindow"
+                        Content="&#xe616;"
                         Style="{StaticResource WindowControlButtonStyle}" />
             </StackPanel>
             <!-- still overlap -->

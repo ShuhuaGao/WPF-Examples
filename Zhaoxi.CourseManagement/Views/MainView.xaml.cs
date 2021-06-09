@@ -23,7 +23,8 @@ namespace Zhaoxi.CourseManagement.Views
         {
             InitializeComponent();
             // avoid hiding the Windows Taskbar
-            MaxHeight = SystemParameters.PrimaryScreenHeight;
+            // put in the XAML instead
+            //MaxHeight = SystemParameters.PrimaryScreenHeight;
         }
 
         // to allow that the window can be dragged to move: view logic only

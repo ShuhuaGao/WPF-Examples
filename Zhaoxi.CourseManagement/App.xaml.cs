@@ -15,17 +15,17 @@ namespace Zhaoxi.CourseManagement
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-            var lv = new LoginView();
-            if (lv.ShowDialog() == true)  // login successfully
-            {
-                Debug.WriteLine($"Login successfully. ");
-                new MainView().ShowDialog();
-            }
-            // after the main window finishes
-            Shutdown();
-        }
+        //protected override void OnStartup(StartupEventArgs e)
+        //{
+        //    base.OnStartup(e);
+        //    var lv = new LoginView();
+        //    if (lv.ShowDialog() == true)  // login successfully
+        //    {
+        //        Debug.WriteLine($"Login successfully. ");
+        //        new MainView().ShowDialog();
+        //    }
+        //    // after the main window finishes
+        //    Shutdown();
+        //}
     }
 }

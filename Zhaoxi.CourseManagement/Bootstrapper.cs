@@ -1,10 +1,10 @@
-﻿using Zhaoxi.CourseManagement.Views;
+﻿using Zhaoxi.CourseManagement.ViewModels;
 using Stylet;
 using StyletIoC;
 
 namespace Zhaoxi.CourseManagement
 {
-    public class Bootstrapper : Bootstrapper<ShellViewModel>  // entry point
+    public class Bootstrapper : Bootstrapper<LoginViewModel>  // entry point
     {
         protected override void ConfigureIoC(IStyletIoCBuilder builder)
         {

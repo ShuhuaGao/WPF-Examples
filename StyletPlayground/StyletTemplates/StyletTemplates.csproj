@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWpf>true</UseWpf>
+
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+
+    <VersionPrefix>1.3.6</VersionPrefix>
+    <PackageId>Stylet.Templates.VM</PackageId>
+    <PackageTags>dotnet-new;templates;WPF;MVVM;ViewModel;Screen;Conductor;ViewModel-First;Model-View-ViewModel;UI</PackageTags>
+    <Copyright>Copyright © 2021 Gao Shuhua</Copyright>
+    <PackageIcon>StyletIcon.png</PackageIcon>
+    <PackageProjectUrl>http://github.com/canton7/Stylet</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/canton7/Stylet</RepositoryUrl>
+    <Authors>Gao Shuhua</Authors>
+    <Description>.NET Core templates for Stylet with separate Views and ViewModels folders. Refer also to the original template https://www.nuget.org/packages/Stylet.Templates/.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
+    <Compile Remove="**\*" />
+    <None Include=".\StyletIcon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,20 @@
+﻿<Window x:Class="Company.StyletApplication1.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Company.StyletApplication1.ViewModels"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s="https://github.com/canton7/Stylet"
+        Title="Stylet Project"
+        Width="800"
+        Height="450"
+        d:DataContext="{d:DesignInstance local:ShellViewModel}"
+        mc:Ignorable="d">
+    <Grid>
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="30">
+            Hello Stylet!
+        </TextBlock>
+    </Grid>
+</Window>

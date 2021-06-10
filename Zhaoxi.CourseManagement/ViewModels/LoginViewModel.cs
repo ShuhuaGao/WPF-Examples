@@ -33,6 +33,10 @@ namespace Zhaoxi.CourseManagement.ViewModels
             windowManager = wm;
         }
 
+        /// <summary>
+        /// Attempt login and, if successful, store the global user information.
+        /// </summary>
+        /// <seealso cref="GlobalValues.UserInfo"/>
         public void DoLogin()
         {
             ErrorMessage = string.Empty;
@@ -65,6 +69,7 @@ namespace Zhaoxi.CourseManagement.ViewModels
                 ErrorMessage = string.Empty;
                 Debug.WriteLine("登录成功.");
                 GlobalValues.UserInfo = user;  // STORE the user info for app-wide usage
+                Debug.WriteLine($"The avatar of the user is {user.Avatar}");
                 // close the login window and show the main window
                 var mainWindow = new MainViewModel();
                 windowManager.ShowWindow(mainWindow);

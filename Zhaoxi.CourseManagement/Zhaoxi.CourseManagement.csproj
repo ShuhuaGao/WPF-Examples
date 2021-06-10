@@ -9,10 +9,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\UserModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Assets\Fonts\iconfont.ttf" />
+    <None Remove="Assets\Images\avatar.png" />
+    <None Remove="Assets\Images\avatar1.png" />
+    <None Remove="Assets\Images\avatar2.png" />
+    <None Remove="Assets\Images\avatar3.png" />
+    <None Remove="Assets\Images\avatar4.png" />
+    <None Remove="Assets\Images\avatar5.png" />
+    <None Remove="Assets\Images\avatar6.png" />
     <None Remove="Assets\Images\default_avatar_female.png" />
     <None Remove="Assets\Images\Demo\verification.png" />
     <None Remove="Assets\Images\Logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Images\avatar2.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +37,12 @@
 
   <ItemGroup>
     <Resource Include="Assets\Fonts\iconfont.ttf" />
+    <Resource Include="Assets\Images\avatar.png" />
+    <Resource Include="Assets\Images\avatar1.png" />
+    <Resource Include="Assets\Images\avatar3.png" />
+    <Resource Include="Assets\Images\avatar4.png" />
+    <Resource Include="Assets\Images\avatar5.png" />
+    <Resource Include="Assets\Images\avatar6.png" />
     <Resource Include="Assets\Images\default_avatar_female.png" />
     <Resource Include="Assets\Images\Demo\verification.png" />
     <Resource Include="Assets\Images\Logo.png" />

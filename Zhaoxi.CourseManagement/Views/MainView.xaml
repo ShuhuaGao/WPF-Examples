@@ -19,6 +19,7 @@
         FontSize="12"
         FontWeight="ExtraLight"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         WindowStyle="None"
@@ -28,12 +29,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Assets/Styles/DefaultStyle.xaml" />
                 <ResourceDictionary>
-                    <Style x:Key="NavButtonStyle"
-                           TargetType="RadioButton">
-                        <Setter Property="Foreground"
-                                Value="White" />
-                        <Setter Property="FontSize"
-                                Value="13" />
+                    <Style x:Key="NavButtonStyle" TargetType="RadioButton">
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="FontSize" Value="13" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="RadioButton">
@@ -46,13 +44,9 @@
                                                           VerticalAlignment="Center" />
                                     </Border>
                                     <ControlTemplate.Triggers>
-                                        <Trigger Property="IsChecked"
-                                                 Value="True">
-                                            <Setter TargetName="back"
-                                                    Property="Background"
-                                                    Value="#44FFFFFF" />
-                                            <Setter Property="FontWeight"
-                                                    Value="Bold" />
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="back" Property="Background" Value="#44FFFFFF" />
+                                            <Setter Property="FontWeight" Value="Bold" />
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -106,8 +100,7 @@
                 </Grid.RowDefinitions>
                 <!--#region row 0-->
                 <!-- both dock panels in the first row and separated by HorizontalAlignment -->
-                <DockPanel HorizontalAlignment="Left"
-                           VerticalAlignment="Center">
+                <DockPanel HorizontalAlignment="Left" VerticalAlignment="Center">
                     <Image Width="40"
                            Height="40"
                            DockPanel.Dock="Left"
@@ -117,8 +110,7 @@
                                Foreground="White"
                                Text="朝夕教育课程管理平台" />
                     <!-- last child fills the remaining space -->
-                    <TextBlock Foreground="#88DDDDDD"
-                               Text="ZHAOXI EDUCATION" />
+                    <TextBlock Foreground="#88DDDDDD" Text="ZHAOXI EDUCATION" />
                 </DockPanel>
                 <StackPanel HorizontalAlignment="Right"
                             VerticalAlignment="Center"
@@ -130,23 +122,33 @@
                         <!-- can also use Image here -->
                         <Border.Background>
                             <!--<ImageBrush ImageSource="{Binding Source={x:Static common:GlobalValues.UserInfo}, Path=Avatar}" />-->
-                            <ImageBrush d:ImageSource="../Assets/Images/avatar.png"
-                                        ImageSource="{Binding Source={x:Static common:GlobalValues.UserInfo}, Path=Avatar}" />
+                            <ImageBrush d:ImageSource="../Assets/Images/avatar.png" ImageSource="{Binding Source={x:Static common:GlobalValues.UserInfo}, Path=Avatar}" />
                         </Border.Background>
                     </Border>
                     <Button Margin="10,0,0,0"
                             VerticalAlignment="Center"
                             d:Content="Administrator"
+                            Background="Transparent"
+                            BorderThickness="0"
                             Content="{Binding UserName, Source={x:Static common:GlobalValues.UserInfo}, Mode=OneWay}"
                             Cursor="Hand"
                             Foreground="White">
+                        <!-- though we set transparent background, there is still hover effect in the default template -->
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <TextBlock Text="{TemplateBinding Content}" />
                             </ControlTemplate>
                         </Button.Template>
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <BeginStoryboard>
+                                    <Storyboard TargetProperty="X" TargetName="siderTrans">
+                                        <DoubleAnimation To="0" Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
                     </Button>
-
                 </StackPanel>
                 <!--#endregion-->
                 <!--#region row 1-->
@@ -217,11 +219,8 @@
                                 </Grid>
                             </Border>
                             <ControlTemplate.Triggers>
-                                <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}"
-                                             Value="">
-                                    <Setter TargetName="tbkWatermark"
-                                            Property="Visibility"
-                                            Value="Visible" />
+                                <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value="">
+                                    <Setter TargetName="tbkWatermark" Property="Visibility" Value="Visible" />
                                 </DataTrigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -230,9 +229,78 @@
                 </TextBox>
                 <!-- endregion -->
                 <!-- row 2, main part -->
-                <ContentControl Grid.Row="2"
-                                s:View.Model="{Binding ActiveItem, Mode=OneWay}" />
+                <ContentControl Grid.Row="2" s:View.Model="{Binding ActiveItem, Mode=OneWay}" />
             </Grid>
+            <!-- 抽屉侧滑栏 overlap in the single-cell main grid -->
+            <Border x:Name="sideBar"
+                    Width="240"
+                    HorizontalAlignment="Right"
+                    Background="#EE666666"
+                    CornerRadius="0, 5, 5, 0"
+                    DataContext="{x:Static common:GlobalValues.UserInfo}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="1"
+                                      Direction="180"
+                                      Opacity="0.3"
+                                      ShadowDepth="2"
+                                      Color="Gray" />
+                </Border.Effect>
+                <Border.RenderTransform>
+                    <TranslateTransform x:Name="siderTrans" X="250" />
+                </Border.RenderTransform>
+                <Grid Margin="10,5" ShowGridLines="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="200" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Button HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="&#xe616;"
+                            FontFamily="../Assets/Fonts/#iconfont"
+                            Style="{StaticResource WindowControlButtonStyle}">
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetProperty="X" TargetName="siderTrans">
+                                            <!-- from current X value to the explicitly marked one -->
+                                            <DoubleAnimation Duration="0:0:0.1" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                    <Border Grid.Row="1"
+                            Width="100"
+                            Height="100"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            CornerRadius="50">
+                        <Border.Background>
+                            <!--<ImageBrush ImageSource="{Binding Source={x:Static common:GlobalValues.UserInfo}, Path=Avatar}" />-->
+                            <ImageBrush d:ImageSource="../Assets/Images/avatar.png" ImageSource="{Binding Avatar}" />
+                        </Border.Background>
+                    </Border>
+                    <StackPanel Grid.Row="2"
+                                Margin="0,10"
+                                Orientation="Horizontal">
+                        <TextBlock Foreground="White" Text="用户名" />
+                        <TextBlock Margin="10,0,0,0"
+                                   Foreground="White"
+                                   Text="{Binding UserName}" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="3"
+                                Margin="0,10"
+                                Orientation="Horizontal">
+                        <TextBlock Foreground="White" Text="性   别" />
+                        <RadioButton Margin="10,0" Content="男" />
+                        <RadioButton Margin="10,0" Content="女" />
+                    </StackPanel>
+                </Grid>
+            </Border>
         </Grid>
     </Border>
 </Window>

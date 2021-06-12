@@ -22,7 +22,7 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized"
+        WindowState="Normal"
         WindowStyle="None"
         mc:Ignorable="d">
     <Window.Resources>
@@ -30,9 +30,12 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Assets/Styles/DefaultStyle.xaml" />
                 <ResourceDictionary>
-                    <Style x:Key="NavButtonStyle" TargetType="RadioButton">
-                        <Setter Property="Foreground" Value="White" />
-                        <Setter Property="FontSize" Value="13" />
+                    <Style x:Key="NavButtonStyle"
+                           TargetType="RadioButton">
+                        <Setter Property="Foreground"
+                                Value="White" />
+                        <Setter Property="FontSize"
+                                Value="13" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="RadioButton">
@@ -45,9 +48,13 @@
                                                           VerticalAlignment="Center" />
                                     </Border>
                                     <ControlTemplate.Triggers>
-                                        <Trigger Property="IsChecked" Value="True">
-                                            <Setter TargetName="back" Property="Background" Value="#44FFFFFF" />
-                                            <Setter Property="FontWeight" Value="Bold" />
+                                        <Trigger Property="IsChecked"
+                                                 Value="True">
+                                            <Setter TargetName="back"
+                                                    Property="Background"
+                                                    Value="#44FFFFFF" />
+                                            <Setter Property="FontWeight"
+                                                    Value="Bold" />
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -85,7 +92,7 @@
                         Content="&#xe60c;"
                         Style="{StaticResource WindowControlButtonStyle}" />
                 <Button Click="MaximizeOrNormalizeWindow"
-                        Content="&#xe65b;"
+                        Content="&#xe64c;"
                         Style="{StaticResource WindowControlButtonStyle}" />
                 <Button Click="CloseWindow"
                         Content="&#xe616;"
@@ -102,7 +109,8 @@
                 </Grid.RowDefinitions>
                 <!--#region row 0-->
                 <!-- both dock panels in the first row and separated by HorizontalAlignment -->
-                <DockPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                <DockPanel HorizontalAlignment="Left"
+                           VerticalAlignment="Center">
                     <Image Width="40"
                            Height="40"
                            DockPanel.Dock="Left"
@@ -112,7 +120,8 @@
                                Foreground="White"
                                Text="朝夕教育课程管理平台" />
                     <!-- last child fills the remaining space -->
-                    <TextBlock Foreground="#88DDDDDD" Text="ZHAOXI EDUCATION" />
+                    <TextBlock Foreground="#88DDDDDD"
+                               Text="ZHAOXI EDUCATION" />
                 </DockPanel>
                 <StackPanel HorizontalAlignment="Right"
                             VerticalAlignment="Center"
@@ -124,7 +133,8 @@
                         <!-- can also use Image here -->
                         <Border.Background>
                             <!--<ImageBrush ImageSource="{Binding Source={x:Static common:GlobalValues.UserInfo}, Path=Avatar}" />-->
-                            <ImageBrush d:ImageSource="../Assets/Images/avatar.png" ImageSource="{Binding Source={x:Static common:GlobalValues.UserInfo}, Path=Avatar}" />
+                            <ImageBrush d:ImageSource="../Assets/Images/avatar.png"
+                                        ImageSource="{Binding Source={x:Static common:GlobalValues.UserInfo}, Path=Avatar}" />
                         </Border.Background>
                     </Border>
                     <Button Margin="10,0,0,0"
@@ -144,8 +154,10 @@
                         <Button.Triggers>
                             <EventTrigger RoutedEvent="Button.Click">
                                 <BeginStoryboard>
-                                    <Storyboard TargetProperty="X" TargetName="siderTrans">
-                                        <DoubleAnimation To="0" Duration="0:0:0.1" />
+                                    <Storyboard TargetProperty="X"
+                                                TargetName="siderTrans">
+                                        <DoubleAnimation To="0"
+                                                         Duration="0:0:0.1" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </EventTrigger>
@@ -221,8 +233,11 @@
                                 </Grid>
                             </Border>
                             <ControlTemplate.Triggers>
-                                <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value="">
-                                    <Setter TargetName="tbkWatermark" Property="Visibility" Value="Visible" />
+                                <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}"
+                                             Value="">
+                                    <Setter TargetName="tbkWatermark"
+                                            Property="Visibility"
+                                            Value="Visible" />
                                 </DataTrigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -231,7 +246,8 @@
                 </TextBox>
                 <!-- endregion -->
                 <!-- row 2, main part -->
-                <ContentControl Grid.Row="2" s:View.Model="{Binding ActiveItem, Mode=OneWay}" />
+                <ContentControl Grid.Row="2"
+                                s:View.Model="{Binding ActiveItem, Mode=OneWay}" />
             </Grid>
             <!-- 抽屉侧滑栏 overlap in the single-cell main grid -->
             <Border x:Name="sideBar"
@@ -248,9 +264,11 @@
                                       Color="Gray" />
                 </Border.Effect>
                 <Border.RenderTransform>
-                    <TranslateTransform x:Name="siderTrans" X="250" />
+                    <TranslateTransform x:Name="siderTrans"
+                                        X="250" />
                 </Border.RenderTransform>
-                <Grid Margin="10,5" ShowGridLines="True">
+                <Grid Margin="10,5"
+                      ShowGridLines="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="200" />
@@ -267,7 +285,8 @@
                             <EventTrigger RoutedEvent="Button.Click">
                                 <EventTrigger.Actions>
                                     <BeginStoryboard>
-                                        <Storyboard TargetProperty="X" TargetName="siderTrans">
+                                        <Storyboard TargetProperty="X"
+                                                    TargetName="siderTrans">
                                             <!-- from current X value to the explicitly marked one -->
                                             <DoubleAnimation Duration="0:0:0.1" />
                                         </Storyboard>
@@ -284,13 +303,15 @@
                             CornerRadius="50">
                         <Border.Background>
                             <!--<ImageBrush ImageSource="{Binding Source={x:Static common:GlobalValues.UserInfo}, Path=Avatar}" />-->
-                            <ImageBrush d:ImageSource="../Assets/Images/avatar.png" ImageSource="{Binding Avatar}" />
+                            <ImageBrush d:ImageSource="../Assets/Images/avatar.png"
+                                        ImageSource="{Binding Avatar}" />
                         </Border.Background>
                     </Border>
                     <StackPanel Grid.Row="2"
                                 Margin="0,10"
                                 Orientation="Horizontal">
-                        <TextBlock Foreground="White" Text="用户名" />
+                        <TextBlock Foreground="White"
+                                   Text="用户名" />
                         <TextBlock Margin="10,0,0,0"
                                    Foreground="White"
                                    Text="{Binding UserName}" />
@@ -299,7 +320,8 @@
                                 Margin="0,10"
                                 VerticalAlignment="Top"
                                 Orientation="Horizontal">
-                        <TextBlock Foreground="White" Text="性   别" />
+                        <TextBlock Foreground="White"
+                                   Text="性   别" />
                         <RadioButton Margin="10,0"
                                      Content="男"
                                      IsChecked="{Binding Gender, Converter={StaticResource genderToBool}, ConverterParameter=1}" />

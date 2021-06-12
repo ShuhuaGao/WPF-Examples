@@ -1,14 +1,105 @@
 ﻿<UserControl x:Class="Zhaoxi.CourseManagement.Views.FirstPageView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Zhaoxi.CourseManagement.Views"
-             mc:Ignorable="d"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DesignHeight="450"
-             d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="First page"
-                   FontSize="50" />
+             d:DesignWidth="800"
+             mc:Ignorable="d">
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="160" />
+            <RowDefinition Height="360" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <UniformGrid Grid.Row="0"
+                     Columns="4">
+            <Border Margin="10"
+                    Background="White"
+                    CornerRadius="5">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10"
+                                      Direction="270"
+                                      Opacity="0.3"
+                                      ShadowDepth="10"
+                                      Color="Gray" />
+                </Border.Effect>
+                <Grid>
+                    <StackPanel Margin="10"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+                        <!-- the curve label -->
+                        <Border Width="20"
+                                Height="20"
+                                Background="#EDFAF0">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontFamily="../Assets/Fonts/#iconfont"
+                                       FontSize="15"
+                                       Foreground="LightSeaGreen"
+                                       Text="&#xe644;" />
+                        </Border>
+                        <TextBlock Text="24%"
+                                   VerticalAlignment="Center"
+                                   Foreground="LightSeaGreen"
+                                   Margin="5,0,0,0" />
+                    </StackPanel>
+                    <lvc:CartesianChart Margin="0,0,0,45">
+                        <lvc:CartesianChart.Series>
+                            <lvc:LineSeries Fill="#FFF2DE"
+                                            Stroke="#FECC71"
+                                            Values="1,2,3,5,3,6,8" />
+                        </lvc:CartesianChart.Series>
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis ShowLabels="False" />
+                        </lvc:CartesianChart.AxisX>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis MaxValue="100"
+                                      MinValue="0"
+                                      ShowLabels="False" />
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
+                    <DockPanel VerticalAlignment="Bottom"
+                               Margin="20,5">
+                        <Border Width="36"
+                                Margin="0,0,5,0"
+                                DockPanel.Dock="Left"
+                                Height="36"
+                                Background="#FFF5E9"
+                                CornerRadius="10">
+                            <TextBlock Text="&#xe6fd;"
+                                       FontSize="23"
+                                       FontFamily="../Assets/Fonts/#iconfont"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Foreground="RosyBrown" />
+                        </Border>
+                        <TextBlock DockPanel.Dock="Top"
+                                   Text="数据名称"
+                                   FontSize="12"
+                                   Foreground="DarkGray" />
+                        <TextBlock DockPanel.Dock="Bottom"
+                                   Text="99%"
+                                   FontSize="16"
+                                   Foreground="DarkGray" />
+                    </DockPanel>
+                </Grid>
+            </Border>
+            <Border Margin="10"
+                    Background="White"
+                    CornerRadius="5">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10"
+                                      Direction="270"
+                                      Opacity="0.3"
+                                      ShadowDepth="10"
+                                      Color="Gray" />
+                </Border.Effect>
+
+            </Border>
+        </UniformGrid>
     </Grid>
 </UserControl>

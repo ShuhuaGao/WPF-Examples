@@ -5,9 +5,18 @@
              xmlns:local="clr-namespace:Zhaoxi.CourseManagement.Views"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewmodels="clr-namespace:Zhaoxi.CourseManagement.ViewModels"
+             d:DataContext="{d:DesignInstance viewmodels:FirstPageViewModel}"
              d:DesignHeight="450"
              d:DesignWidth="800"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="FirstPageViewResource.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="160" />
@@ -16,90 +25,17 @@
         </Grid.RowDefinitions>
         <UniformGrid Grid.Row="0"
                      Columns="4">
-            <Border Margin="10"
-                    Background="White"
-                    CornerRadius="5">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="10"
-                                      Direction="270"
-                                      Opacity="0.3"
-                                      ShadowDepth="10"
-                                      Color="Gray" />
-                </Border.Effect>
-                <Grid>
-                    <StackPanel Margin="10"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Orientation="Horizontal">
-                        <!-- the curve label -->
-                        <Border Width="20"
-                                Height="20"
-                                Background="#EDFAF0">
-                            <TextBlock HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       FontFamily="../Assets/Fonts/#iconfont"
-                                       FontSize="15"
-                                       Foreground="LightSeaGreen"
-                                       Text="&#xe644;" />
-                        </Border>
-                        <TextBlock Text="24%"
-                                   VerticalAlignment="Center"
-                                   Foreground="LightSeaGreen"
-                                   Margin="5,0,0,0" />
-                    </StackPanel>
-                    <lvc:CartesianChart Margin="0,0,0,45">
-                        <lvc:CartesianChart.Series>
-                            <lvc:LineSeries Fill="#FFF2DE"
-                                            Stroke="#FECC71"
-                                            Values="1,2,3,5,3,6,8" />
-                        </lvc:CartesianChart.Series>
-                        <lvc:CartesianChart.AxisX>
-                            <lvc:Axis ShowLabels="False" />
-                        </lvc:CartesianChart.AxisX>
-                        <lvc:CartesianChart.AxisY>
-                            <lvc:Axis MaxValue="100"
-                                      MinValue="0"
-                                      ShowLabels="False" />
-                        </lvc:CartesianChart.AxisY>
-                    </lvc:CartesianChart>
-                    <DockPanel VerticalAlignment="Bottom"
-                               Margin="20,5">
-                        <Border Width="36"
-                                Margin="0,0,5,0"
-                                DockPanel.Dock="Left"
-                                Height="36"
-                                Background="#FFF5E9"
-                                CornerRadius="10">
-                            <TextBlock Text="&#xe6fd;"
-                                       FontSize="23"
-                                       FontFamily="../Assets/Fonts/#iconfont"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Foreground="RosyBrown" />
-                        </Border>
-                        <TextBlock DockPanel.Dock="Top"
-                                   Text="数据名称"
-                                   FontSize="12"
-                                   Foreground="DarkGray" />
-                        <TextBlock DockPanel.Dock="Bottom"
-                                   Text="99%"
-                                   FontSize="16"
-                                   Foreground="DarkGray" />
-                    </DockPanel>
-                </Grid>
-            </Border>
-            <Border Margin="10"
-                    Background="White"
-                    CornerRadius="5">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="10"
-                                      Direction="270"
-                                      Opacity="0.3"
-                                      ShadowDepth="10"
-                                      Color="Gray" />
-                </Border.Effect>
+            <!-- four cards displayed by a DataTemplate -->
+            <ContentControl Content="{Binding Card1}"
+                            ContentTemplate="{StaticResource ResourceKey=Card}" />
 
-            </Border>
+            <ContentControl Content="{Binding Card2}"
+                            ContentTemplate="{StaticResource ResourceKey=Card}" />
+
+            <ContentControl Content="{Binding Card3}"
+                            ContentTemplate="{StaticResource ResourceKey=Card}" />
+            <ContentControl Content="{Binding Card4}"
+                            ContentTemplate="{StaticResource ResourceKey=Card}" />
         </UniformGrid>
     </Grid>
 </UserControl>

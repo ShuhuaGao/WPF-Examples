@@ -17,10 +17,10 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="160" />
-            <RowDefinition Height="360" />
+            <!--<RowDefinition Height="360" />-->
             <RowDefinition />
         </Grid.RowDefinitions>
         <UniformGrid Grid.Row="0"
@@ -37,5 +37,26 @@
             <ContentControl Content="{Binding Card4}"
                             ContentTemplate="{StaticResource ResourceKey=Card}" />
         </UniformGrid>
+        <Grid Grid.Row="1"
+              Margin="10"
+              ShowGridLines="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <!-- two elements in a single cell -->
+            <TextBlock HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       FontSize="15"
+                       FontWeight="Bold"
+                       Foreground="#3F4C5D"
+                       Text="课程总览" />
+            <TextBlock HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontSize="13">
+                <Hyperlink>详情</Hyperlink>
+            </TextBlock>
+            <!-- row 1: the list of courses -->
+        </Grid>
     </Grid>
 </UserControl>

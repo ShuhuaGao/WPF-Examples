@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="Zhaoxi.CourseManagement.Views.CourseItemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Zhaoxi.CourseManagement.Views"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:m="clr-namespace:Zhaoxi.CourseManagement.Models"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Zhaoxi.CourseManagement.ViewModels"
+             d:DesignHeight="89"
+             d:DesignWidth="800"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+
+        <DataTemplate DataType="m:PlatformData">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Text="{Binding Name}" />
+                <TextBlock Grid.Row="1"
+                           Text="{Binding PlayCount}" />
+
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Border Background="White"
+            CornerRadius="5">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="3"
+                              Direction="220"
+                              Opacity="0.5"
+                              ShadowDepth="3"
+                              Color="LightGray" />
+        </Border.Effect>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition Width="3.5*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       d:Text="C#/.Net架构师蜕变营"
+                       Foreground="#444" />
+
+
+        </Grid>
+    </Border>
+</UserControl>

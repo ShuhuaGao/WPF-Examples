@@ -5,6 +5,7 @@
              xmlns:local="clr-namespace:Zhaoxi.CourseManagement.Views"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="https://github.com/canton7/Stylet"
              xmlns:viewmodels="clr-namespace:Zhaoxi.CourseManagement.ViewModels"
              d:DataContext="{d:DesignInstance viewmodels:FirstPageViewModel}"
              d:DesignHeight="450"
@@ -23,19 +24,14 @@
             <!--<RowDefinition Height="360" />-->
             <RowDefinition />
         </Grid.RowDefinitions>
-        <UniformGrid Grid.Row="0"
-                     Columns="4">
+        <UniformGrid Grid.Row="0" Columns="4">
             <!-- four cards displayed by a DataTemplate -->
-            <ContentControl Content="{Binding Card1}"
-                            ContentTemplate="{StaticResource ResourceKey=Card}" />
+            <ContentControl Content="{Binding Card1}" ContentTemplate="{StaticResource ResourceKey=Card}" />
 
-            <ContentControl Content="{Binding Card2}"
-                            ContentTemplate="{StaticResource ResourceKey=Card}" />
+            <ContentControl Content="{Binding Card2}" ContentTemplate="{StaticResource ResourceKey=Card}" />
 
-            <ContentControl Content="{Binding Card3}"
-                            ContentTemplate="{StaticResource ResourceKey=Card}" />
-            <ContentControl Content="{Binding Card4}"
-                            ContentTemplate="{StaticResource ResourceKey=Card}" />
+            <ContentControl Content="{Binding Card3}" ContentTemplate="{StaticResource ResourceKey=Card}" />
+            <ContentControl Content="{Binding Card4}" ContentTemplate="{StaticResource ResourceKey=Card}" />
         </UniformGrid>
         <Grid Grid.Row="1"
               Margin="10"
@@ -57,6 +53,11 @@
                 <Hyperlink>详情</Hyperlink>
             </TextBlock>
             <!-- row 1: the list of courses -->
+            <!-- first test a single item (row) -->
+            <ContentControl Grid.Row="1"
+                            VerticalAlignment="Top"
+                            s:View.Model="{Binding CourseItemViewModels[0]}" />
+
         </Grid>
     </Grid>
 </UserControl>

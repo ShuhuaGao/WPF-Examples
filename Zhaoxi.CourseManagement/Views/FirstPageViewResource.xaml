@@ -3,8 +3,7 @@
                     xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
                     xmlns:vm="clr-namespace:Zhaoxi.CourseManagement.ViewModels">
     <!-- DataTemplate applied to CardViewModel automatically -->
-    <DataTemplate x:Key="Card"
-                  DataType="vm:CardViewModel">
+    <DataTemplate x:Key="Card" DataType="vm:CardViewModel">
         <!-- content of a DataTemplate is a visual tree -->
         <Border Margin="10"
                 Background="White"
@@ -53,8 +52,7 @@
                                   ShowLabels="False" />
                     </lvc:CartesianChart.AxisY>
                 </lvc:CartesianChart>
-                <DockPanel Margin="20,5"
-                           VerticalAlignment="Bottom">
+                <DockPanel Margin="20,5" VerticalAlignment="Bottom">
                     <Border Width="36"
                             Height="36"
                             Margin="0,0,5,0"

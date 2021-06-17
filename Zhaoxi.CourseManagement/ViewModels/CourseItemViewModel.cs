@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,9 +17,23 @@ namespace Zhaoxi.CourseManagement.ViewModels
         public CourseItemViewModel(CourseInfo course)
         {
             this.course = course;
+            // build the pie series
+            foreach (var pd in course.PlatformDatas)
+            {
+                SeriesCollection.Add(new PieSeries
+                {
+                    Title = pd.PlatformName,
+                    Values = new ChartValues<int> { pd.PlayCount },
+                    DataLabels = false
+                });
+            }
         }
 
-        public string Name { get => course.Name; }
+        public string Name => course.Name;
+
+        public SeriesCollection SeriesCollection { get; } = new SeriesCollection();
+
+        public IList<PlatformData> PlatformDatas => course.PlatformDatas.ToList();
 
 
     }

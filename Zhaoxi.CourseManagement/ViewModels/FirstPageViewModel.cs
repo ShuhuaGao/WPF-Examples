@@ -4,6 +4,7 @@ using LiveCharts.Wpf;
 using LiveCharts;
 using Stylet;
 using System.Windows.Media;
+using Zhaoxi.CourseManagement.Models;
 
 namespace Zhaoxi.CourseManagement.ViewModels
 {
@@ -13,6 +14,7 @@ namespace Zhaoxi.CourseManagement.ViewModels
         public CardViewModel Card2 { get; set; }
         public CardViewModel Card3 { get; set; }
         public CardViewModel Card4 { get; set; }
+        public IEnumerable<CourseItemViewModel> CourseItemViewModels { get; }
 
         public FirstPageViewModel()
         {
@@ -46,6 +48,19 @@ namespace Zhaoxi.CourseManagement.ViewModels
                 MonitorName = "监控数据四",
                 Icon = "\uE84E"
             };
+
+            // getter-only property can ONLY be set in the constructor
+            CourseItemViewModels = InitCourseItemViewModels();
+        }
+
+        private IEnumerable<CourseItemViewModel> InitCourseItemViewModels()
+        {
+            var c1 = new CourseInfo("C#/.Net架构师蜕变营");
+            var c2 = new CourseInfo("C#/.Net高级进阶VIP班");
+            var courseItemViewModels = new List<CourseItemViewModel>();
+            courseItemViewModels.Add(new CourseItemViewModel(c1));
+            courseItemViewModels.Add(new CourseItemViewModel(c2));
+            return courseItemViewModels;
         }
     }
 }

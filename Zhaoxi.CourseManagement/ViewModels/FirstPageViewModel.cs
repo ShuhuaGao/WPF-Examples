@@ -53,13 +53,16 @@ namespace Zhaoxi.CourseManagement.ViewModels
             CourseItemViewModels = InitCourseItemViewModels();
         }
 
-        private IEnumerable<CourseItemViewModel> InitCourseItemViewModels()
+        private IEnumerable<CourseItemViewModel> InitCourseItemViewModels(int n = 20)
         {
-            var c1 = new CourseInfo("C#/.Net架构师蜕变营");
-            var c2 = new CourseInfo("C#/.Net高级进阶VIP班");
+            var courseNames = new string[] { "C#/.Net架构师蜕变营", "C#/.Net高级进阶VIP班", "JAVA高级实战班", "Python培训冲刺30天", "Node.js全栈开发" };
             var courseItemViewModels = new List<CourseItemViewModel>();
-            courseItemViewModels.Add(new CourseItemViewModel(c1));
-            courseItemViewModels.Add(new CourseItemViewModel(c2));
+            var rand = new Random();
+            for (int i = 0; i < n; i++)
+            {
+                var ci = new CourseInfo(courseNames[rand.Next(0, courseNames.Length)]);
+                courseItemViewModels.Add(new CourseItemViewModel(ci));
+            }
             return courseItemViewModels;
         }
     }

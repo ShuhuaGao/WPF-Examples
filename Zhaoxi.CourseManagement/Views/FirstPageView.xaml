@@ -35,7 +35,7 @@
         </UniformGrid>
         <Grid Grid.Row="1"
               Margin="10"
-              ShowGridLines="True">
+              ShowGridLines="False">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
                 <RowDefinition />
@@ -54,10 +54,21 @@
             </TextBlock>
             <!-- row 1: the list of courses -->
             <!-- first test a single item (row) -->
-            <ContentControl Grid.Row="1"
-                            VerticalAlignment="Top"
-                            s:View.Model="{Binding CourseItemViewModels[0]}" />
-
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                <ItemsControl ItemsSource="{Binding CourseItemViewModels, Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <!-- data context is set to each item -->
+                            <local:CourseItemView Margin="0,2" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </UserControl>

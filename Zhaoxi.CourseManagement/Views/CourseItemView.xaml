@@ -53,7 +53,7 @@
         <Border.Effect>
             <DropShadowEffect BlurRadius="3"
                               Direction="220"
-                              Opacity="0.5"
+                              Opacity="0.1"
                               ShadowDepth="3"
                               Color="LightGray" />
         </Border.Effect>
@@ -76,6 +76,7 @@
                     BorderThickness="0,0,1,0" />
             <lvc:PieChart Grid.Column="1"
                           Margin="10,5"
+                          DisableAnimations="True"
                           InnerRadius="15"
                           LegendLocation="Right"
                           Series="{Binding SeriesCollection}">
@@ -90,7 +91,7 @@
                     Margin="0,5"
                     BorderBrush="#CCC"
                     BorderThickness="0,0,1,0" />
-            <!-- may also use an ItemsControl here -->
+            <!-- may also use an ItemsControl here if the number is not fixed -->
             <UniformGrid Grid.Column="2"
                          Margin="10,0"
                          Columns="5">

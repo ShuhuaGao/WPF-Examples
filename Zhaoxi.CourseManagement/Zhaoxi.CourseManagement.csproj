@@ -49,4 +49,8 @@
     <Resource Include="Assets\Images\Demo\verification.png" />
     <Resource Include="Assets\Images\Logo.png" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Auxiliary\" />
+  </ItemGroup>
 </Project>

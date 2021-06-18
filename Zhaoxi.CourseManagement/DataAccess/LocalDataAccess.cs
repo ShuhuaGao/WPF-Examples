@@ -49,7 +49,7 @@ namespace Zhaoxi.CourseManagement.DataAccess
             // check whether the user exists and validate the password
             using var conn = new MySqlConnection(connStr);
             conn.Open();
-            var sql = $"SELECT * FROM dbo_users WHERE user_name = \"{userName}\"";
+            var sql = $"SELECT * FROM users WHERE user_name = \"{userName}\"";
             using var cmd = new MySqlCommand(sql, conn);
             using MySqlDataReader reader = cmd.ExecuteReader();
             Debug.WriteLine("SQL: " + sql);

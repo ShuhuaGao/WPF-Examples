@@ -1,0 +1,98 @@
+USE `zxdata`;
+ 
+INSERT course_teacher_relation (`course_id`, `teacher_id`) VALUES (N'C0001', N'1003');
+INSERT course_teacher_relation (`course_id`, `teacher_id`) VALUES (N'C0001', N'1005');
+INSERT course_teacher_relation (`course_id`, `teacher_id`) VALUES (N'C0002', N'1004');
+INSERT course_teacher_relation (`course_id`, `teacher_id`) VALUES (N'C0002', N'1005');
+INSERT course_teacher_relation (`course_id`, `teacher_id`) VALUES (N'C0003', N'1006');
+INSERT course_teacher_relation (`course_id`, `teacher_id`) VALUES (N'C0004', N'1007');
+INSERT course_teacher_relation (`course_id`, `teacher_id`) VALUES (N'C0005', N'1008');
+INSERT course_teacher_relation (`course_id`, `teacher_id`) VALUES (N'C0006', N'1003');
+INSERT course_teacher_relation (`course_id`, `teacher_id`) VALUES (N'C0007', N'1003');
+INSERT course_teacher_relation (`course_id`, `teacher_id`) VALUES (N'C0007', N'1005');
+INSERT course_teacher_relation (`course_id`, `teacher_id`) VALUES (N'C0008', N'1003');
+INSERT course_teacher_relation (`course_id`, `teacher_id`) VALUES (N'C0008', N'1005');
+INSERT course_teacher_relation (`course_id`, `teacher_id`) VALUES (N'C0009', N'1007');
+INSERT course_teacher_relation (`course_id`, `teacher_id`) VALUES (N'C0010', N'1008');
+ 
+INSERT courses (`course_id`, `course_name`, `description`, `is_publish`, `course_cover`, `course_url`) VALUES (N'C0001', N'C#/.Net架构师蜕变营', N'.Net终极课程，培养优秀的.Net架构师！深入分布式、跨平台、微服务最核心技术，输出核心架构师思维，实战架构落地，成就架构师!', 1, N'http://www.zhaoxiedu.net/static/imgs/course/架构师VIP班.jpg', N'https://ke.qq.com/course/456926');
+INSERT courses (`course_id`, `course_name`, `description`, `is_publish`, `course_cover`, `course_url`) VALUES (N'C0002', N'C#/.Net高级进阶VIP班', N'.Net高级进阶课程，深入C#，程序设计定向培养，深入常用框架应用并扩展定制，学习跨平台微服务等最新技术，快速成长为团队的优秀carry！', 1, N'http://www.zhaoxiedu.net/static/imgs/course/高级进阶VIP班.jpg', N'https://ke.qq.com/course/453949');
+INSERT courses (`course_id`, `course_name`, `description`, `is_publish`, `course_cover`, `course_url`) VALUES (N'C0003', N'Java高级实战VIP班', N'旨在培养满足一线互联网需求的JAVA架构师人才，VIP课内容涵盖酒店系统，朝夕培训平台，易淘电商三大项目，项目取自企业中真实项目需求，是您提升项目开发和进阶的首选课程', 1, N'http://www.zhaoxiedu.net/static/imgs/course/java-vip.jpg', N'https://ke.qq.com/course/2770287');
+INSERT courses (`course_id`, `course_name`, `description`, `is_publish`, `course_cover`, `course_url`) VALUES (N'C0004', N'C#/.Net全栈VIP班', N'全栈信仰，从C#到Sql到Ado.Net到O/RM，从Html到CSS到JS到vue等前端框架，从Webform到MVC到Asp.NetCore，多个完整项目实战锤炼你的动手能力！', 1, N'http://www.zhaoxiedu.net/static/imgs/course/全栈VIP班.jpg', N'https://ke.qq.com/course/464059');
+INSERT courses (`course_id`, `course_name`, `description`, `is_publish`, `course_cover`, `course_url`) VALUES (N'C0005', N'Winfom高级就业班', N'零基础学习SqlServer和Winform客户端开发，上百视频+三月直播，轻松入门解决就业，毕业交付可实用产品项目！', 1, N'http://www.zhaoxiedu.net/static/imgs/course/Winfom-VIP班.jpg', N'https://ke.qq.com/course/464930');
+INSERT courses (`course_id`, `course_name`, `description`, `is_publish`, `course_cover`, `course_url`) VALUES (N'C0006', N'AutoCAD/C#零基础到项目实战', N'覆盖.Net开发过程中遇到的框架组件解读，语法深入，跨平台开发，大数据高并发等专题体验课合集，持续更新', 1, N'http://www.zhaoxiedu.net/static/imgs/course/autocad-vip.jpg', N'https://ke.qq.com/course/462094');
+INSERT courses (`course_id`, `course_name`, `description`, `is_publish`, `course_cover`, `course_url`) VALUES (N'C0007', N'C#/.Net架构师修养', N'覆盖.Net开发过程中遇到的框架组件解读，语法深入，跨平台开发，大数据高并发等专题体验课合集，持续更新！', 1, N'http://www.zhaoxiedu.net/static/imgs/course/架构师修养.jpg', N'https://ke.qq.com/course/461522');
+INSERT courses (`course_id`, `course_name`, `description`, `is_publish`, `course_cover`, `course_url`) VALUES (N'C0008', N'构师必备框架组件', N'专题录制开发组件，含Autofac/log4net/Nginx/读写分离/GIT/Core-Linux等全套视频课件配套环境等！', 1, N'http://www.zhaoxiedu.net/static/imgs/course/架构师框架组件.jpg', N'https://ke.qq.com/course/453561');
+INSERT courses (`course_id`, `course_name`, `description`, `is_publish`, `course_cover`, `course_url`) VALUES (N'C0009', N'Web前端零基础教程', N'2020年最新Web前端零基础教程，含Html/CSS/JavaScript系统教程，被称之为“地球最好”的零基础教程！', 1, N'http://www.zhaoxiedu.net/static/imgs/course/前端教程.jpg', N'https://ke.qq.com/course/468984');
+INSERT courses (`course_id`, `course_name`, `description`, `is_publish`, `course_cover`, `course_url`) VALUES (N'C0010', N'零基础Winform实战学生管理系统', N'基于C#完成AutoCAD二次开发，支持C#和AutoCAD双零基础快速入门并独立完成项目实战，成为稀缺领域人才，一站式搞定高薪就业！', 1, N'http://www.zhaoxiedu.net/static/imgs/course/学生管理系统.jpg', N'https://ke.qq.com/course/456629');
+ 
+INSERT platforms (`platform_id`, `platform_name`, `is_validation`) VALUES (N'PF001', N'云课堂', 1);
+INSERT platforms (`platform_id`, `platform_name`, `is_validation`) VALUES (N'PF002', N'B站', 1);
+INSERT platforms (`platform_id`, `platform_name`, `is_validation`) VALUES (N'PF003', N'知乎', 1);
+INSERT platforms (`platform_id`, `platform_name`, `is_validation`) VALUES (N'PF004', N'抖音', 1);
+INSERT platforms (`platform_id`, `platform_name`, `is_validation`) VALUES (N'PF005', N'博客', 1);
+ 
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0001', N'PF001', CAST(161 AS Decimal(18, 0)), 0, CAST(-75 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0001', N'PF002', CAST(283 AS Decimal(18, 0)), 1, CAST(4 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0001', N'PF003', CAST(568 AS Decimal(18, 0)), 1, CAST(22 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0001', N'PF004', CAST(41 AS Decimal(18, 0)), 1, CAST(77 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0001', N'PF005', CAST(678 AS Decimal(18, 0)), 1, CAST(91 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0002', N'PF001', CAST(207 AS Decimal(18, 0)), 0, CAST(-43 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0002', N'PF002', CAST(930 AS Decimal(18, 0)), 0, CAST(-84 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0002', N'PF003', CAST(218 AS Decimal(18, 0)), 1, CAST(6 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0002', N'PF004', CAST(107 AS Decimal(18, 0)), 1, CAST(4 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0002', N'PF005', CAST(420 AS Decimal(18, 0)), 1, CAST(31 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0003', N'PF001', CAST(512 AS Decimal(18, 0)), 1, CAST(25 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0003', N'PF002', CAST(921 AS Decimal(18, 0)), 1, CAST(86 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0003', N'PF003', CAST(161 AS Decimal(18, 0)), 0, CAST(-29 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0003', N'PF004', CAST(918 AS Decimal(18, 0)), 0, CAST(-87 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0003', N'PF005', CAST(590 AS Decimal(18, 0)), 0, CAST(-98 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0004', N'PF001', CAST(454 AS Decimal(18, 0)), 1, CAST(38 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0004', N'PF002', CAST(443 AS Decimal(18, 0)), 0, CAST(-75 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0004', N'PF003', CAST(68 AS Decimal(18, 0)), 0, CAST(-72 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0004', N'PF004', CAST(274 AS Decimal(18, 0)), 0, CAST(-40 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0004', N'PF005', CAST(678 AS Decimal(18, 0)), 0, CAST(-42 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0005', N'PF001', CAST(264 AS Decimal(18, 0)), 1, CAST(64 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0005', N'PF002', CAST(53 AS Decimal(18, 0)), 0, CAST(-64 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0005', N'PF003', CAST(638 AS Decimal(18, 0)), 0, CAST(-18 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0005', N'PF004', CAST(404 AS Decimal(18, 0)), 1, CAST(49 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0005', N'PF005', CAST(862 AS Decimal(18, 0)), 1, CAST(78 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0006', N'PF001', CAST(741 AS Decimal(18, 0)), 1, CAST(57 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0006', N'PF002', CAST(430 AS Decimal(18, 0)), 1, CAST(96 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0006', N'PF003', CAST(490 AS Decimal(18, 0)), 1, CAST(13 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0006', N'PF004', CAST(82 AS Decimal(18, 0)), 0, CAST(-38 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0006', N'PF005', CAST(221 AS Decimal(18, 0)), 1, CAST(66 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0007', N'PF001', CAST(389 AS Decimal(18, 0)), 1, CAST(54 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0007', N'PF002', CAST(378 AS Decimal(18, 0)), 0, CAST(-21 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0007', N'PF003', CAST(902 AS Decimal(18, 0)), 0, CAST(-66 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0007', N'PF004', CAST(548 AS Decimal(18, 0)), 1, CAST(18 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0007', N'PF005', CAST(497 AS Decimal(18, 0)), 0, CAST(-61 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0008', N'PF001', CAST(876 AS Decimal(18, 0)), 0, CAST(-64 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0008', N'PF002', CAST(50 AS Decimal(18, 0)), 0, CAST(-9 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0008', N'PF003', CAST(918 AS Decimal(18, 0)), 1, CAST(92 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0008', N'PF004', CAST(867 AS Decimal(18, 0)), 1, CAST(53 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0008', N'PF005', CAST(198 AS Decimal(18, 0)), 0, CAST(-47 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0009', N'PF001', CAST(451 AS Decimal(18, 0)), 1, CAST(39 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0009', N'PF002', CAST(155 AS Decimal(18, 0)), 1, CAST(88 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0009', N'PF003', CAST(689 AS Decimal(18, 0)), 1, CAST(54 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0009', N'PF004', CAST(822 AS Decimal(18, 0)), 1, CAST(44 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0009', N'PF005', CAST(915 AS Decimal(18, 0)), 0, CAST(-56 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0010', N'PF001', CAST(299 AS Decimal(18, 0)), 0, CAST(-64 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0010', N'PF002', CAST(339 AS Decimal(18, 0)), 0, CAST(-44 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0010', N'PF003', CAST(481 AS Decimal(18, 0)), 1, CAST(37 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0010', N'PF004', CAST(902 AS Decimal(18, 0)), 0, CAST(-92 AS Decimal(18, 0)));
+INSERT play_record (`course_id`, `platform_id`, `play_count`, `is_growing`, `growing_rate`) VALUES (N'C0010', N'PF005', CAST(99 AS Decimal(18, 0)), 1, CAST(11 AS Decimal(18, 0)));
+ 
+INSERT users (`user_id`, `user_name`, `real_name`, `password`, `is_validation`, `is_can_login`, `is_teacher`, `avatar`, `gender`) VALUES (N'1001', N'admin', N'Administrator', N'51A70A1E25F9E6A8954F54D6DF935B0D', 1, 1, 0, N'../Assets/Images/avatar.png', 1);
+INSERT users (`user_id`, `user_name`, `real_name`, `password`, `is_validation`, `is_can_login`, `is_teacher`, `avatar`, `gender`) VALUES (N'1002', N'guest', N'Guest', N'2D64CDF22D0B162AC64F5F7A883DC964', 1, 0, 0, N'../Assets/Images/avatar.png', 1);
+INSERT users (`user_id`, `user_name`, `real_name`, `password`, `is_validation`, `is_can_login`, `is_teacher`, `avatar`, `gender`) VALUES (N'1003', N'eleven', N'Eleven', N'C95C977F4EFC60E2717BB730A69470F2', 1, 1, 1, N'../Assets/Images/avatar.png', 1);
+INSERT users (`user_id`, `user_name`, `real_name`, `password`, `is_validation`, `is_can_login`, `is_teacher`, `avatar`, `gender`) VALUES (N'1004', N'richard', N'Richard', N'EF60F453E23F1B9B3C45C97C5E1C316E', 1, 1, 1, N'../Assets/Images/avatar.png', 1);
+INSERT users (`user_id`, `user_name`, `real_name`, `password`, `is_validation`, `is_can_login`, `is_teacher`, `avatar`, `gender`) VALUES (N'1005', N'clay', N'Clay', N'0E6AE0856E2CDD1E94344562EFF41A23', 1, 1, 1, N'../Assets/Images/avatar.png', 1);
+INSERT users (`user_id`, `user_name`, `real_name`, `password`, `is_validation`, `is_can_login`, `is_teacher`, `avatar`, `gender`) VALUES (N'1006', N'garry', N'Garry', N'1FF74A56AE38F179E201BC91F754CBA1', 1, 1, 1, N'../Assets/Images/avatar.png', 1);
+INSERT users (`user_id`, `user_name`, `real_name`, `password`, `is_validation`, `is_can_login`, `is_teacher`, `avatar`, `gender`) VALUES (N'1007', N'ace', N'Ace', N'1D4C08127C768A77A1E39CCA5E208F91', 1, 1, 1, N'../Assets/Images/avatar.png', 1);
+INSERT users (`user_id`, `user_name`, `real_name`, `password`, `is_validation`, `is_can_login`, `is_teacher`, `avatar`, `gender`) VALUES (N'1008', N'leah', N'Leah', N'50A1CDDA6D8D09C9021FC490016240B4', 1, 1, 1, N'../Assets/Images/avatar.png', 2);
+INSERT users (`user_id`, `user_name`, `real_name`, `password`, `is_validation`, `is_can_login`, `is_teacher`, `avatar`, `gender`) VALUES (N'1009', N'jovan', N'Jovan', N'3B9D859D7EF2C8EA60B890FEEFF20912', 1, 1, 1, N'../Assets/Images/avatar.png', 1);
+
+/* update password with MD5 */
+UPDATE users SET password = MD5(concat(user_name, "123456")) WHERE user_id <> "";
+ 

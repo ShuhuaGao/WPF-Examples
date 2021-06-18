@@ -10,7 +10,7 @@ namespace Zhaoxi.CourseManagement.Models
 {
     public class LoginModel : PropertyChangedBase
     {
-        private string userName = "Megan";
+        private string userName = "admin";
 
         public string UserName
         {

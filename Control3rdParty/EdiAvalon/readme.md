@@ -12,6 +12,30 @@ Mainly follow the tutorials listed at https://github.com/Dirkster99/AvalonDock, 
     ```
 
 ## Some explanations
+### How to render a data object (viewmodel) in Avalon dock?
+- A simple way: define an automatically applied `DataTemplate` for the given viewmodel type. See [this commit](https://github.com/ShuhuaGao/WPF-Examples/tree/668e3099bcd7b5959ffd1dd1491a6f7a657b72e5/Control3rdParty/EdiAvalon).
+    ```xml
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:FileViewModel}">
+            <TextBlock Background="Turquoise" Text="{Binding TextContent}" />
+        </DataTemplate>
+    </Window.Resources>
+    ...
+    <ad:DockingManager x:Name="dockManager">
+        <ad:LayoutRoot>
+            <ad:LayoutPanel>
+                <ad:LayoutDocumentPane>
+                    <!-- `Content` refers to the `FileViewModel` instance below -->
+                    <ad:LayoutDocument Title="{Binding RelativeSource={RelativeSource Self}, Path=Content.Title}" CanFloat="False">
+                        <!-- rendered by the DataTemplate in Window.Resources -->
+                        <vm:FileViewModel />
+                    </ad:LayoutDocument>
+                </ad:LayoutDocumentPane>
+            </ad:LayoutPanel>
+        </ad:LayoutRoot>
+    ```
+
+
 ### Get the currently active content (usually a viewmodel)
 - `DockingManager.ActiveContent: object` and its event 
     ```csharp

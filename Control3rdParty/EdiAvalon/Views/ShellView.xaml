@@ -30,14 +30,12 @@
                 <MenuItem Header="Close" />
             </MenuItem>
         </Menu>
-        <ad:DockingManager x:Name="dockManager"
-                           BorderBrush="AliceBlue"
-                           BorderThickness="1">
+        <ad:DockingManager x:Name="dockManager">
             <ad:LayoutRoot>
                 <ad:LayoutPanel>
                     <ad:LayoutDocumentPane>
                         <ad:LayoutDocument Title="{Binding RelativeSource={RelativeSource Self}, Path=Content.Title}" CanFloat="False">
-                            <!-- rendered by the DataTemplate -->
+                            <!-- rendered by the DataTemplate in Window.Resources -->
                             <vm:FileViewModel />
                         </ad:LayoutDocument>
                     </ad:LayoutDocumentPane>

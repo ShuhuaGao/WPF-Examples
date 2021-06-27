@@ -5,16 +5,23 @@
         xmlns:local="clr-namespace:EdiAvalon.ViewModels"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:s="https://github.com/canton7/Stylet"
-        Title="Stylet Project"
+        Title="EdiAvalon"
         Width="800"
         Height="450"
         d:DataContext="{d:DesignInstance local:ShellViewModel}"
         mc:Ignorable="d">
-    <Grid>
-        <TextBlock HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="30">
-            Hello Stylet!
-        </TextBlock>
-    </Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New" />
+                <MenuItem Header="Open" />
+                <Separator />
+                <MenuItem Header="Save" />
+                <MenuItem Header="Save As..." />
+                <MenuItem Header="Recent Files" />
+                <Separator />
+                <MenuItem Header="Close" />
+            </MenuItem>
+        </Menu>
+    </DockPanel>
 </Window>

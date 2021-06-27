@@ -29,7 +29,7 @@ namespace EdiAvalon.ViewModels.ADBase
         }
 
 
-        public virtual Uri IconSource
+        public Uri IconSource
         {
             get;
             protected set;

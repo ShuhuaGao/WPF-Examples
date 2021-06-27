@@ -8,8 +8,10 @@ namespace EdiAvalon.ViewModels.ADBase
 {
     public class LayoutDocumentViewModel : LayoutContentViewModel
     {
-        public LayoutDocumentViewModel(string title) : base(title)
+        public LayoutDocumentViewModel(string title = "Document") : base(title)
         {
+            // default icon source
+            IconSource = new Uri("../Assets/Images/document.png", UriKind.Relative);
         }
     }
 }

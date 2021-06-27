@@ -6,11 +6,17 @@
         xmlns:local="clr-namespace:EdiAvalon.ViewModels"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:s="https://github.com/canton7/Stylet"
+        xmlns:vm="clr-namespace:EdiAvalon.ViewModels"
         Title="EdiAvalon"
         Width="800"
         Height="450"
         d:DataContext="{d:DesignInstance local:ShellViewModel}"
         mc:Ignorable="d">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:FileViewModel}">
+            <TextBlock Background="Turquoise" Text="{Binding TextContent}" />
+        </DataTemplate>
+    </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
@@ -26,6 +32,18 @@
         </Menu>
         <ad:DockingManager x:Name="dockManager"
                            BorderBrush="AliceBlue"
-                           BorderThickness="1" />
+                           BorderThickness="1">
+            <ad:LayoutRoot>
+                <ad:LayoutPanel>
+                    <ad:LayoutDocumentPane>
+                        <ad:LayoutDocument Title="{Binding RelativeSource={RelativeSource Self}, Path=Content.Title}" CanFloat="False">
+                            <!-- rendered by the DataTemplate -->
+                            <vm:FileViewModel />
+                        </ad:LayoutDocument>
+                    </ad:LayoutDocumentPane>
+                </ad:LayoutPanel>
+            </ad:LayoutRoot>
+        </ad:DockingManager>
+
     </DockPanel>
 </Window>

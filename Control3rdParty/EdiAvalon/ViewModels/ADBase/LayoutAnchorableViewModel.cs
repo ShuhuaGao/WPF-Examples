@@ -14,7 +14,7 @@ namespace EdiAvalon.ViewModels.ADBase
     /// </remarks>
     public class LayoutAnchorableViewModel : LayoutContentViewModel
     {
-        public LayoutAnchorableViewModel(string title) : base(title)
+        public LayoutAnchorableViewModel(string title = "Anchorable") : base(title)
         {
         }
     }

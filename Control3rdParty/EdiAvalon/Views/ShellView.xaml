@@ -1,6 +1,7 @@
 ﻿<Window x:Class="EdiAvalon.Views.ShellView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ad="https://github.com/Dirkster99/AvalonDock"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:EdiAvalon.ViewModels"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -23,5 +24,8 @@
                 <MenuItem Header="Close" />
             </MenuItem>
         </Menu>
+        <ad:DockingManager x:Name="dockManager"
+                           BorderBrush="AliceBlue"
+                           BorderThickness="1" />
     </DockPanel>
 </Window>

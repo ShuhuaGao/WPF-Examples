@@ -71,13 +71,14 @@ Now since the `LayoutItem, LayoutAnchorableItem, LayoutDocumentItem` (backed by 
 
 The `Style` is applied to `LayoutItem` that inherits `FrameworkElement`. `LayoutItem` has a [`Model`](https://doc.xceed.com/xceed-toolkit-plus-for-wpf/Xceed.Wpf.AvalonDock~Xceed.Wpf.AvalonDock.Controls.LayoutItem~Model.html) property that gets the content of the associated LayoutAnchorable or LayoutDocument. Thus, `Model` refers actually to our data object and can be used in binding inside the Style.
 
-- A simple case: a [fixed style](https://doc.xceed.com/xceed-toolkit-plus-for-wpf/Xceed.Wpf.AvalonDock~Xceed.Wpf.AvalonDock.DockingManager~LayoutItemContainerStyle.html) for all `LayoutDocumentItem`
+- A simple case: a [fixed style](https://doc.xceed.com/xceed-toolkit-plus-for-wpf/Xceed.Wpf.AvalonDock~Xceed.Wpf.AvalonDock.DockingManager~LayoutItemContainerStyle.html) for all `LayoutItem`
 ```csharp
 public Style LayoutItemContainerStyle {get; set;}
 ```
 
 ```xml
 <ad:DockingManager x:Name="dockManager"
+                   AnchorablesSource="{Binding Tools}"
                    DocumentsSource="{Binding Files}">
     <ad:DockingManager.LayoutItemContainerStyle>
         <Style TargetType="{x:Type ad:LayoutItem}">
@@ -91,6 +92,16 @@ public Style LayoutItemContainerStyle {get; set;}
             <ad:LayoutAnchorablePane DockMinHeight="100" />
         </ad:LayoutPanel>
     </ad:LayoutRoot>
+</ad:DockingManager>
+```
+
+Check [this commit](https://github.com/ShuhuaGao/WPF-Examples/tree/ca3012038f6ff0f411997e1d6bd890377423cf91/Control3rdParty/EdiAvalon) for the above test.
+
+![](./External/fixedstyle.png)
+
+- Use a `StyleSelector` to customize the `LayoutItem` appearance for various data objects
+```csharp
+public StyleSelector LayoutItemContainerStyleSelector {get; set;}
 ```
 
 The `Style` may differ for different viewmodels (data object in a `LayoutContent`)

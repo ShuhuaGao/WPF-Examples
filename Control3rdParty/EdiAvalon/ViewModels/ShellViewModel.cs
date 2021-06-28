@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Stylet;
 using EdiAvalon.ViewModels;
+using EdiAvalon.ViewModels.ADBase;
 
 namespace EdiAvalon.ViewModels
 {
@@ -16,6 +17,16 @@ namespace EdiAvalon.ViewModels
             Files.Add(new FileViewModel { Title = "file 2" });
             Files.Add(new FileViewModel { Title = "file 3" });
         }
+
+
+        private LayoutAnchorableViewModel[] tools = {
+            new FileStatsViewModel{ Title = "File Stats 1" },
+            new FileStatsViewModel{ Title = "File Stats 2" }
+        };
+
+        // serve as the 
+        public IEnumerable<LayoutAnchorableViewModel> Tools => tools;
+
 
     }
 }

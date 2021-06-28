@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ad="https://github.com/Dirkster99/AvalonDock"
+                    xmlns:ads="clr-namespace:EdiAvalon.Views.ADSelectors">
+    <ads:LayoutItemContainerStyleSelector x:Key="adStyleSelector">
+        <ads:LayoutItemContainerStyleSelector.FileStyle>
+            <!-- a file data object is only allowed in a LayoutDocument -->
+            <!-- LayoutDocument can only be hosted by a LayoutDocumentItem -->
+            <Style TargetType="{x:Type ad:LayoutDocumentItem}">
+                <Setter Property="Title" Value="{Binding Model.Title}" />
+                <Setter Property="IconSource" Value="{Binding Model.IconSource}" />
+                <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
+                <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}" />
+                <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}" />
+            </Style>
+        </ads:LayoutItemContainerStyleSelector.FileStyle>
+        <!-- for an anchorable data object -->
+        <!-- LayoutAnchorable may reside in both LayoutAnchroableItem and LayoutDocumentItem (base class LayoutItem) -->
+        <ads:LayoutItemContainerStyleSelector.ToolStyle>
+            <Style TargetType="{x:Type ad:LayoutItem}">
+                <Setter Property="Title" Value="{Binding Model.Title}" />
+            </Style>
+        </ads:LayoutItemContainerStyleSelector.ToolStyle>
+    </ads:LayoutItemContainerStyleSelector>
+</ResourceDictionary>

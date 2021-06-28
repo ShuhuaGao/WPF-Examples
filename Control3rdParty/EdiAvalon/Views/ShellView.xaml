@@ -13,17 +13,24 @@
         d:DataContext="{d:DesignInstance local:ShellViewModel}"
         mc:Ignorable="d">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type vm:FileViewModel}">
-            <TextBlock Background="Turquoise"
-                       Text="{Binding TextContent}" />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:FileStatsViewModel}">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Foreground="Red"
-                           Text="{Binding FileSize}" />
-                <TextBlock Text="{Binding LastModified}" />
-            </StackPanel>
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <DataTemplate DataType="{x:Type vm:FileViewModel}">
+                        <TextBlock Background="Turquoise"
+                                   Text="{Binding TextContent}" />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:FileStatsViewModel}">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Foreground="Red"
+                                       Text="{Binding FileSize}" />
+                            <TextBlock Text="{Binding LastModified}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ResourceDictionary>
+                <ResourceDictionary Source="./ADSelectors/LayoutItemContainerStyleSelector.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -39,13 +46,9 @@
             </MenuItem>
         </Menu>
         <ad:DockingManager x:Name="dockManager"
-                           DocumentsSource="{Binding Files}">
-            <ad:DockingManager.LayoutItemContainerStyle>
-                <Style TargetType="{x:Type ad:LayoutItem}">
-                    <!-- property Model of LayoutItem is the data object -->
-                    <Setter Property="Title" Value="{Binding Model.Title, StringFormat=doc-\{0\}}" />
-                </Style>
-            </ad:DockingManager.LayoutItemContainerStyle>
+                           AnchorablesSource="{Binding Tools}"
+                           DocumentsSource="{Binding Files}"
+                           LayoutItemContainerStyleSelector="{StaticResource adStyleSelector}">
             <ad:LayoutRoot>
                 <ad:LayoutPanel Orientation="Vertical">
                     <ad:LayoutDocumentPane />

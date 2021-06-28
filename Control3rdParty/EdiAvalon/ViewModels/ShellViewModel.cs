@@ -8,9 +8,14 @@ namespace EdiAvalon.ViewModels
 {
     public class ShellViewModel : Screen
     {
-        public ObservableCollection<FileViewModel> Files { get; set; }
+        public ObservableCollection<FileViewModel> Files { get; set; } = new ObservableCollection<FileViewModel>();
 
-        public FileViewModel OneFile { get; } = new FileViewModel();
+        public ShellViewModel()
+        {
+            Files.Add(new FileViewModel { Title = "file 1" });
+            Files.Add(new FileViewModel { Title = "file 2" });
+            Files.Add(new FileViewModel { Title = "file 3" });
+        }
 
     }
 }

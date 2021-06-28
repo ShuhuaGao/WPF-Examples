@@ -14,7 +14,15 @@
         mc:Ignorable="d">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:FileViewModel}">
-            <TextBlock Background="Turquoise" Text="{Binding TextContent}" />
+            <TextBlock Background="Turquoise"
+                       Text="{Binding TextContent}" />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:FileStatsViewModel}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Foreground="Red"
+                           Text="{Binding FileSize}" />
+                <TextBlock Text="{Binding LastModified}" />
+            </StackPanel>
         </DataTemplate>
     </Window.Resources>
     <DockPanel>
@@ -30,15 +38,18 @@
                 <MenuItem Header="Close" />
             </MenuItem>
         </Menu>
-        <ad:DockingManager x:Name="dockManager">
+        <ad:DockingManager x:Name="dockManager"
+                           DocumentsSource="{Binding Files}">
+            <ad:DockingManager.LayoutItemContainerStyle>
+                <Style TargetType="{x:Type ad:LayoutItem}">
+                    <!-- property Model of LayoutItem is the data object -->
+                    <Setter Property="Title" Value="{Binding Model.Title, StringFormat=doc-\{0\}}" />
+                </Style>
+            </ad:DockingManager.LayoutItemContainerStyle>
             <ad:LayoutRoot>
-                <ad:LayoutPanel>
-                    <ad:LayoutDocumentPane>
-                        <ad:LayoutDocument Title="{Binding RelativeSource={RelativeSource Self}, Path=Content.Title}" CanFloat="False">
-                            <!-- rendered by the DataTemplate in Window.Resources -->
-                            <vm:FileViewModel />
-                        </ad:LayoutDocument>
-                    </ad:LayoutDocumentPane>
+                <ad:LayoutPanel Orientation="Vertical">
+                    <ad:LayoutDocumentPane />
+                    <ad:LayoutAnchorablePane DockMinHeight="100" />
                 </ad:LayoutPanel>
             </ad:LayoutRoot>
         </ad:DockingManager>

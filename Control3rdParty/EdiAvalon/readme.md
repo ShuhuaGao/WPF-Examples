@@ -17,6 +17,7 @@ Mainly follow the tutorials listed at https://github.com/Dirkster99/AvalonDock, 
 Both classes derive from `LayoutContent`, whose `ContentProperty` is `Content`. Thus, we may use the two classes as a `ContentControl`, whose `Content` can be anything (i.e., a `Control` or any data object). If a data object is supplied, then it is visualized with a data template if applicable.
 
 Note that `LayoutElement` inherits `System.Windows.DependencyObject` and is NOT a `Control`. That is why classes in the `AvalonDock.Layout` namespace are considered to be *models* (distinct from the model in MVVM though).
+
 ### How to render a data object (viewmodel) in Avalon dock?
 The data object may be placed statically and explicitly inside `LayoutDocument` or `LayoutAnchorable` in XAML, or assigned implicitly in data source.
 - A simple way: define an **automatically applied** `DataTemplate` for the given viewmodel type. See [this commit](https://github.com/ShuhuaGao/WPF-Examples/tree/668e3099bcd7b5959ffd1dd1491a6f7a657b72e5/Control3rdParty/EdiAvalon). Note that `LayoutElement` has no template property since it is not a control.
@@ -51,3 +52,45 @@ The data object may be placed statically and explicitly inside `LayoutDocument` 
     Note that the `ActiveContent` actually refers to the underlying viewmodel in a pane.
 - It is common that the active content (i.e., a visual pane) is chosen by the user and changed frequently. Besides, multiple objects may need to know the `ActiveContent`, e.g., other `LayoutContent`s. Nonetheless, we can only set up one source for `ActiveContent` binding.
 - To allow the information propagation to multiple objects, we may use a global *broker* or use the event mechanism (i.e., listening on `ActiveContentChanged`) in an event aggregator.
+
+### How to create panes dynamically
+In practice, the number of panes and their layout are not fixed, e.g., a user may *new* a document in need. That is, we cannot pre-specify the layout in XAML.
+
+In a MVVM setting, the collections of document and anchorable viewmodels (data objects) are provided to `DockingManager` with the following [two dependency properties](https://doc.xceed.com/xceed-toolkit-plus-for-wpf/Xceed.Wpf.AvalonDock~Xceed.Wpf.AvalonDock.DockingManager_members.html):
+```csharp
+public IEnumerable DocumentsSource {get; set;}
+public IEnumerable AnchorablesSource {get; set;}
+```
+We can thus bind the above two properties to `ObservableCollection` of viewmodels (here each viewmodel means a data object of a `LayoutContent`).
+
+Note that at least one (empty) `LayoutDocumentPane` and `LayoutAnchorablePane` should be specified for visualization of data objects in the two sources.
+
+
+### How to set the style of a pane
+Now since the `LayoutItem, LayoutAnchorableItem, LayoutDocumentItem` (backed by `LayoutContent` and subclasses) are produced dynamically, we can use style to customize its appearance. 
+
+The `Style` is applied to `LayoutItem` that inherits `FrameworkElement`. `LayoutItem` has a [`Model`](https://doc.xceed.com/xceed-toolkit-plus-for-wpf/Xceed.Wpf.AvalonDock~Xceed.Wpf.AvalonDock.Controls.LayoutItem~Model.html) property that gets the content of the associated LayoutAnchorable or LayoutDocument. Thus, `Model` refers actually to our data object and can be used in binding inside the Style.
+
+- A simple case: a [fixed style](https://doc.xceed.com/xceed-toolkit-plus-for-wpf/Xceed.Wpf.AvalonDock~Xceed.Wpf.AvalonDock.DockingManager~LayoutItemContainerStyle.html) for all `LayoutDocumentItem`
+```csharp
+public Style LayoutItemContainerStyle {get; set;}
+```
+
+```xml
+<ad:DockingManager x:Name="dockManager"
+                   DocumentsSource="{Binding Files}">
+    <ad:DockingManager.LayoutItemContainerStyle>
+        <Style TargetType="{x:Type ad:LayoutItem}">
+            <!-- property Model of LayoutItem is the data object -->
+            <Setter Property="Title" Value="{Binding Model.Title, StringFormat=doc-\{0\}}" />
+        </Style>
+    </ad:DockingManager.LayoutItemContainerStyle>
+    <ad:LayoutRoot>
+        <ad:LayoutPanel Orientation="Vertical">
+            <ad:LayoutDocumentPane />
+            <ad:LayoutAnchorablePane DockMinHeight="100" />
+        </ad:LayoutPanel>
+    </ad:LayoutRoot>
+```
+
+The `Style` may differ for different viewmodels (data object in a `LayoutContent`)

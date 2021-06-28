@@ -1,0 +1,30 @@
+﻿<Window x:Class="Dirkster99AvalonDock.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ad="https://github.com/Dirkster99/AvalonDock"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Dirkster99AvalonDock"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="MainWindow"
+        Width="800"
+        Height="450"
+        mc:Ignorable="d">
+    <Grid>
+        <ad:DockingManager x:Name="dockManager">
+            <ad:LayoutRoot>
+                <ad:LayoutPanel Orientation="Vertical">
+                    <ad:LayoutDocumentPane>
+                        <ad:LayoutDocument Title="doc" CanFloat="True">
+                            <Border Background="AliceBlue" />
+                        </ad:LayoutDocument>
+                    </ad:LayoutDocumentPane>
+                    <ad:LayoutAnchorablePane DockHeight="100">
+                        <ad:LayoutAnchorable Title="anchorable">
+                            <Border Background="Gold" />
+                        </ad:LayoutAnchorable>
+                    </ad:LayoutAnchorablePane>
+                </ad:LayoutPanel>
+            </ad:LayoutRoot>
+        </ad:DockingManager>
+    </Grid>
+</Window>

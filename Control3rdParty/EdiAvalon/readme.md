@@ -3,6 +3,8 @@
 ## Tutorials
 Mainly follow the tutorials listed at https://github.com/Dirkster99/AvalonDock, but try to simplify it with the dedicated MVVM framework *Stylet*.
 
+Documentation of Avalon dock can be found [here](https://doc.xceed.com/xceed-toolkit-plus-for-wpf/Xceed.Wpf.AvalonDock.html).
+
 ## Required NuGet Packages
 - Dirkster.AvalonDock
 - Stylet
@@ -13,6 +15,20 @@ Mainly follow the tutorials listed at https://github.com/Dirkster99/AvalonDock, 
 - Better set up the [props.snippet](https://gist.github.com/ShuhuaGao/bff38344143717ace1a468c78efcf338) to generate quickly a property that notifies its change in `Stylet`.
 
 ## Some explanations
+### A bird's eye view of the MVVM approach for Avalon dock
+The viewmodel (i.e., a data object) is assigned to the `Content` of a `LayoutConent`
+
+![Layout](External/layout.png)
+
+A instance of `LayoutAnchorable` or `LayoutDocument` is placed in a pane on the layout side of Avalon dock. On the control side, a `LayoutAnchorable` or `LayoutDocument` object is presented by a `LayoutItem`.
+
+![Control](External/control.png)
+
+- The visualization of the data object (a viewmodel) is done according to data template.
+- The appearance of a `LayoutItem` is customized with a `Style`. See `LayoutItemContainerStyle` and `LayoutItemContainerStyleSelector`.
+- A `AvalonDock.Layout.LayoutDocumentPane` can contain multiple `LayoutDocument` or `LayoutAnchorable`, but a `LayoutAnchorablePane` can only accommodate multiple `LayoutAnchorable`.
+
+
 ### Two key classes: `LayoutAnchorable` and `LayoutDocument`
 Both classes derive from `LayoutContent`, whose `ContentProperty` is `Content`. Thus, we may use the two classes as a `ContentControl`, whose `Content` can be anything (i.e., a `Control` or any data object). If a data object is supplied, then it is visualized with a data template if applicable.
 
@@ -99,9 +115,26 @@ Check [this commit](https://github.com/ShuhuaGao/WPF-Examples/tree/ca3012038f6ff
 
 ![](./External/fixedstyle.png)
 
-- Use a `StyleSelector` to customize the `LayoutItem` appearance for various data objects
-```csharp
-public StyleSelector LayoutItemContainerStyleSelector {get; set;}
-```
+- Use a `StyleSelector` to customize the `LayoutItem` appearance for various data objects. That is, choose the style of the `LayoutItem` based on its viewmodel underneath by making use the `DockingManager.LayoutItemContainerStyleSelector` property.
+    ```csharp
+    public StyleSelector LayoutItemContainerStyleSelector {get; set;}
+    ```
 
-The `Style` may differ for different viewmodels (data object in a `LayoutContent`)
+    We need to provide a subclass of `System.Windows.Controls.StyleSelector`. Check [LayoutItemContainerStyleSelector.cs](./Views/ADSelectors/LayoutItemContainerStyleSelector.cs) and the associated XAML file for an example.
+
+### Customize the header of a pane
+Set `DockingManager.AnchorableHeaderTemplate` or `DockingManager.DocumentHeaderTemplate`.
+```xml
+<ad:DockingManager.AnchorableHeaderTemplate>
+    <DataTemplate>
+        <StackPanel Orientation="Horizontal">
+            <Image Margin="0,0,4,0"
+                    MaxHeight="20"
+                    MaxWidth="20"
+                    Source="{Binding IconSource}" />
+            <TextBlock Text="{Binding Title}" />
+        </StackPanel>
+    </DataTemplate>
+</ad:DockingManager.AnchorableHeaderTemplate>
+```
+The binding source (data context) seems to be a `LayoutAnchorable`.

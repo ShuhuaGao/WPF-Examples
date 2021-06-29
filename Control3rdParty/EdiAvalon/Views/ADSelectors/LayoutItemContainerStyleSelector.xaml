@@ -2,12 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:ad="https://github.com/Dirkster99/AvalonDock"
                     xmlns:ads="clr-namespace:EdiAvalon.Views.ADSelectors">
+    <!-- define an instance here and assign its properties below -->
     <ads:LayoutItemContainerStyleSelector x:Key="adStyleSelector">
         <ads:LayoutItemContainerStyleSelector.FileStyle>
             <!-- a file data object is only allowed in a LayoutDocument -->
-            <!-- LayoutDocument can only be hosted by a LayoutDocumentItem -->
             <Style TargetType="{x:Type ad:LayoutDocumentItem}">
-                <Setter Property="Title" Value="{Binding Model.Title}" />
+                <Setter Property="Title" Value="{Binding Model.Title, StringFormat=doc-\{0\}}" />
                 <Setter Property="IconSource" Value="{Binding Model.IconSource}" />
                 <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
                 <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}" />
@@ -19,6 +19,8 @@
         <ads:LayoutItemContainerStyleSelector.ToolStyle>
             <Style TargetType="{x:Type ad:LayoutItem}">
                 <Setter Property="Title" Value="{Binding Model.Title}" />
+                <Setter Property="IconSource" Value="{Binding Model.IconSource}" />
+                <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
             </Style>
         </ads:LayoutItemContainerStyleSelector.ToolStyle>
     </ads:LayoutItemContainerStyleSelector>

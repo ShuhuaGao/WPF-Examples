@@ -16,6 +16,7 @@ namespace EdiAvalon.ViewModels.ADBase
     {
         public LayoutAnchorableViewModel(string title = "Anchorable") : base(title)
         {
+            IconSource = "/Assets/Images/tool-icon.png";
         }
     }
 }

@@ -7,7 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="document.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="document.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

@@ -49,6 +49,17 @@
                            AnchorablesSource="{Binding Tools}"
                            DocumentsSource="{Binding Files}"
                            LayoutItemContainerStyleSelector="{StaticResource adStyleSelector}">
+            <ad:DockingManager.AnchorableHeaderTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Margin="0,0,4,0"
+                               MaxHeight="20"
+                               MaxWidth="20"
+                               Source="{Binding IconSource}" />
+                        <TextBlock Text="{Binding Title}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ad:DockingManager.AnchorableHeaderTemplate>
             <ad:LayoutRoot>
                 <ad:LayoutPanel Orientation="Vertical">
                     <ad:LayoutDocumentPane />

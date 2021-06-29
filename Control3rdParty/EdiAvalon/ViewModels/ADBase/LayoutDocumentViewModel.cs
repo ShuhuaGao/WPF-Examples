@@ -11,7 +11,7 @@ namespace EdiAvalon.ViewModels.ADBase
         public LayoutDocumentViewModel(string title = "Document") : base(title)
         {
             // default icon source
-            IconSource = new Uri("../Assets/Images/document.png", UriKind.Relative);
+            IconSource = "/Assets/Images/document.png";
         }
     }
 }

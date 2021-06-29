@@ -17,6 +17,14 @@
         <xcad:DockingManager Grid.Row="1"
                              BorderBrush="Aqua"
                              BorderThickness="1">
+            <xcad:DockingManager.DocumentHeaderTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Margin="0,0,4,0" Source="{Binding IconSource}" />
+                        <TextBlock Text="{Binding Title}" />
+                    </StackPanel>
+                </DataTemplate>
+            </xcad:DockingManager.DocumentHeaderTemplate>
             <xcad:LayoutRoot>
                 <xcad:LayoutPanel x:Name="rootPanel" Orientation="Horizontal">
                     <!-- by default, all placed in the main area -->
@@ -33,7 +41,8 @@
                             <!-- no `CanHide` property in Document -->
                             <xcad:LayoutDocument Title="Doc-1"
                                                  CanClose="False"
-                                                 CanFloat="False">
+                                                 CanFloat="False"
+                                                 IconSource="/document.png">
                                 <Border Background="Firebrick" />
                             </xcad:LayoutDocument>
                         </xcad:LayoutDocumentPane>

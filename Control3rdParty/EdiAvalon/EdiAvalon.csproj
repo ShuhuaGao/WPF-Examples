@@ -4,13 +4,15 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    
+
     <RootNamespace>EdiAvalon</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Assets\Images\document.png" />
     <None Remove="Assets\Images\property-blue.png" />
+    <None Remove="Assets\Images\tool-icon.png" />
+    <None Remove="Views\ADSelectors\document.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,5 +23,7 @@
   <ItemGroup>
     <Resource Include="Assets\Images\document.png" />
     <Resource Include="Assets\Images\property-blue.png" />
+    <Resource Include="Assets\Images\tool-icon.png" />
+    <Resource Include="Views\ADSelectors\document.png" />
   </ItemGroup>
 </Project>

@@ -18,7 +18,7 @@
                             <Border Background="AliceBlue" />
                         </ad:LayoutDocument>
                     </ad:LayoutDocumentPane>
-                    <ad:LayoutAnchorablePane DockHeight="100">
+                    <ad:LayoutAnchorablePane DockHeight="100" Name="hello" CanRepositionItems="True">
                         <ad:LayoutAnchorable Title="anchorable">
                             <Border Background="Gold" />
                         </ad:LayoutAnchorable>

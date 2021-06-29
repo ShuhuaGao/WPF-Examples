@@ -21,6 +21,7 @@
                 <Setter Property="Title" Value="{Binding Model.Title}" />
                 <Setter Property="IconSource" Value="{Binding Model.IconSource}" />
                 <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
+                <Setter Property="Visibility" Value="Visible" />
             </Style>
         </ads:LayoutItemContainerStyleSelector.ToolStyle>
     </ads:LayoutItemContainerStyleSelector>

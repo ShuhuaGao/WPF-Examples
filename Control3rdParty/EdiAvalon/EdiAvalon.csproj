@@ -12,11 +12,10 @@
     <None Remove="Assets\Images\document.png" />
     <None Remove="Assets\Images\property-blue.png" />
     <None Remove="Assets\Images\tool-icon.png" />
-    <None Remove="Views\ADSelectors\document.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dirkster.AvalonDock" Version="4.51.1" />
+    <PackageReference Include="Dirkster.AvalonDock" Version="4.50.3" />
     <PackageReference Include="Stylet" Version="1.*" />
   </ItemGroup>
 
@@ -24,6 +23,5 @@
     <Resource Include="Assets\Images\document.png" />
     <Resource Include="Assets\Images\property-blue.png" />
     <Resource Include="Assets\Images\tool-icon.png" />
-    <Resource Include="Views\ADSelectors\document.png" />
   </ItemGroup>
 </Project>

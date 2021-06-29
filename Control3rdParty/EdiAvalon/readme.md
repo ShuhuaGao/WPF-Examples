@@ -137,4 +137,17 @@ Set `DockingManager.AnchorableHeaderTemplate` or `DockingManager.DocumentHeaderT
     </DataTemplate>
 </ad:DockingManager.AnchorableHeaderTemplate>
 ```
-The binding source (data context) seems to be a `LayoutAnchorable`.
+The binding source (data context) seems to be a `LayoutAnchorable`. 
+
+Check Commit c5613a20 for details.
+
+
+### Active content
+The currently active data object can be obtained (bound) by `DockingManager.ActiveContent`, which may be any object hosted in both `LayoutAnchorable` and `LayoutDocument` in an active `LayoutItem`.
+
+To filter the active content, e.g., if we only care about the active document object, we can set up a converter for the binding (or alternatively, use an `object` property as the source and do logic therein).
+
+Check [ActiveDocumentConverter.cs](./Converters/ActiveDocumentConverter.cs).
+```xml
+ActiveContent="{Binding ActiveDocument, Mode=TwoWay, Converter={StaticResource activeDocumentConverter}}"
+```

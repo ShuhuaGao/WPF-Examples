@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dirkster.AvalonDock" Version="4.51.1" />
-    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.1.0" />
+    <Reference Include="AvalonDock">
+      <HintPath>..\..\..\AvalonDock\source\Components\AvalonDock\bin\Debug\net5.0-windows\AvalonDock.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

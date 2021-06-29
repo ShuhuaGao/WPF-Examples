@@ -1,8 +1,8 @@
 ﻿using EdiAvalon.ViewModels.ADBase;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace EdiAvalon.ViewModels
@@ -24,7 +24,7 @@ namespace EdiAvalon.ViewModels
             set => SetAndNotify(ref _fileSize, value);
         }
 
-        private DateTime lastModified;
+        private DateTime lastModified = DateTime.MinValue;
 
         public DateTime LastModified
         {
@@ -32,6 +32,37 @@ namespace EdiAvalon.ViewModels
             set => SetAndNotify(ref lastModified, value);
         }
 
+
+        private string filePath = "Not saved yet";
+
+        public string FilePath
+        {
+            get => filePath;
+            set
+            {
+                Debug.WriteLine($">> Set FilePath of FileStats: {value}");
+                if (filePath != value)
+                {
+                    if (value == null)
+                    {
+                        filePath = "Not saved yet";
+                        FileSize = 0;
+                        LastModified = DateTime.MinValue;
+
+                    }
+                    else
+                    {
+                        filePath = value;
+                        var fi = new FileInfo(filePath);
+                        FileSize = fi.Length;
+                        LastModified = fi.LastWriteTime;
+
+                    }
+                    NotifyOfPropertyChange();
+                }
+
+            }
+        }
 
 
     }

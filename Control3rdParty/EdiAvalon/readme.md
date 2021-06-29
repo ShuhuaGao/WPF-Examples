@@ -151,3 +151,7 @@ Check [ActiveDocumentConverter.cs](./Converters/ActiveDocumentConverter.cs).
 ```xml
 ActiveContent="{Binding ActiveDocument, Mode=TwoWay, Converter={StaticResource activeDocumentConverter}}"
 ```
+
+### Open a file dialog in MVVM
+Refer to https://stackoverflow.com/a/64861760
+

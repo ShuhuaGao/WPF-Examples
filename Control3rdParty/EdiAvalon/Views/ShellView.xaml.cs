@@ -21,9 +21,20 @@ namespace EdiAvalon.Views
 
         private void dockManager_Loaded(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine(">> dockManager_Loaded");
-            var vm = DataContext as ShellViewModel;
-            vm.ActiveDocument = vm.Files[1];
+
+        }
+
+        // open menu item clicked
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                var filePath = dialog.FileName; // full path
+                Debug.WriteLine(filePath);
+                var vm = DataContext as ShellViewModel; // get view model
+                vm?.OpenFile(filePath); // call viewmodel method like an action
+            }
         }
     }
 }

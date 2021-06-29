@@ -13,18 +13,15 @@ namespace EdiAvalon.ViewModels
 
         public ShellViewModel()
         {
-            Files.Add(new FileViewModel { Title = "file 1" });
-            Files.Add(new FileViewModel { Title = "file 2" });
-            Files.Add(new FileViewModel { Title = "file 3" });
-            ActiveDocument = Files[1];
-            Debug.WriteLine("Hello, world");
+            //Files.Add(new FileViewModel { Title = "file 1" });
+            //Files.Add(new FileViewModel { Title = "file 2" });
+            //Files.Add(new FileViewModel { Title = "file 3" });
+            tools.Add(fileStats);
         }
 
+        private readonly FileStatsViewModel fileStats = new() { Title = "File Stats" };
 
-        private LayoutAnchorableViewModel[] tools = {
-            new FileStatsViewModel{ Title = "File Stats 1" },
-            new FileStatsViewModel{ Title = "File Stats 2" }
-        };
+        private List<LayoutAnchorableViewModel> tools = new();
 
 
         public IEnumerable<LayoutAnchorableViewModel> Tools => tools;
@@ -37,17 +34,25 @@ namespace EdiAvalon.ViewModels
             get => activeDocument;
             set
             {
-                SetAndNotify(ref activeDocument, value);
+                if (value != activeDocument)
+                {
+                    activeDocument = value;
+                    fileStats.FilePath = activeDocument.FilePath;
+                    NotifyOfPropertyChange();
+                }
             }
         }
 
 
         public void CreateNewFile()
         {
-            Files.Add(new FileViewModel()
-            {
-                Title = "untitled"
-            });
+            Files.Add(new FileViewModel { Title = "untitled" });
+            ActiveDocument = Files.Last();
+        }
+
+        public void OpenFile(string filePath)
+        {
+            Files.Add(new FileViewModel(filePath));
             ActiveDocument = Files.Last();
         }
 

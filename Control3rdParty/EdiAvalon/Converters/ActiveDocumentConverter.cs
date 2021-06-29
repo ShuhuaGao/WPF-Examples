@@ -12,7 +12,7 @@ namespace EdiAvalon.Converters
         {
             if (value is FileViewModel)
             {
-                Debug.WriteLine(">> Convert from FileViewModel");
+                //Debug.WriteLine(">> Convert from FileViewModel");
                 return value;
             }
             // Used as a returned value to instruct the binding engine not to perform any action.

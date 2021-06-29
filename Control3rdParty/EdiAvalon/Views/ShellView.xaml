@@ -24,6 +24,7 @@
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type vm:FileStatsViewModel}">
                         <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding FilePath}" />
                             <TextBlock Foreground="Red"
                                        Text="{Binding FileSize}" />
                             <TextBlock Text="{Binding LastModified}" />
@@ -51,7 +52,8 @@
             <MenuItem Header="File">
                 <MenuItem Command="{s:Action CreateNewFile}"
                           Header="New" />
-                <MenuItem Header="Open" />
+                <MenuItem Click="MenuItem_Click"
+                          Header="Open" />
                 <Separator />
                 <MenuItem Header="Save" />
                 <MenuItem Header="Save As..." />

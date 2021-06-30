@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:ad="https://github.com/Dirkster99/AvalonDock"
                     xmlns:ads="clr-namespace:EdiAvalon.Views.ADSelectors">
+    <ad:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
     <!-- define an instance here and assign its properties below -->
     <ads:LayoutItemContainerStyleSelector x:Key="adStyleSelector">
         <ads:LayoutItemContainerStyleSelector.FileStyle>
@@ -15,13 +16,15 @@
             </Style>
         </ads:LayoutItemContainerStyleSelector.FileStyle>
         <!-- for an anchorable data object -->
-        <!-- LayoutAnchorable may reside in both LayoutAnchroableItem and LayoutDocumentItem (base class LayoutItem) -->
+        <!-- LayoutAnchorable may reside in both LayoutAnchroableItem and LayoutDocumentItem (deriving LayoutItem) -->
+        <!-- Model here refers to the data object (viewmodel) -->
         <ads:LayoutItemContainerStyleSelector.ToolStyle>
-            <Style TargetType="{x:Type ad:LayoutItem}">
+            <Style TargetType="{x:Type ad:LayoutAnchorableItem}">
                 <Setter Property="Title" Value="{Binding Model.Title}" />
                 <Setter Property="IconSource" Value="{Binding Model.IconSource}" />
                 <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
-                <Setter Property="Visibility" Value="Visible" />
+                <Setter Property="CanHide" Value="False"/>
+                <Setter Property="Visibility" Value="{Binding Model.IsVisible, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}, Mode=TwoWay}" />
             </Style>
         </ads:LayoutItemContainerStyleSelector.ToolStyle>
     </ads:LayoutItemContainerStyleSelector>

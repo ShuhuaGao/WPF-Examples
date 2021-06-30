@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace EdiAvalon.ViewModels.ADBase
 {
@@ -18,5 +18,18 @@ namespace EdiAvalon.ViewModels.ADBase
         {
             IconSource = "/Assets/Images/tool-icon.png";
         }
+
+        private bool isVisible = true;
+
+        public bool IsVisible
+        {
+            get => isVisible;
+            set
+            {
+                SetAndNotify(ref isVisible, value);
+                Debug.WriteLine($">> IsVisible: {value}");
+            }
+        }
+
     }
 }

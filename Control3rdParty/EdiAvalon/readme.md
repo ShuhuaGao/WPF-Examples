@@ -155,3 +155,34 @@ ActiveContent="{Binding ActiveDocument, Mode=TwoWay, Converter={StaticResource a
 ### Open a file dialog in MVVM
 Refer to https://stackoverflow.com/a/64861760
 
+
+### Visibility of `LayoutItem`
+`LayoutItem` inherits the `Visibility` property from `UIElement`. The `System.Windows.Visibility` enum has three values:
+```
+Collapsed	2	
+Do not display the element, and do not reserve space for it in layout.
+
+Hidden	1	
+Do not display the element, but reserve space for the element in layout.
+
+Visible	0	
+Display the element.
+```
+We usually define a `bool` property in the viewmodel instead and perform conversion between the two in binding.
+
+Avalon dock has provided a built-in converter as `AvalonDock.Converters.BoolToVisibilityConverter`. Since a `false` may be interpreted as either `Collapsed` or `Hidden`, we indicate our choice as the converter parameter.
+
+```xml
+<Setter Property="Visibility" Value="{Binding Model.IsVisible, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}, Mode=TwoWay}" />
+```
+
+The `ViewModel.IsVisible` can then be manipulated by a control like a menu item. 
+
+- Note that if the converter parameter is set to `Visibility.Collapsed` instead, then once the tool pane is closed, we cannot use `IsVisibile = true` to show it again. 
+- The [`CanClose`](https://doc.xceed.com/xceed-toolkit-plus-for-wpf/Xceed.Wpf.AvalonDock~Xceed.Wpf.AvalonDock.Controls.LayoutItem~CanClose.html) property of a `LayoutItem` should be `false` (by default). Otherwise, 
+    > Gets or sets whether the content can be closed definitively (removed from the layout and not just hidden).
+
+  We cannot show it again. 
+
+- To prohibit hiding, we set `<Setter Property="CanHide" Value="False"/>`. In this case, no x button is shown, since the item cannot be hidden or closed.
+    ![Canhide No](External/canhide-no.png)

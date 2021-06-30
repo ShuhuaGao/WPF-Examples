@@ -61,6 +61,11 @@
                 <Separator />
                 <MenuItem Header="Close" />
             </MenuItem>
+            <MenuItem Header="Tools">
+                <MenuItem Header="File Stats"
+                          IsCheckable="True"
+                          IsChecked="{Binding FileStats.IsVisible}" />
+            </MenuItem>
         </Menu>
         <ad:DockingManager x:Name="dockManager"
                            ActiveContent="{Binding ActiveDocument, Mode=TwoWay, Converter={StaticResource activeDocumentConverter}}"

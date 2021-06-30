@@ -9,6 +9,7 @@ namespace EdiAvalon.ViewModels
 {
     public class ShellViewModel : Screen
     {
+        // as the DockingManager.DocumentSource
         public ObservableCollection<FileViewModel> Files { get; set; } = new ObservableCollection<FileViewModel>();
 
         public ShellViewModel()
@@ -16,14 +17,16 @@ namespace EdiAvalon.ViewModels
             //Files.Add(new FileViewModel { Title = "file 1" });
             //Files.Add(new FileViewModel { Title = "file 2" });
             //Files.Add(new FileViewModel { Title = "file 3" });
-            tools.Add(fileStats);
+            tools.Add(FileStats);
         }
 
-        private readonly FileStatsViewModel fileStats = new() { Title = "File Stats" };
-
-        private List<LayoutAnchorableViewModel> tools = new();
+        public FileStatsViewModel FileStats { get; private set; } = new() { Title = "File Stats" };
 
 
+
+        private readonly List<LayoutAnchorableViewModel> tools = new();
+
+        // as the DockingManager.AnchorablesSource
         public IEnumerable<LayoutAnchorableViewModel> Tools => tools;
 
 
@@ -37,7 +40,7 @@ namespace EdiAvalon.ViewModels
                 if (value != activeDocument)
                 {
                     activeDocument = value;
-                    fileStats.FilePath = activeDocument.FilePath;
+                    FileStats.FilePath = activeDocument.FilePath;
                     NotifyOfPropertyChange();
                 }
             }

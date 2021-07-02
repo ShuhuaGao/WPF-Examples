@@ -38,13 +38,29 @@ namespace EdiAvalon.ViewModels.ADBase
         private string contentId;
 
         /// <summary>
-        /// Gets or sets the ID of the content, which is used to identify the content during serialization/deserialization.
+        /// Get the ID of the content, which is used to identify the content during serialization/deserialization.
         /// </summary>
         public string ContentId
         {
             get => contentId;
-            set => SetAndNotify(ref contentId, value);
+            private set => SetAndNotify(ref contentId, value);
         }
+
+        /// <summary>
+        /// Set the content ID with the class name as the prefix.
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="prefix">a short string inserted before <paramref name="id"/></param>
+        /// <remarks>
+        /// The resultant content ID is <c>className + "|" + <paramref name="id"/> </c>, which can be obtained by <seealso cref="ContentId"/>,
+        /// where <c>className</c> is the name of the current class.
+        /// </remarks>
+        public void SetRawContentId(string rawId)
+        {
+            ContentId = $"{GetType().Name}|{rawId}";
+        }
+
+
 
         private bool isSelected;
 
@@ -74,6 +90,5 @@ namespace EdiAvalon.ViewModels.ADBase
             get => isActive;
             set => SetAndNotify(ref isActive, value);
         }
-
     }
 }

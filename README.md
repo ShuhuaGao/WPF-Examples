@@ -9,4 +9,9 @@ Examples of WPF applications for learning purposes.
 
 4. Master-detail pattern in WPF [link](./Master-Detail)
 
+5. Items control in WPF. 
+
 5. TreeView to show a simple file explorer with/without MVVM. [link](https://github.com/ShuhuaGao/WPF-Examples/tree/CustomTab/AngelSix)
+6. Avalon dock 
+		- [basic](./Control3rdParty/AvalonDock)
+		-[MVVM](./Control3rdParty/EdiAvalon)

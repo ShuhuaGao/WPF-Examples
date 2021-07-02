@@ -1,13 +1,14 @@
 ﻿# A demo to learn AvalonDock (accompanied by Stylet)
 
 ## Tutorials
-Mainly follow the tutorials listed at https://github.com/Dirkster99/AvalonDock, but try to simplify it with the dedicated MVVM framework *Stylet*.
+Mainly follow the tutorials listed at https://github.com/Dirkster99/AvalonDock, but try to simplify it and also integrate it with the dedicated MVVM framework *Stylet*.
 
 Documentation of Avalon dock can be found [here](https://doc.xceed.com/xceed-toolkit-plus-for-wpf/Xceed.Wpf.AvalonDock.html).
+See also the [wiki](https://github.com/Dirkster99/AvalonDock/wiki) on GitHub.
 
 ## Required NuGet Packages
-- Dirkster.AvalonDock
-- Stylet
+- [Dirkster.AvalonDock](https://www.nuget.org/packages/Dirkster.AvalonDock/)
+- [Stylet](https://www.nuget.org/packages/Stylet/)
 - Template [Stylet.Templates.VM](https://www.nuget.org/packages/Stylet.Templates.VM/) to generate a Stylet project quickly by 
     ```
     dotnet new stylet.vm -n EdiAvalon
@@ -186,3 +187,73 @@ The `ViewModel.IsVisible` can then be manipulated by a control like a menu item.
 
 - To prohibit hiding, we set `<Setter Property="CanHide" Value="False"/>`. In this case, no x button is shown, since the item cannot be hidden or closed.
     ![Canhide No](External/canhide-no.png)
+
+
+### Serialize an AvalonDock layout model
+Maily use the [XmlLayoutSerializer](https://doc.xceed.com/xceed-toolkit-plus-for-wpf/Xceed.Wpf.AvalonDock~Xceed.Wpf.AvalonDock.Layout.Serialization.XmlLayoutSerializer.html) class in the `AvalonDock.Layout.Serialization` namespace.
+```csharp
+public XmlLayoutSerializer( 
+   DockingManager manager
+)
+```
+
+Another important property is `LayoutContent.ContentId` of type `string`
+> Gets or sets the ID of the content, which is used to identify the content during serialization/deserialization.
+
+A tutorial is presented in [AvalonDock [2.0] Tutorial Part 5](https://www.codeproject.com/Articles/719143/AvalonDock-Tutorial-Part-Load-Save-Layout), but note that this tutorial seems to be overly complicated and depends on the (outdated) MVVM Light framework. We will take a much simpler (but possibly less general) way instead.
+
+#### Save layout in XML
+We may initiate the save operation in the `FrameworkElement.Unloaded` event (since `DockingManager` inherits a `Control`) (or other appropriate places). 
+
+Note that the `Window.Closed` event is fired even before the above `Unloaded`.
+
+
+Check `DockManager_Unloaded` in [ShellView.xaml.cs](./Views/ShellView.xaml.cs).
+```csharp
+// save the layout
+private void DockManager_Unloaded(object sender, RoutedEventArgs e)
+{
+    var serializer = new AvalonDock.Layout.Serialization.XmlLayoutSerializer(dockManager);
+    serializer.Serialize(layoutXmlFile);
+    Debug.WriteLine($">> Layout saved to {layoutXmlFile}");
+}
+```
+Since we want to restore the layout next time, the `ContentId` property of a `LayoutContent` must be properly set (which is just an empty string by default). For example, it may be a file path for a `LayoutDocument`. 
+
+### Load/restore layout from XML
+
+The class `AvalonDock.Layout.Serialization.XmlLayoutSerializer` has a [LayoutSerializationCallback](https://doc.xceed.com/xceed-toolkit-plus-for-wpf/Xceed.Wpf.AvalonDock~Xceed.Wpf.AvalonDock.Layout.Serialization.LayoutSerializer~LayoutSerializationCallback_EV.html) event. Its `LayoutSerializationCallbackEventArgs` has three properties, the most import one of which is the `Model` property of type `LayoutContent` (either a `LayoutAnchorable` or a `LayoutDocument`) that can be used to access the properties like `ContentId` stored in the XML. On the other hand, the `Content` property of `LayoutSerializationCallbackEventArgs` is to be assigned in the event handler, which will serve as the restored `LayoutContent.Content` (i.e., the data object viewmodel here).
+
+The work flow is that, once a `Pane` and its associated `LayoutContent` instance are to be restored, the above event fires.
+
+**How to choose the proper `Content` to restore a `LayoutContent`?**
+
+- The actual type of the `LayoutSerializationCallbackEventArgs.Model` may be either `LayoutDocument` or `LayoutAnchorable`, which can be used as a binary classifier. 
+  That is, if a viewmodel instance was previously living inside `Docking.DocumentSource`, then the `LayoutDocument` type implies that we should try to locate the data object in our document collection for this viewmodel object.
+- If a more fine-grained categorization is required, we can use the `ContentId` property for matching.
+- If no `Content` was set, then by default it is `null` and we see an empty pane in the UI.
+
+Check `RestoreLayoutContent` in [ShellView.xaml.cs](./Views/ShellView.xaml.cs) for more details.
+
+<span style="background-color:lightblue">
+Note that, in MVVM pattern, a view is allowed to know its viewmodel (its `DataContext` is set to the viewmodel instance anyway), but the opposite direction is not allowed. The direct serialization/deserializatin part uses Avalon Dock utilities and should be put in the V (view) part as code-behind. By contrast, the location of the proper viewmodel `Content` is the responsiblity of the viewmodel.</span> 
+
+See this interesting discussion about [MVVM](https://stackoverflow.com/questions/1043918/open-file-dialog-mvvm/64861760#64861760).
+
+
+In the `ShellViewModel` (recall that `DockingManager` resides in `ShellView`), we define a method to be used in the event `LayoutSerializationCallback` handler.
+```csharp
+public LayoutContentViewModel LocateContentFromId(string contentId)
+```
+
+To identify the data object with the `ContentId`, a simple way is to include the class name in the content id as `SetRawContentId`.
+
+```csharp
+public void SetRawContentId(string rawId)
+{
+    ContentId = $"{GetType().Name}|{rawId}";
+}
+```
+
+#### LayoutUpdateStrategy
+Sometimes, if the layout is complicated, Avalon Dock may fail to restore it perfectly. In such a case, we need to specify the [LayoutUpdateStrategy](https://doc.xceed.com/xceed-toolkit-plus-for-wpf/Xceed.Wpf.AvalonDock~Xceed.Wpf.AvalonDock.DockingManager~LayoutUpdateStrategy.html) property.

@@ -27,7 +27,7 @@ namespace EdiAvalon.ViewModels.ADBase
             set
             {
                 SetAndNotify(ref isVisible, value);
-                Debug.WriteLine($">> IsVisible: {value}");
+                //Debug.WriteLine($">> IsVisible: {value}");
             }
         }
 

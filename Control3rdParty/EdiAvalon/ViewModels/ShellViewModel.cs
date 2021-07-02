@@ -59,5 +59,36 @@ namespace EdiAvalon.ViewModels
             ActiveDocument = Files.Last();
         }
 
+        public LayoutContentViewModel LocateContentFromId(string contentId)
+        {
+
+            if (contentId.StartsWith(nameof(FileStatsViewModel)))
+            {
+                return FileStats;
+            }
+            else if (contentId.StartsWith(nameof(FileViewModel)))
+            {
+                // a FileView model: construct it by opening the file if not available yet
+                FileViewModel fv = Files.FirstOrDefault(f => f.ContentId == contentId);
+                if (fv != null)
+                    return fv;
+                try
+                {
+                    string filePath = contentId[(nameof(FileViewModel).Length + 1)..];
+                    Debug.WriteLine(filePath);
+                    var file = new FileViewModel(filePath);
+
+                    Files.Add(file);
+                    return file;
+                }
+                catch (System.Exception)
+                {
+                    Debug.WriteLine($"Cannot read file for {contentId}");
+                    return null;
+                }
+            }
+            return null;
+        }
+
     }
 }

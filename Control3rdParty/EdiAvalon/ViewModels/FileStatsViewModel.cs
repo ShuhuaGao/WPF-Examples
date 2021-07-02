@@ -11,7 +11,7 @@ namespace EdiAvalon.ViewModels
     {
         public FileStatsViewModel() : base("File Statistics")
         {
-            ContentId = "FileStatsTool";
+            SetRawContentId("FileStatsTool");
             IconSource = "./Assets/Images/property-blue.png";
         }
 

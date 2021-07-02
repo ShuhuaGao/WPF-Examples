@@ -74,16 +74,8 @@
                            DocumentHeaderTemplate="{StaticResource headerTemplate}"
                            DocumentsSource="{Binding Files}"
                            LayoutItemContainerStyleSelector="{StaticResource adStyleSelector}"
-                           Loaded="dockManager_Loaded">
-
-            <ad:LayoutRoot>
-                <ad:LayoutPanel Orientation="Vertical">
-                    <ad:LayoutDocumentPane />
-                    <ad:LayoutAnchorablePane Name="ToolsPane"
-                                             DockMinHeight="100" />
-                </ad:LayoutPanel>
-            </ad:LayoutRoot>
-        </ad:DockingManager>
+                           Loaded="DockManager_Loaded"
+                           Unloaded="DockManager_Unloaded" />
 
     </DockPanel>
 </Window>

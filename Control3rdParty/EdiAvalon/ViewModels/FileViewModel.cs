@@ -43,7 +43,8 @@ namespace EdiAvalon.ViewModels
             set
             {
                 SetAndNotify(ref filePath, value);
-                ContentId = filePath;
+                // use to save/load layout
+                SetRawContentId(filePath);
             }
         }
 

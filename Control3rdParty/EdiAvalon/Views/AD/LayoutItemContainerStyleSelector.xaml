@@ -23,7 +23,7 @@
                 <Setter Property="Title" Value="{Binding Model.Title}" />
                 <Setter Property="IconSource" Value="{Binding Model.IconSource}" />
                 <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
-                <Setter Property="CanHide" Value="False"/>
+                <Setter Property="CanHide" Value="False" />
                 <Setter Property="Visibility" Value="{Binding Model.IsVisible, Converter={StaticResource boolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}, Mode=TwoWay}" />
             </Style>
         </ads:LayoutItemContainerStyleSelector.ToolStyle>

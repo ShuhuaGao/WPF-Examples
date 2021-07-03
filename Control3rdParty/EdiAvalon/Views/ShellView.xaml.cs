@@ -43,7 +43,9 @@ namespace EdiAvalon.Views
                 // try to retrieve the viewmodel of a LayoutContent for the ContentId
                 var serializer = new AvalonDock.Layout.Serialization.XmlLayoutSerializer(dockManager);
                 serializer.LayoutSerializationCallback += RestoreLayoutContent;
+                // the method below will set the `Layout` property (of type LayoutRoot) of the DockingManager
                 serializer.Deserialize(layoutXmlFile);
+                // TODO: ActiveContent
             }
 
 

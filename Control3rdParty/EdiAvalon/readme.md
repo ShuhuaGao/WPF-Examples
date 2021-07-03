@@ -255,5 +255,9 @@ public void SetRawContentId(string rawId)
 }
 ```
 
+<span style="background-color:red">
+Check the *LayoutPersistence* project for a minimal example. Do note that, even if the `LayoutSerializationCallback` does nothing, it has to be provided to make the layout loading process work.
+</span>
+
 #### LayoutUpdateStrategy
-Sometimes, if the layout is complicated, Avalon Dock may fail to restore it perfectly. In such a case, we need to specify the [LayoutUpdateStrategy](https://doc.xceed.com/xceed-toolkit-plus-for-wpf/Xceed.Wpf.AvalonDock~Xceed.Wpf.AvalonDock.DockingManager~LayoutUpdateStrategy.html) property.
+Sometimes, if the layout is complicated, Avalon Dock may fail to restore it perfectly. In such a rare case, we need to specify the [LayoutUpdateStrategy](https://doc.xceed.com/xceed-toolkit-plus-for-wpf/Xceed.Wpf.AvalonDock~Xceed.Wpf.AvalonDock.DockingManager~LayoutUpdateStrategy.html) property.
